@@ -30,6 +30,16 @@ public class Articulo {
 	private Marca marcaA;
 	@Autowired
 	private String tipoA;
+	@Autowired
+	private boolean EstadoA;
+
+	public boolean isEstadoA() {
+		return EstadoA;
+	}
+
+	public void setEstadoA(boolean estadoA) {
+		EstadoA = estadoA;
+	}
 
 	public Articulo() {
 		super();

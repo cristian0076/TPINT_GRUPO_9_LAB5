@@ -113,6 +113,7 @@
 					<th scope="col">Descripcion</th>
 					<th scope="col">Marca</th>
 					<th scope="col">Tipo</th>
+					<th scope="col">Estado</th>
 					<th scope="col"></th>
 					<th scope="col"></th>
 				</tr>
@@ -125,6 +126,7 @@
 						<td><span>${item.descripcionA}</span></td>
 						<td><span>${item.marcaA.nombreM}</span></td>
 						<td><span>${item.tipoA}</span></td>
+						<td><span>${item.isEstadoA()}</span></td>
 						<td><span><button type="button" class="btn btn-warning">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 									fill="currentColor" class="bi bi-pencil-fill"

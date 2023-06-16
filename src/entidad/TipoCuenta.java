@@ -19,6 +19,16 @@ public class TipoCuenta {
 	private int id;
 	@Autowired
 	private String descripcionT;
+	@Autowired
+	private boolean EstadoT;
+
+	public boolean isEstadoT() {
+		return EstadoT;
+	}
+
+	public void setEstadoT(boolean estadoT) {
+		EstadoT = estadoT;
+	}
 
 	public TipoCuenta() {
 		super();

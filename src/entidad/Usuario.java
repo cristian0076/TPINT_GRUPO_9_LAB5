@@ -33,6 +33,16 @@ public class Usuario {
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name="tipoCuentaU")
 	private TipoCuenta tipoCuentaU;
+	@Autowired
+	private boolean EstadoU;
+
+	public boolean isEstadoU() {
+		return EstadoU;
+	}
+
+	public void setEstadoU(boolean estadoU) {
+		EstadoU = estadoU;
+	}
 
 	public Usuario() {
 		super();

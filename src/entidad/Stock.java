@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Date;
 
 @Entity
@@ -27,8 +30,18 @@ public class Stock {
     private int cantidad;
     @Column(name = "precioCompra")
     private double precioCompra;
+    @Autowired
+	private boolean EstadoS;
 
-    public Stock() {
+    public boolean isEstadoS() {
+		return EstadoS;
+	}
+
+	public void setEstadoS(boolean estadoS) {
+		EstadoS = estadoS;
+	}
+
+	public Stock() {
     }
 
     public Stock(Date fechaIngreso, Articulo articulo, int cantidad, double precioCompra) {
