@@ -1,5 +1,8 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -24,7 +27,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping("Redireccionar_Index.html")
-	public ModelAndView eventoRedireccionarIndex(String txtUsuario, String txtClave)
+	public ModelAndView eventoRedireccionarIndex(String txtUsuario, String txtClave,HttpServletRequest request)
 	{
 		System.out.println(txtUsuario);
 		System.out.println(txtClave);
@@ -40,8 +43,10 @@ public class LoginController {
 			return MV;
 		}
 		if(usuario.getUsuarioU().equals(txtUsuario) && usuario.getContraseniaU().equals(txtClave)) {
-			MV.addObject("Usuario",txtUsuario);
+			MV.addObject("Usuario",usuario);
 			MV.setViewName("Index");
+			HttpSession session = request.getSession(true);
+			session.setAttribute("usuario", usuario);
 			return MV;
 		}else {
 			String Message = "Verifica las credenciales.";
