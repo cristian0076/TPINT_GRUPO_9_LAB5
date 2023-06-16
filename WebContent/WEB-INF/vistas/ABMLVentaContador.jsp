@@ -81,6 +81,7 @@
 		</nav>
 
 		<!-- Totales -->
+
 		<div class="d-flex flex-row justify-content-around mx-auto w-75">
 			<div
 				class="d-flex flex-column align-items-center justify-content-center">
