@@ -64,7 +64,7 @@
 		</div>
 		</nav>
 
-		<h2 class="my-3 ml-2 text-center">PRODUCTOS</h2>
+		<h2 class="my-3 ml-2 text-center">Productos</h2>
 
 		<button type="button" class="btn btn-primary my-3 w-[30px] mx-auto"
 			data-toggle="modal" data-target="#exampleModalCenter">Añadir

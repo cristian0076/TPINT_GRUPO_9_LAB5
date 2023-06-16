@@ -63,7 +63,7 @@
 		</nav>
 
 		<!-- Titulo -->
-		<h2 class="my-3 ml-2 text-center">EMPLEADOS</h2>
+		<h2 class="my-3 ml-2 text-center">Empleados</h2>
 
 		<!-- Boton agregar -->
 		<button type="button" class="btn btn-primary my-3 w-[30px] mx-auto"
