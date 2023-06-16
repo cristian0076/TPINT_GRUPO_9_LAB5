@@ -56,13 +56,9 @@
 				<input type="submit" value="Clientes" class="dropdown-item"
 					name="btnProducto">
 			</form>
-						<form action="Redireccionar_ABMLVentas.html" method="post">
-				<input type="submit" value="Ventas" class="dropdown-item"
+						<form action="Redireccionar_ABMLVentaContador.html" method="post">
+				<input type="submit" value="VentasContador" class="dropdown-item"
 					name="btnVenta">
-			</form>
-			<form action="Redireccionar_ABMLCliente.html" method="post">
-				<input type="submit" value="Cliente" class="dropdown-item"
-					name="btnCliente">
 			</form>
 		</div>
 	</div>

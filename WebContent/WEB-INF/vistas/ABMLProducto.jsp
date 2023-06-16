@@ -60,6 +60,10 @@
 				<input type="submit" value="Cliente" class="dropdown-item"
 					name="btnCliente">
 			</form>
+			<form action="Redireccionar_ABMLVentaContador.html" method="post">
+				<input type="submit" value="VentasContador" class="dropdown-item"
+					name="btnVenta">
+			</form>
 			</div>
 		</div>
 		</nav>
