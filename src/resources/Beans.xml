@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="UsuarioInicial" class="entidad.Usuario">
+		<property name="usuarioU" value="Pepe"></property>
+		<property name="contraseniaU" value="123"></property>
+		<property name="empleadoU" ref="EmpleadoPepe"></property>
+		<property name="tipoCuentaU" ref="TipoCuentaVendedor"></property>
+	</bean>
+
+	<bean id="EmpleadoPepe" class="entidad.Empleado">
+		<property name="legajoE" value="1"></property>
+		<property name="dniE" value="42123123123"></property>
+		<property name="nombreE" value="Pepe"></property>
+		<property name="apellidoE" value="Caseros"></property>
+		<property name="sexoE" value="Masculino"></property>
+		<property name="fechaNacimientoE" value="10/10/2000"></property>
+		<property name="direccionE" value="Calle 123"></property>
+		<property name="localidadE" value="San Julio"></property>
+		<property name="mailE" value="pepe@gmail.com"></property>
+		<property name="telefonoE" value="1112312312"></property>
+	</bean>
+
+	<bean id="TipoCuentaContador" class="entidad.TipoCuenta">
+		<property name="descripcionT" value="Contador"></property>
+	</bean>
+	<bean id="TipoCuentaVendedor" class="entidad.TipoCuenta">
+		<property name="descripcionT" value="Vendedor"></property>
+	</bean>
+
+	<bean id="ArticuloInicial" class="entidad.Articulo">
+		<property name="nombreA" value="NombreArticulo"></property>
+		<property name="descripcionA" value="DescripcionArticulo"></property>
+		<property name="tipoA" value="TipoArticulo"></property>
+		<property name="marcaA" ref="MarcaInicial"></property>
+	</bean>
+	
+	
+	<bean id="StockInicial" class="entidad.Stock">
+		<property name="fechaIngreso" value="10/10/2000"></property>
+		<property name="articulo" ref="ArticuloInicial"></property>
+		<property name="cantidad" value="1000"></property>
+		<property name="precioCompra" value="150"></property>
+	</bean>
+	
+		<bean id="ClienteInicial" class="entidad.Cliente">
+		<property name="DNI_C" value="42123123123"></property>
+		<property name="Nombre_C" value="Pepe"></property>
+		<property name="Apellido_C" value="Caseros"></property>
+		<property name="Sexo_C" value="Masculino"></property>
+		<property name="Fecha_Nacimiento_C" value="10/10/2000"></property>
+		<property name="Direccion_C" value="Calle 123"></property>
+		<property name="Localidad_C" value="San Julio"></property>
+		<property name="Mail_C" value="pepe@gmail.com"></property>
+		<property name="Telefono_C" value="1112312312"></property>
+	</bean>
+	
+	<bean id="VentaInicial" class="entidad.Venta">
+		<property name="Fecha_V" value="2023/01/01"></property>
+		<property name="Id_Cliente" ref="ClienteInicial"></property>
+		<property name="Id_usuario" ref="UsuarioInicial"></property>
+		<property name="Total_V" value="2000"></property>
+	</bean>
+
+	<bean id="MarcaInicial" class="entidad.Marca">
+		<property name="nombreM" value="NombreMarca"></property>
+		<property name="descripcionM" value="DescripcionMarca"></property>
+	</bean>
+
+
+	<!-- CREO EL SERVICIO PARA USUARIO -->
+	<bean id="serviceBean" class="servicioImpl.ServicioImplUsuario">
+		<property name="dataAccess" ref="dataAccessBean"></property>
+	</bean>
+
+	<!-- EL SERVICIO NECESITA EL DAO -->
+	<bean id="dataAccessBean" class="daoImp.ServicioImplUsuarioDao"
+		scope="singleton">
+	</bean>
+
+	<!-- CREO EL SERVICIO PARA ARTICULO -->
+	<bean id="serviceBeanArticulo"
+		class="servicioImpl.ServicioImplArticulo">
+		<property name="dataAccess" ref="dataAccessBeanArticulo"></property>
+	</bean>
+
+	<!-- EL SERVICIO NECESITA EL DAO -->
+	<bean id="dataAccessBeanArticulo"
+		class="daoImp.ServicioImplArticuloDao" scope="singleton">
+	</bean>
+	
+			<!-- CREO EL SERVICIO PARA VENTA -->
+	<bean id="serviceBeanVenta"
+		class="servicioImpl.ServicioImplVentas">
+		<property name="dataAccess" ref="dataAccessBeanVentas"></property>
+	</bean>
+
+	<!-- EL SERVICIO NECESITA EL DAO -->
+	<bean id="dataAccessBeanVentas"
+		class="daoImp.ServicioImplVentasDao" scope="singleton">
+	</bean>
+</beans>
