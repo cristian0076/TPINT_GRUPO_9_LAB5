@@ -35,6 +35,7 @@
 		<property name="nombreA" value="NombreArticulo"></property>
 		<property name="descripcionA" value="DescripcionArticulo"></property>
 		<property name="tipoA" value="TipoArticulo"></property>
+		<property name="status" value="1"></property>
 		<property name="marcaA" ref="MarcaInicial"></property>
 	</bean>
 	

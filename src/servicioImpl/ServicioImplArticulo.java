@@ -39,4 +39,9 @@ public class ServicioImplArticulo implements ServicioArticulo {
 		return dataAccess.agregarArticulo(nombre, descripcion, tipo, marca);
 	}
 
+	@Override
+	public int eliminarArticulo(int id) {
+		return dataAccess.eliminarArticulo(id);
+	}
+
 }

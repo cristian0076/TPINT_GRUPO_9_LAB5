@@ -1,0 +1,10 @@
+/controller/
+/dao/
+/daoImp/
+/entidad/
+/excepciones/
+/hibernate.cfg.xml
+/principal/
+/resources/
+/servicio/
+/servicioImpl/

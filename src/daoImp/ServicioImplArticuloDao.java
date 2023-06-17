@@ -24,7 +24,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		ConfigHibernate ch = new ConfigHibernate();
 		Session session = ch.abrirConexion();
 
-		List<Articulo> listaArticulos = (List<Articulo>) session.createQuery("SELECT a FROM Articulo a")
+		List<Articulo> listaArticulos = (List<Articulo>) session.createQuery("SELECT a FROM Articulo a WHERE a.status = 1")
 				.setFirstResult(Integer.parseInt(pagina) * 5).setMaxResults(5).list();
 		ch.cerrarSession();
 		return listaArticulos;
@@ -35,7 +35,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		ConfigHibernate ch = new ConfigHibernate();
 		Session session = ch.abrirConexion();
 
-		List<Articulo> listaArticulos = (List<Articulo>) session.createQuery("SELECT a FROM Articulo a").list();
+		List<Articulo> listaArticulos = (List<Articulo>) session.createQuery("SELECT a FROM Articulo a WHERE a.status = 1").list();
 		ch.cerrarSession();
 		return listaArticulos;
 	}
@@ -67,6 +67,32 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		}
 
 		return noError;
+	}
+
+	@Override
+	public int eliminarArticulo(int id) {
+		int estado = 0;
+
+		try {
+			ConfigHibernate ch = new ConfigHibernate();
+			Session session = ch.abrirConexion();
+			session.beginTransaction();
+			
+			String hql = "UPDATE Articulo a SET a.status = 0 WHERE a.id = :id";
+			
+			 estado = session.createQuery(hql)
+			        .setParameter("id", id)
+			        .executeUpdate();
+			
+			session.getTransaction().commit();
+			
+			ch.cerrarSession();
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			estado = 0;
+		}
+		
+		return estado;
 	}
 
 }

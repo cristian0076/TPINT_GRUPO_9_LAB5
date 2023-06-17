@@ -37,6 +37,19 @@ public class ABMLArticuloController {
 		return MV;
 	}
 	
+	@RequestMapping("EliminarProducto_ABMLProducto.html")
+	public ModelAndView eventoEliminarProducto(int btnEliminar)
+	{
+		
+		int id = btnEliminar;
+		ModelAndView MV = new ModelAndView();
+		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo)appContext.getBean("serviceBeanArticulo");
+		int estado = derImplArticulo.eliminarArticulo(id);
+		MV.addObject("pudoEliminarse",estado);
+		MV = fetchData(MV, "0");
+		return MV;
+	}
+	
 	
 	private ModelAndView fetchData(ModelAndView MV, String pagina) {
 		if(pagina == null)

@@ -30,11 +30,26 @@ public class Articulo {
 	private Marca marcaA;
 	@Autowired
 	private String tipoA;
+	private boolean status; // 0 inactivo, 1 activo
 
 	public Articulo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public boolean isStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+
 
 	public int getId() {
 		return id;
@@ -76,10 +91,14 @@ public class Articulo {
 		this.tipoA = tipoA;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Articulo [id=" + id + ", nombreA=" + nombreA + ", descripcionA=" + descripcionA + ", marcaA=" + marcaA
-				+ ", tipoA=" + tipoA + "]";
+				+ ", tipoA=" + tipoA + ", status=" + status + "]";
 	}
+
+
 
 }
