@@ -228,10 +228,10 @@
 	
 	<script type="text/javascript">
 	function cargarDatos(id,nombre, descripcion, tipo, marcaId) {
-		$('#txtNombreM').val(nombre);
-		$('#txtDescripcionM').val(descripcion);
-		$('#txtTipoM').val(tipo);
-		$('#txtMarcaM').val(marcaId);
+		$('input[name="txtNombreM"]').val(nombre);
+		$('input[name="txtDescripcionM"]').val(descripcion);
+		$('input[name="txtTipoM"]').val(tipo);
+		$('input[name="txtMarcaM"]').val(marcaId);
     }
 	</script>
 	
