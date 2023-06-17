@@ -103,11 +103,12 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 			ConfigHibernate ch = new ConfigHibernate();
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
-
-			String hql = "UPDATE Articulo a SET a.status = 1 , a.nombreA = :nombre , a.descripcionA = :descripcion , a.tipoA = :tipo , a.marcaA = "+marca+" WHERE a.id = :id";
+			
+			Marca marcaBD = (Marca) session.createQuery("SELECT m FROM Marca m WHERE m.id = " + marca).uniqueResult();
+			String hql = "UPDATE Articulo a SET a.status = 1 , a.nombreA = :nombre , a.descripcionA = :descripcion , a.tipoA = :tipo , a.marcaA = :marca WHERE a.id = :id";
 
 			estado = session.createQuery(hql).setParameter("id", id).setParameter("nombre", nombre)
-					.setParameter("descripcion", descripcion).setParameter("tipo", tipo)
+					.setParameter("descripcion", descripcion).setParameter("tipo", tipo).setParameter("marca", marcaBD)
 					.executeUpdate();
 
 			session.getTransaction().commit();
