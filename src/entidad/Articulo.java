@@ -30,7 +30,9 @@ public class Articulo {
 	private Marca marcaA;
 	@Autowired
 	private String tipoA;
+
 	private boolean status; // 0 inactivo, 1 activo
+
 
 	public Articulo() {
 		super();

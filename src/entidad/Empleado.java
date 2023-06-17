@@ -39,6 +39,16 @@ public class Empleado {
 	private String mailE;
 	@Autowired
 	private String telefonoE;
+	@Autowired
+	private boolean EstadoE;
+
+	public boolean isEstadoE() {
+		return EstadoE;
+	}
+
+	public void setEstadoE(boolean estadoE) {
+		EstadoE = estadoE;
+	}
 
 	public Empleado() {
 		super();

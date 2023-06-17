@@ -1,3 +1,4 @@
+<%@page import="entidad.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -48,7 +49,7 @@
 				<input type="submit" value="Marcas" class="dropdown-item"
 					name="btnProducto">
 			</form>
-		<form action="Redireccionar_ABMLVentas.html" method="post">
+			<form action="Redireccionar_ABMLVentas.html" method="post">
 				<input type="submit" value="Ventas" class="dropdown-item"
 					name="btnProducto">
 			</form>
@@ -56,20 +57,59 @@
 				<input type="submit" value="Clientes" class="dropdown-item"
 					name="btnProducto">
 			</form>
-						<form action="Redireccionar_ABMLVentas.html" method="post">
-				<input type="submit" value="Ventas" class="dropdown-item"
-					name="btnVenta">
-			</form>
-			<form action="Redireccionar_ABMLCliente.html" method="post">
-				<input type="submit" value="Cliente" class="dropdown-item"
-					name="btnCliente">
+			<form action="Redireccionar_ABMLVentaContador.html" method="post">
+				<input type="submit" value="VentaContador" class="dropdown-item"
+					name="btnVentaContador">
 			</form>
 		</div>
 	</div>
 	</nav>
+	<div class="container d-flex flex-row my-5">
+		<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"
+			fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+		<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" /> <path
+			fill-rule="evenodd"
+			d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+		</svg>
 
-	<h1>Bienvenido a la pagina de inicio ${Usuario}</h1>
-	<footer id="sticky-footer"
+		<div class="ml-5">
+			<%
+				Usuario usuario = (Usuario) session.getAttribute("usuario");
+			%>
+			<h3 class="ml-3 mt-3">Bienvenido a la pagina de inicio
+				${usuario.getUsuarioU()}</h3>
+			<div class="container d-flex flex-row my-4 justify-content-between">
+				<div class="ml-3">
+					<h5>Usuario:</h5>
+					<span>${usuario.getUsuarioU()}</span>
+					<h5>Nombre:</h5>
+					<span>${usuario.getEmpleadoU().getNombreE()}</span>
+					<h5>Apellido:</h5>
+					<span>${usuario.getEmpleadoU().getApellidoE()}</span>
+					<h5>DNI:</h5>
+					<span>${usuario.getEmpleadoU().getDniE()}</span>
+					<h5>Sexo:</h5>
+					<span>${usuario.getEmpleadoU().getSexoE()}</span>
+				</div>
+				<div>
+					<h5>Fecha de Nacimiento:</h5>
+					<span>${usuario.getEmpleadoU().getFechaNacimientoE()}</span>
+					<h5>Localidad</h5>
+					<span>${usuario.getEmpleadoU().getLocalidadE()}</span>
+					<h5>Direccion:</h5>
+					<span>${usuario.getEmpleadoU().getDireccionE()}</span>
+					<h5>E-Mail:</h5>
+					<span>${usuario.getEmpleadoU().getMailE()}</span>
+					<h5>Telefono:</h5>
+					<span>${usuario.getEmpleadoU().getTelefonoE()}</span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<footer id="align-bottom"
 		class="py-4 bg-dark text-white-50 fixed-bottom">
 	<div class="container text-center">
 		<span class="logo-text text-white">© 2023 - By Grupo Nro 9 LAB5

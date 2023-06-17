@@ -37,6 +37,7 @@
 		<property name="tipoA" value="TipoArticulo"></property>
 		<property name="status" value="1"></property>
 		<property name="marcaA" ref="MarcaInicial"></property>
+		<property name="EstadoA" value="false"></property>
 	</bean>
 	
 	
@@ -45,6 +46,7 @@
 		<property name="articulo" ref="ArticuloInicial"></property>
 		<property name="cantidad" value="1000"></property>
 		<property name="precioCompra" value="150"></property>
+		<property name="EstadoS" value="false"></property>
 	</bean>
 	
 		<bean id="ClienteInicial" class="entidad.Cliente">
@@ -57,6 +59,7 @@
 		<property name="Localidad_C" value="San Julio"></property>
 		<property name="Mail_C" value="pepe@gmail.com"></property>
 		<property name="Telefono_C" value="1112312312"></property>
+		<property name="EstadoC" value="false"></property>
 	</bean>
 	
 	<bean id="VentaInicial" class="entidad.Venta">
@@ -64,11 +67,13 @@
 		<property name="Id_Cliente" ref="ClienteInicial"></property>
 		<property name="Id_usuario" ref="UsuarioInicial"></property>
 		<property name="Total_V" value="2000"></property>
+		<property name="EstadoV" value="false"></property>
 	</bean>
 
 	<bean id="MarcaInicial" class="entidad.Marca">
 		<property name="nombreM" value="NombreMarca"></property>
 		<property name="descripcionM" value="DescripcionMarca"></property>
+		<property name="EstadoM" value="false"></property>
 	</bean>
 
 

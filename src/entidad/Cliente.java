@@ -46,6 +46,16 @@ public class Cliente {
 	private String Mail_C;
 	@Autowired
 	private String Telefono_C;
+	@Autowired
+	private boolean EstadoC;
+
+	public boolean isEstadoC() {
+		return EstadoC;
+	}
+
+	public void setEstadoC(boolean estadoC) {
+		EstadoC = estadoC;
+	}
 
 	public Cliente() {
 		super();

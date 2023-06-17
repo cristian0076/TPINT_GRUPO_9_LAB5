@@ -20,6 +20,16 @@ public class Marca {
 	private String nombreM;
 	@Autowired
 	private String descripcionM;
+	@Autowired
+	private boolean EstadoM;
+
+	public boolean isEstadoM() {
+		return EstadoM;
+	}
+
+	public void setEstadoM(boolean estadoM) {
+		EstadoM = estadoM;
+	}
 
 	public Marca() {
 		super();

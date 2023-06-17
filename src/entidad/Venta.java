@@ -33,8 +33,19 @@ public class Venta {
 	private Usuario Id_usuario;
 	@Autowired
 	private float Total_V;
+	@Autowired
+	private boolean EstadoV;
 	
-	
+	public boolean isEstadoV() {
+		return EstadoV;
+	}
+
+
+	public void setEstadoV(boolean estadoV) {
+		EstadoV = estadoV;
+	}
+
+
 	public Cliente getId_Cliente() {
 		return Id_Cliente;
 	}

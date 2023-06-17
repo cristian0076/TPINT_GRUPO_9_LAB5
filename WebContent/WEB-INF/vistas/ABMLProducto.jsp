@@ -60,6 +60,10 @@
 				<input type="submit" value="Cliente" class="dropdown-item"
 					name="btnCliente">
 			</form>
+			<form action="Redireccionar_ABMLVentaContador.html" method="post">
+				<input type="submit" value="VentasContador" class="dropdown-item"
+					name="btnVenta">
+			</form>
 			</div>
 		</div>
 		</nav>
@@ -113,6 +117,7 @@
 					<th scope="col">Descripcion</th>
 					<th scope="col">Marca</th>
 					<th scope="col">Tipo</th>
+					<th scope="col">Estado</th>
 					<th scope="col"></th>
 					<th scope="col"></th>
 				</tr>
@@ -128,6 +133,7 @@
 						<td><span>
 						<form action="Redireccionar_ABMLProducto.html" method="post">
 						<button type="submit" class="btn btn-warning">
+
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 									fill="currentColor" class="bi bi-pencil-fill"
 									viewBox="0 0 16 16"> <path
