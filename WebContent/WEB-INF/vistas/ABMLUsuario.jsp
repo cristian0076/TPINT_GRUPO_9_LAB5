@@ -1,3 +1,4 @@
+<%@page import="entidad.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,55 +16,72 @@
 <body style="height: 100vh; width: 100%;">
 	<f:view
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center;">
-
+		<%
+			Usuario usuario = (Usuario) session.getAttribute("usuario");
+		%>
 		<!-- Barra navegacion -->
 		<nav
-			class="navbar navbar-expand-lg navbar-light  bg-dark text-white-50">
-		<form action="Redireccionar_IndexGeneral.html" method="post">
-			<input type="submit" value="Mayorista"
-				class="navbar-brand btn btn-outline-dark text-light font-weight-bold"
-				name="btnIndex">
-		</form>
-		<div class="dropdown show">
-			<a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-				id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> ABML </a>
+			class="navbar navbar-expand-lg navbar-light bg-dark text-white-50 d-flex flex-row justify-content-between">
 
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-				<form action="Redireccionar_ABMLProducto.html" method="post">
-					<input type="submit" value="Productos" class="dropdown-item"
-						name="btnProducto">
-				</form>
-							<form action="Redireccionar_ABMLStock.html" method="post">
-				<input type="submit" value="Stock" class="dropdown-item"
-					name="btnProducto">
+		<div class="dropdown show d-flex flex-row">
+			<form action="Redireccionar_IndexGeneral.html" method="post">
+				<input type="submit" value="Mayorista"
+					class="navbar-brand btn btn-outline-dark text-light font-weight-bold"
+					name="btnIndex">
 			</form>
-				<form action="Redireccionar_ABMLEmpleado.html" method="post">
-					<input type="submit" value="Empleados" class="dropdown-item"
-						name="btnProducto">
-				</form>
-				<form action="Redireccionar_ABMLUsuario.html" method="post">
-					<input type="submit" value="Usuarios" class="dropdown-item"
-						name="btnProducto">
-				</form>
-				<form action="Redireccionar_ABMLMarca.html" method="post">
-					<input type="submit" value="Marcas" class="dropdown-item"
-						name="btnProducto">
-				</form>
-							<form action="Redireccionar_ABMLVentas.html" method="post">
-				<input type="submit" value="Ventas" class="dropdown-item"
-					name="btnVenta">
-			</form>
-			<form action="Redireccionar_ABMLCliente.html" method="post">
-				<input type="submit" value="Cliente" class="dropdown-item"
-					name="btnCliente">
-			</form>
-			<form action="Redireccionar_ABMLVentaContador.html" method="post">
-				<input type="submit" value="VentasContador" class="dropdown-item"
-					name="btnVenta">
-			</form>
+
+			<div>
+				<a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+					id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> ABML </a>
+
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<form action="Redireccionar_ABMLProducto.html" method="post">
+						<input type="submit" value="Productos" class="dropdown-item"
+							name="btnProducto">
+					</form>
+					<form action="Redireccionar_ABMLStock.html" method="post">
+						<input type="submit" value="Stock" class="dropdown-item"
+							name="btnProducto">
+					</form>
+					<form action="Redireccionar_ABMLEmpleado.html" method="post">
+						<input type="submit" value="Empleados" class="dropdown-item"
+							name="btnEmpleado">
+					</form>
+					<form action="Redireccionar_ABMLUsuario.html" method="post">
+						<input type="submit" value="Usuarios" class="dropdown-item"
+							name="btnUsuarios">
+					</form>
+					<form action="Redireccionar_ABMLMarca.html" method="post">
+						<input type="submit" value="Marcas" class="dropdown-item"
+							name="btnMarca">
+					</form>
+					<form action="Redireccionar_ABMLVentas.html" method="post">
+						<input type="submit" value="Ventas" class="dropdown-item"
+							name="btnVenta">
+					</form>
+					<form action="Redireccionar_ABMLCliente.html" method="post">
+						<input type="submit" value="Cliente" class="dropdown-item"
+							name="btnCliente">
+					</form>
+					<form action="Redireccionar_ABMLVentaContador.html" method="post">
+						<input type="submit" value="VentaContador" class="dropdown-item"
+							name="btnVentaContador">
+					</form>
+				</div>
 			</div>
+
 		</div>
+		<div class="d-flex flex-row">
+			<span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+				fill="currentColor" class="bi bi-person-circle text-white"
+				viewBox="0 0 16 16"> <path
+				d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" /> <path fill-rule="evenodd"
+				d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+			</svg>
+		</div>
+
 		</nav>
 
 		<!-- Titulo -->
