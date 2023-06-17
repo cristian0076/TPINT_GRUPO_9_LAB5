@@ -71,7 +71,6 @@
 					</form>
 				</div>
 			</div>
-
 		</div>
 		<div class="d-flex flex-row">
 			<span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
@@ -84,8 +83,18 @@
 		</div>
 
 		</nav>
+		<!-- Titulo -->
+		<h2 class="my-3 ml-2 text-center">Ventas</h2>
+
+		<!-- parametros de busqueda -->
+		<div class="row justify-content-center">
+			<input type="date" class="my-3 mx-1"> <input type="date"
+				class="my-3 mx-1">
+			<button type="button" class="btn btn-primary my-3 mx-1">Buscar</button>
+		</div>
 
 		<!-- Tabla -->
+
 		<table class="table table-striped w-75 mx-auto">
 			<thead>
 				<tr>

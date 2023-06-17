@@ -93,11 +93,11 @@
 		<table class="table table-striped w-75 mx-auto">
 			<thead>
 				<tr>
+					<th scope="col">ID</th>
 					<th scope="col">DNI</th>
-					<th scope="col"></th>
+					<th scope="col">Nombre</th>
 					<th scope="col">Apellido</th>
 					<th scope="col">Sexo</th>
-					<th scope="col">Fecha de nacimiento</th>
 					<th scope="col">Direccion</th>
 					<th scope="col">Localidad</th>
 					<th scope="col">Correo electronico</th>
