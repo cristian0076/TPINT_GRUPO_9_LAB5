@@ -44,4 +44,9 @@ public class ServicioImplArticulo implements ServicioArticulo {
 		return dataAccess.eliminarArticulo(id);
 	}
 
+	@Override
+	public int modificarArticulo(int id,String nombre, String descripcion, String tipo, String marca) {
+		return dataAccess.modificarArticulo(id,nombre, descripcion, tipo, marca);
+	}
+
 }

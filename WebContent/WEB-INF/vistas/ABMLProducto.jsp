@@ -71,6 +71,7 @@
 							name="btnVentaContador">
 					</form>
 				</div>
+
 			</div>
 
 		</div>
@@ -127,6 +128,43 @@
 			</div>
 		</div>
 
+
+		<div class="modal fade" id="modalModificar" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Modificar
+							Producto</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="ModificarProducto_ABMLProducto.html" method="post">
+						<div class="modal-body">
+							<span>Nombre</span> <input type="text" class="form-control"
+								name="txtNombreM" placeholder="Nombre Producto"
+								required="required"> <span>Descripcion</span> <input
+								type="text" class="form-control" name="txtDescripcionM"
+								placeholder="Descripcion Producto" required="required">
+							<span>Tipo</span> <input type="text" class="form-control"
+								name="txtTipoM" placeholder="Tipo Producto" required="required">
+							<span>ID Marca</span> <input type="text" class="form-control"
+								name="txtMarcaM" placeholder="ID Marca" required="required">
+								<input type="hidden" name="id_M">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+							<input type="submit" value="Guardar" class="btn btn-success"
+								name="btnGuardar">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
 		<table class="table table-striped w-75 mx-auto">
 			<thead>
 				<tr>
@@ -150,16 +188,17 @@
 						<td><span>${item.marcaA.nombreM}</span></td>
 						<td><span>${item.tipoA}</span></td>
 						<td><span>
-								<form action="Redireccionar_ABMLProducto.html" method="post">
-									<button type="submit" class="btn btn-warning">
 
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-											fill="currentColor" class="bi bi-pencil-fill"
-											viewBox="0 0 16 16"> <path
-											d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-										</svg>
-									</button>
-								</form>
+								<button type="submit" class="btn btn-warning "
+									data-toggle="modal" data-target="#modalModificar"
+									onclick="cargarDatos(${item.id}, '${item.nombreA}', '${item.descripcionA}', '${item.tipoA}', ${item.marcaA.id})">
+
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+										fill="currentColor" class="bi bi-pencil-fill"
+										viewBox="0 0 16 16"> <path
+										d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+									</svg>
+								</button>
 						</span></td>
 						<td><span>
 								<form action="EliminarProducto_ABMLProducto.html" method="post">
@@ -190,12 +229,22 @@
 
 		<%
 			boolean pudoAgregarse = false;
+				int pudoModificarse = 0;
 				if (request.getAttribute("pudoAgregarse") != null) {
 					pudoAgregarse = (boolean) request.getAttribute("pudoAgregarse");
+				}
+				if (request.getAttribute("pudoModificarse") != null) {
+					pudoModificarse = (int) request.getAttribute("pudoModificarse");
 				}
 				if (pudoAgregarse) {
 		%>
 		<div class="alert alert-success" role="alert">Se salvo
+			correctamente!</div>
+		<%
+			}
+				if (pudoModificarse==1) {
+		%>
+		<div class="alert alert-success" role="alert">Se modifico
 			correctamente!</div>
 		<%
 			}
@@ -209,6 +258,17 @@
 		</div>
 		</footer>
 	</f:view>
+
+	<script type="text/javascript">
+	function cargarDatos(id,nombre, descripcion, tipo, marcaId) {
+		$('input[name="id_M"]').val(id);
+		$('input[name="txtNombreM"]').val(nombre);
+		$('input[name="txtDescripcionM"]').val(descripcion);
+		$('input[name="txtTipoM"]').val(tipo);
+		$('input[name="txtMarcaM"]').val(marcaId);
+    }
+	</script>
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>
