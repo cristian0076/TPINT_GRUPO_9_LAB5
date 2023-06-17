@@ -37,7 +37,6 @@
 		<property name="tipoA" value="TipoArticulo"></property>
 		<property name="status" value="1"></property>
 		<property name="marcaA" ref="MarcaInicial"></property>
-		<property name="EstadoA" value="false"></property>
 	</bean>
 	
 	
