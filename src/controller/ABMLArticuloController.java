@@ -63,4 +63,17 @@ public class ABMLArticuloController {
 		MV.setViewName("ABMLProducto");
 		return MV;
 	}
+	@RequestMapping("ModificarProducto_ABMLProducto.html")
+	public ModelAndView eventoModificarProducto(int id_M,String txtNombreM, String txtDescripcionM, String txtTipoM, String txtMarcaM)
+	{
+		ModelAndView MV = new ModelAndView();
+		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo)appContext.getBean("serviceBeanArticulo");
+		int estado = derImplArticulo.modificarArticulo(id_M,txtNombreM, txtDescripcionM, txtTipoM, txtMarcaM);
+		System.out.println(estado);
+		MV.addObject("pudoModificarse",estado);
+		MV = fetchData(MV, "0");
+		return MV;
+	}
+	
+
 }

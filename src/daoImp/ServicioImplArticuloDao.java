@@ -24,8 +24,9 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		ConfigHibernate ch = new ConfigHibernate();
 		Session session = ch.abrirConexion();
 
-		List<Articulo> listaArticulos = (List<Articulo>) session.createQuery("SELECT a FROM Articulo a WHERE a.status = 1")
-				.setFirstResult(Integer.parseInt(pagina) * 5).setMaxResults(5).list();
+		List<Articulo> listaArticulos = (List<Articulo>) session
+				.createQuery("SELECT a FROM Articulo a WHERE a.status = 1").setFirstResult(Integer.parseInt(pagina) * 5)
+				.setMaxResults(5).list();
 		ch.cerrarSession();
 		return listaArticulos;
 	}
@@ -35,7 +36,8 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		ConfigHibernate ch = new ConfigHibernate();
 		Session session = ch.abrirConexion();
 
-		List<Articulo> listaArticulos = (List<Articulo>) session.createQuery("SELECT a FROM Articulo a WHERE a.status = 1").list();
+		List<Articulo> listaArticulos = (List<Articulo>) session
+				.createQuery("SELECT a FROM Articulo a WHERE a.status = 1").list();
 		ch.cerrarSession();
 		return listaArticulos;
 	}
@@ -48,8 +50,8 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 			ConfigHibernate ch = new ConfigHibernate();
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
-			
-			Marca marcaBD = (Marca) session.createQuery("SELECT m FROM Marca m WHERE m.id = "+marca).uniqueResult();
+
+			Marca marcaBD = (Marca) session.createQuery("SELECT m FROM Marca m WHERE m.id = " + marca).uniqueResult();
 
 			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 			Articulo articulo = (Articulo) appContext.getBean("ArticuloInicial");
@@ -58,7 +60,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 			articulo.setTipoA(tipo);
 			articulo.setMarcaA(marcaBD);
 			session.save(articulo);
-			
+
 			session.getTransaction().commit();
 			ch.cerrarSession();
 		} catch (Exception e) {
@@ -77,21 +79,44 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 			ConfigHibernate ch = new ConfigHibernate();
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
-			
+
 			String hql = "UPDATE Articulo a SET a.status = 0 WHERE a.id = :id";
-			
-			 estado = session.createQuery(hql)
-			        .setParameter("id", id)
-			        .executeUpdate();
-			
+
+			estado = session.createQuery(hql).setParameter("id", id).executeUpdate();
+
 			session.getTransaction().commit();
-			
+
 			ch.cerrarSession();
 		} catch (Exception e) {
 			e.printStackTrace(System.out);
 			estado = 0;
 		}
-		
+
+		return estado;
+	}
+
+	@Override
+	public int modificarArticulo(int id, String nombre, String descripcion, String tipo, String marca) {
+		int estado = 0;
+		System.out.println(marca);
+		try {
+			ConfigHibernate ch = new ConfigHibernate();
+			Session session = ch.abrirConexion();
+			session.beginTransaction();
+
+			String hql = "UPDATE Articulo a SET a.status = 1 , a.nombreA = :nombre , a.descripcionA = :descripcion , a.tipoA = :tipo , a.marcaA = "+marca+" WHERE a.id = :id";
+
+			estado = session.createQuery(hql).setParameter("id", id).setParameter("nombre", nombre)
+					.setParameter("descripcion", descripcion).setParameter("tipo", tipo)
+					.executeUpdate();
+
+			session.getTransaction().commit();
+			ch.cerrarSession();
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			estado = 0;
+		}
+
 		return estado;
 	}
 
