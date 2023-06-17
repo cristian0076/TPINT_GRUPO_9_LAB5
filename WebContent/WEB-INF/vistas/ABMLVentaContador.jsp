@@ -88,7 +88,7 @@
 				<span>Ventas</span>
 				<div
 					class="bg-secondary rounded-circle d-flex flex-column align-items-center justify-content-center text-white"
-					style="height: 45px; width: 45px; box-shadow: 1px 0px 59px -3px rgba(0,0,0,0.75);">
+					style="height: 45px; width: 45px; box-shadow: 1px 0px 59px -3px rgba(0, 0, 0, 0.75);">
 					<span>2000</span>
 				</div>
 			</div>
@@ -97,7 +97,7 @@
 				<span>Compras</span>
 				<div
 					class="bg-secondary rounded-circle d-flex flex-column align-items-center justify-content-center text-white"
-					style="height: 45px; width: 45px; box-shadow: 1px 0px 59px -3px rgba(0,0,0,0.75);">
+					style="height: 45px; width: 45px; box-shadow: 1px 0px 59px -3px rgba(0, 0, 0, 0.75);">
 					<span>1000</span>
 				</div>
 			</div>
@@ -106,7 +106,7 @@
 				<span>Ganancias</span>
 				<div
 					class="bg-secondary rounded-circle d-flex flex-column align-items-center justify-content-center text-white"
-					style="height: 45px; width: 45px; box-shadow: 1px 0px 59px -3px rgba(0,0,0,0.75);">
+					style="height: 45px; width: 45px; box-shadow: 1px 0px 59px -3px rgba(0, 0, 0, 0.75);">
 					<span>1000</span>
 				</div>
 			</div>
