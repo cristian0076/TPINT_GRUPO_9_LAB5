@@ -83,6 +83,7 @@
 					<th scope="col">Marca</th>
 					<th scope="col">Tipo</th>
 					<th scope="col">Cantidad</th>
+					<th scope="col">Fecha Vencimiento</th>
 					<th scope="col">Precio de compra</th>
 					<th scope="col"></th>
 					<th scope="col"></th>
@@ -96,6 +97,7 @@
 					<td><span>Natura</span></td>
 					<td><span>Girasol</span></td>
 					<td><span>1500</span></td>
+					<td><span>15/06/2024</span></td>
 					<td><span>425</span></td>
 					<td><span><button type="button" class="btn btn-warning">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

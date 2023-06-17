@@ -46,6 +46,7 @@
 		<property name="cantidad" value="1000"></property>
 		<property name="precioCompra" value="150"></property>
 		<property name="EstadoS" value="false"></property>
+		<property name="FechaVencimientoS" value="10/12/2024"></property>
 	</bean>
 	
 		<bean id="ClienteInicial" class="entidad.Cliente">

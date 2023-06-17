@@ -32,6 +32,8 @@ public class Stock {
     private double precioCompra;
     @Autowired
 	private boolean EstadoS;
+    @Autowired
+	private Date FechaVencimientoS;
 
     public boolean isEstadoS() {
 		return EstadoS;
@@ -95,6 +97,14 @@ public class Stock {
 	public String toString() {
 		return "Stock [id=" + id + ", fechaIngreso=" + fechaIngreso + ", articulo=" + articulo + ", cantidad="
 				+ cantidad + ", precioCompra=" + precioCompra + "]";
+	}
+
+	public Date getFechaVencimientoS() {
+		return FechaVencimientoS;
+	}
+
+	public void setFechaVencimientoS(Date fechaVencimientoS) {
+		FechaVencimientoS = fechaVencimientoS;
 	}
     
     
