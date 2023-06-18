@@ -78,6 +78,7 @@ public class ABMLArticuloController {
 
 		MV.addObject("articulos", articulos);
 		MV.addObject("cantPaginas", Math.ceil(todosLosArticulos.size() / 5));
+		MV.addObject("paginaActual",pagina);
 		MV.setViewName("ABMLProducto");
 		return MV;
 	}

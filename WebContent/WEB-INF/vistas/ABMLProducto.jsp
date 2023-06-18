@@ -146,7 +146,7 @@
 						aria-label="Text input with dropdown button"
 						id="txtFiltroProducto" name="txtFiltroProducto">
 					<div class="input-group-append">
-						<button class="btn btn-outline-success" type="submit">Buscar</button>
+						<button class="btn btn-outline-primary" type="submit">Buscar</button>
 					</div>
 				</form>
 			</div>
@@ -254,8 +254,21 @@
 				name="txtFiltroProducto">
 			<ul class="pagination">
 				<c:forEach begin="0" step="1" end="${cantPaginas}" var="variable">
+					<%
+						String paginaActual = "0";
+								int variable = (int) pageContext.getAttribute("variable");
+								if (request.getAttribute("paginaActual") != null) {
+									paginaActual = (String) request.getAttribute("paginaActual");
+								}
+								if (variable >= Integer.parseInt(paginaActual) - 3
+										&& variable <= Integer.parseInt(paginaActual) + 3) {
+					%>
 					<li class="page-item"><input type="submit" value="${variable}"
-						class="page-link" name="btnPagina"></li>
+						class="page-link btn btn-secondary
+						<%if(Integer.parseInt(paginaActual)==variable){%> text-white <%} %>" name="btnPagina" <%if(Integer.parseInt(paginaActual)==variable){%>disabled<%} %>></li>
+					<%
+						}
+					%>
 				</c:forEach>
 			</ul>
 		</form>
