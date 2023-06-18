@@ -89,45 +89,68 @@
 
 		<h2 class="my-3 ml-2 text-center">Productos</h2>
 
-		<button type="button" class="btn btn-primary my-3 w-[30px] mx-auto"
-			data-toggle="modal" data-target="#exampleModalCenter">Añadir
-			+</button>
+		<div
+			class="d-flex flex-row justify-content-center align-items-center gap-3">
+			<button type="button" class="btn btn-primary my-3 w-[30px]"
+				data-toggle="modal" data-target="#exampleModalCenter">Añadir
+				+</button>
 
-		<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-			role="dialog" aria-labelledby="exampleModalCenterTitle"
-			aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLongTitle">Añadir
-							Producto</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Añadir
+								Producto</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form action="AgregarProducto_ABMLProducto.html" method="post">
+							<div class="modal-body">
+								<span>Nombre</span> <input type="text" class="form-control"
+									name="txtNombre" placeholder="Nombre Producto"
+									required="required"> <span>Descripcion</span> <input
+									type="text" class="form-control" name="txtDescripcion"
+									placeholder="Descripcion Producto" required="required">
+								<span>Tipo</span> <input type="text" class="form-control"
+									name="txtTipo" placeholder="Tipo Producto" required="required">
+								<span>ID Marca</span> <input type="number" class="form-control"
+									name="txtMarca" placeholder="ID Marca" required="required">
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">Cerrar</button>
+								<input type="submit" value="Guardar" class="btn btn-success"
+									name="btnGuardar">
+							</div>
+						</form>
 					</div>
-					<form action="AgregarProducto_ABMLProducto.html" method="post">
-						<div class="modal-body">
-							<span>Nombre</span> <input type="text" class="form-control"
-								name="txtNombre" placeholder="Nombre Producto"
-								required="required"> <span>Descripcion</span> <input
-								type="text" class="form-control" name="txtDescripcion"
-								placeholder="Descripcion Producto" required="required">
-							<span>Tipo</span> <input type="text" class="form-control"
-								name="txtTipo" placeholder="Tipo Producto" required="required">
-							<span>ID Marca</span> <input type="number" class="form-control"
-								name="txtMarca" placeholder="ID Marca" required="required">
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-							<input type="submit" value="Guardar" class="btn btn-success"
-								name="btnGuardar">
-						</div>
-					</form>
 				</div>
 			</div>
-		</div>
 
+			<!-- Busqueda / Filtro -->
+			<div class="input-group w-50 ml-3">
+				<form action="Redireccionar_ABMLProducto.html" class="input-group">
+					<select class="custom-select ddlFiltroProducto"
+						id="ddlFiltroProducto" name="ddlFiltroProducto">
+						<option selected value="0">Filtros</option>
+						<option value="1">ID</option>
+						<option value="2">Nombre</option>
+						<option value="3">Descripcion</option>
+						<option value="4">Tipo</option>
+						<option value="5">Marca</option>
+					</select> <input type="text" class="form-control txtFiltroProducto"
+						aria-label="Text input with dropdown button"
+						id="txtFiltroProducto" name="txtFiltroProducto">
+					<div class="input-group-append">
+						<button class="btn btn-outline-success" type="submit">Buscar</button>
+					</div>
+				</form>
+			</div>
+		</div>
 
 		<div class="modal fade" id="modalModificar" tabindex="-1"
 			role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -153,7 +176,7 @@
 								name="txtTipoM" placeholder="Tipo Producto" required="required">
 							<span>ID Marca</span> <input type="text" class="form-control"
 								name="txtMarcaM" placeholder="ID Marca" required="required">
-								<input type="hidden" name="id_M">
+							<input type="hidden" name="id_M">
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -218,6 +241,17 @@
 		</table>
 		<nav aria-label="Page navigation example" class="mx-auto">
 		<form action="Redireccionar_ABMLProducto.html" method="post">
+			<select class="custom-select ddlFiltroProducto"
+				id="ddlFiltroProducto" name="ddlFiltroProducto" hidden>
+				<option selected value="0">Filtros</option>
+				<option value="1">ID</option>
+				<option value="2">Nombre</option>
+				<option value="3">Descripcion</option>
+				<option value="4">Tipo</option>
+				<option value="5">Marca</option>
+			</select> <input type="hidden" class="form-control txtFiltroProducto"
+				aria-label="Text input with dropdown button" id="txtFiltroProducto"
+				name="txtFiltroProducto">
 			<ul class="pagination">
 				<c:forEach begin="0" step="1" end="${cantPaginas}" var="variable">
 					<li class="page-item"><input type="submit" value="${variable}"
@@ -242,7 +276,7 @@
 			correctamente!</div>
 		<%
 			}
-				if (pudoModificarse==1) {
+				if (pudoModificarse == 1) {
 		%>
 		<div class="alert alert-success" role="alert">Se modifico
 			correctamente!</div>
@@ -267,6 +301,37 @@
 		$('input[name="txtTipoM"]').val(tipo);
 		$('input[name="txtMarcaM"]').val(marcaId);
     }
+	</script>
+	<script type="text/javascript">
+	const ddls = document.getElementsByClassName("ddlFiltroProducto");
+	const inputs = document.getElementsByClassName("txtFiltroProducto");
+	
+	for (let i = 0; i < ddls.length; i++) {
+		ddls[i].addEventListener("change", (event) => {
+			sessionStorage.setItem("ddlFiltroProducto", event.target.value);
+		});
+	}
+	
+	for (let i = 0; i < inputs.length; i++) {
+		inputs[i].addEventListener("change", (event) => {
+			sessionStorage.setItem("txtFiltroProducto", event.target.value);
+		});
+	}
+	
+	window.addEventListener("load", function() {
+		for (let i = 0; i < ddls.length; i++) {
+			if(sessionStorage.getItem("ddlFiltroProducto")== null){
+				 ddls[i].value = 0;
+			}else{
+				ddls[i].value = sessionStorage.getItem("ddlFiltroProducto");
+			}
+		}
+		for (let i = 0; i < inputs.length; i++) {
+			inputs[i].value = sessionStorage.getItem("txtFiltroProducto");
+		}
+		
+	})
+	
 	</script>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

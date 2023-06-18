@@ -1,5 +1,6 @@
 package daoImp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -20,24 +21,89 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 	}
 
 	@Override
-	public List<Articulo> obtenerTodosLosArticulosSegunPagina(String pagina) {
+	public List<Articulo> obtenerTodosLosArticulosSegunPagina(String pagina, String modoFiltro, String textoFiltro) {
 		ConfigHibernate ch = new ConfigHibernate();
 		Session session = ch.abrirConexion();
+		List<Articulo> listaArticulos = new ArrayList<Articulo>();
 
-		List<Articulo> listaArticulos = (List<Articulo>) session
-				.createQuery("SELECT a FROM Articulo a WHERE a.status = 1").setFirstResult(Integer.parseInt(pagina) * 5)
-				.setMaxResults(5).list();
+		switch (modoFiltro) {
+		case "1":
+			listaArticulos = (List<Articulo>) session
+					.createQuery("SELECT a FROM Articulo a WHERE a.status = 1 AND a.id LIKE '%" + textoFiltro + "%'")
+					.setFirstResult(Integer.parseInt(pagina) * 5).setMaxResults(5).list();
+			break;
+		case "2":
+			listaArticulos = (List<Articulo>) session
+					.createQuery(
+							"SELECT a FROM Articulo a WHERE a.status = 1 AND a.nombreA LIKE '%" + textoFiltro + "%'")
+					.setFirstResult(Integer.parseInt(pagina) * 5).setMaxResults(5).list();
+			break;
+		case "3":
+			listaArticulos = (List<Articulo>) session.createQuery(
+					"SELECT a FROM Articulo a WHERE a.status = 1 AND a.descripcionA LIKE '%" + textoFiltro + "%'")
+					.setFirstResult(Integer.parseInt(pagina) * 5).setMaxResults(5).list();
+			break;
+		case "4":
+			listaArticulos = (List<Articulo>) session
+					.createQuery("SELECT a FROM Articulo a WHERE a.status = 1 AND a.tipoA LIKE '%" + textoFiltro + "%'")
+					.setFirstResult(Integer.parseInt(pagina) * 5).setMaxResults(5).list();
+			break;
+		case "5":
+			listaArticulos = (List<Articulo>) session
+					.createQuery("SELECT a FROM Articulo a JOIN a.marcaA m WHERE a.status = 1 AND m.nombreM LIKE '%"
+							+ textoFiltro + "%'")
+					.setFirstResult(Integer.parseInt(pagina) * 5).setMaxResults(5).list();
+			break;
+
+		default:
+			listaArticulos = (List<Articulo>) session.createQuery("SELECT a FROM Articulo a WHERE a.status = 1")
+					.setFirstResult(Integer.parseInt(pagina) * 5).setMaxResults(5).list();
+			break;
+		}
+
 		ch.cerrarSession();
 		return listaArticulos;
 	}
 
 	@Override
-	public List<Articulo> obtenerTodosLosArticulos() {
+	public List<Articulo> obtenerTodosLosArticulos(String modoFiltro, String textoFiltro) {
 		ConfigHibernate ch = new ConfigHibernate();
 		Session session = ch.abrirConexion();
+		List<Articulo> listaArticulos = new ArrayList<Articulo>();
 
-		List<Articulo> listaArticulos = (List<Articulo>) session
-				.createQuery("SELECT a FROM Articulo a WHERE a.status = 1").list();
+		switch (modoFiltro) {
+		case "1":
+			listaArticulos = (List<Articulo>) session
+					.createQuery("SELECT a FROM Articulo a WHERE a.status = 1 AND a.id LIKE '%" + textoFiltro + "%'")
+					.list();
+			break;
+		case "2":
+			listaArticulos = (List<Articulo>) session
+					.createQuery(
+							"SELECT a FROM Articulo a WHERE a.status = 1 AND a.nombreA LIKE '%" + textoFiltro + "%'")
+					.list();
+			break;
+		case "3":
+			listaArticulos = (List<Articulo>) session.createQuery(
+					"SELECT a FROM Articulo a WHERE a.status = 1 AND a.descripcionA LIKE '%" + textoFiltro + "%'")
+					.list();
+			break;
+		case "4":
+			listaArticulos = (List<Articulo>) session
+					.createQuery("SELECT a FROM Articulo a WHERE a.status = 1 AND a.tipoA LIKE '%" + textoFiltro + "%'")
+					.list();
+			break;
+		case "5":
+			listaArticulos = (List<Articulo>) session
+					.createQuery("SELECT a FROM Articulo a JOIN a.marcaA m WHERE a.status = 1 AND m.nombreM LIKE '%"
+							+ textoFiltro + "%'")
+					.list();
+			break;
+
+		default:
+			listaArticulos = (List<Articulo>) session.createQuery("SELECT a FROM Articulo a WHERE a.status = 1").list();
+			break;
+		}
 		ch.cerrarSession();
 		return listaArticulos;
 	}
@@ -103,7 +169,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 			ConfigHibernate ch = new ConfigHibernate();
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
-			
+
 			Marca marcaBD = (Marca) session.createQuery("SELECT m FROM Marca m WHERE m.id = " + marca).uniqueResult();
 			String hql = "UPDATE Articulo a SET a.status = 1 , a.nombreA = :nombre , a.descripcionA = :descripcion , a.tipoA = :tipo , a.marcaA = :marca WHERE a.id = :id";
 
