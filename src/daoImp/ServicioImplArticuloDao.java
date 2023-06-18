@@ -20,6 +20,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Articulo> obtenerTodosLosArticulosSegunPagina(String pagina, String modoFiltro, String textoFiltro) {
 		ConfigHibernate ch = new ConfigHibernate();
@@ -65,6 +66,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		return listaArticulos;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Articulo> obtenerTodosLosArticulos(String modoFiltro, String textoFiltro) {
 		ConfigHibernate ch = new ConfigHibernate();
