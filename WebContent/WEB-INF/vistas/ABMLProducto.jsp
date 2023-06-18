@@ -265,7 +265,9 @@
 					%>
 					<li class="page-item"><input type="submit" value="${variable}"
 						class="page-link btn btn-secondary
-						<%if(Integer.parseInt(paginaActual)==variable){%> text-white <%} %>" name="btnPagina" <%if(Integer.parseInt(paginaActual)==variable){%>disabled<%} %>></li>
+						<%if(Integer.parseInt(paginaActual)==variable){%> text-white <%} %>"
+						name="btnPagina" <%if(Integer.parseInt(paginaActual)==variable){%>
+						disabled <%} %>></li>
 					<%
 						}
 					%>
