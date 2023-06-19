@@ -115,10 +115,20 @@
 									required="required"> <span>Descripcion</span> <input
 									type="text" class="form-control" name="txtDescripcion"
 									placeholder="Descripcion Producto" required="required">
-								<span>Tipo</span> <input type="text" class="form-control"
-									name="txtTipo" placeholder="Tipo Producto" required="required">
-								<span>ID Marca</span> <input type="number" class="form-control"
-									name="txtMarca" placeholder="ID Marca" required="required">
+								<span>Tipo</span> 
+								<select class="form-control" name="txtTipo" required="required">
+  									<option value="" disabled selected>Seleccione un tipo de producto</option>
+  									<c:forEach var="tipo" items="${Tipos}">
+    									<option value="${tipo.id}">${tipo.nombre}</option>
+  									</c:forEach>
+								</select>
+								<span>Marca</span> 
+								<select class="form-control" name="txtMarca" required="required">
+  									<option value="" disabled selected>Seleccione una marca de producto</option>
+  									<c:forEach var="marca" items="${Marcas}">
+    									<option value="${marca.id}">${marca.nombreM}</option>
+  									</c:forEach>
+								</select>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-danger"
@@ -172,11 +182,20 @@
 								required="required"> <span>Descripcion</span> <input
 								type="text" class="form-control" name="txtDescripcionM"
 								placeholder="Descripcion Producto" required="required">
-							<span>Tipo</span> <input type="text" class="form-control"
-								name="txtTipoM" placeholder="Tipo Producto" required="required">
-							<span>ID Marca</span> <input type="text" class="form-control"
-								name="txtMarcaM" placeholder="ID Marca" required="required">
-							<input type="hidden" name="id_M">
+								<span>Tipo</span> 
+								<select class="form-control" name="txtTipoM" required="required">
+  									<option value="" disabled selected>Seleccione un tipo de producto</option>
+  									<c:forEach var="tipo" items="${Tipos}">
+    									<option value="${tipo.id}">${tipo.nombre}</option>
+  									</c:forEach>
+								</select>
+								<span>Marca</span> 
+								<select class="form-control" name="txtMarcaM" required="required">
+  									<option value="" disabled selected>Seleccione una marca de producto</option>
+  									<c:forEach var="marca" items="${Marcas}">
+    									<option value="${marca.id}">${marca.nombreM}</option>
+  									</c:forEach>
+								</select>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -209,12 +228,12 @@
 						<td><span>${item.nombreA} </span></td>
 						<td><span>${item.descripcionA}</span></td>
 						<td><span>${item.marcaA.nombreM}</span></td>
-						<td><span>${item.tipoA}</span></td>
+						<td><span>${item.tipoA.nombre}</span></td>
 						<td><span>
 
 								<button type="submit" class="btn btn-warning "
 									data-toggle="modal" data-target="#modalModificar"
-									onclick="cargarDatos(${item.id}, '${item.nombreA}', '${item.descripcionA}', '${item.tipoA}', ${item.marcaA.id})">
+									onclick="cargarDatos(${item.id}, '${item.nombreA}', '${item.descripcionA}', '${item.tipoA.id}', ${item.marcaA.id})">
 
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="currentColor" class="bi bi-pencil-fill"
@@ -224,7 +243,7 @@
 								</button>
 						</span></td>
 						<td><span>
-								<form action="EliminarProducto_ABMLProducto.html" method="post">
+								<form action="EliminarProducto_ABMLProducto.html" method="post" onsubmit="return confirm('¿Está seguro que desea borrar el producto?');">
 									<button type="submit" name="btnEliminar" value="${item.id}"
 										class="btn btn-danger">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -313,8 +332,38 @@
 		$('input[name="id_M"]').val(id);
 		$('input[name="txtNombreM"]').val(nombre);
 		$('input[name="txtDescripcionM"]').val(descripcion);
-		$('input[name="txtTipoM"]').val(tipo);
-		$('input[name="txtMarcaM"]').val(marcaId);
+		//$('input[name="txtTipoM"]').val(tipo);
+		//$('input[name="txtMarcaM"]').val(marcaId);
+		
+		//selecciono el desplegable de tipos
+		var selectElement = document.querySelector('select[name="txtTipoM"]');
+		
+		// Recorre todas las opciones del desplegable de tipos de productos
+		for (var i = 0; i < selectElement.options.length; i++) {
+		  var option = selectElement.options[i];
+		  
+		  // Compara el valor de la opción con el valor deseado
+		  if (option.value == tipo) {
+		    // Establece el atributo "selected" en la opción correspondiente
+		    option.selected = true;
+		    break; // Si encontramos la opción, terminamos el bucle
+		  }
+		}
+		
+		
+		//selecciono el desplegable de marcas
+		var selectElement2 = document.querySelector('select[name="txtMarcaM"]');
+		// Recorre todas las opciones del desplegable de marcas de productos
+		for (var i = 0; i < selectElement2.options.length; i++) {
+		  var option2 = selectElement2.options[i];
+		  // Compara el valor de la opción con el valor deseado
+		  if (option2.value == marcaId) {
+		    // Establece el atributo "selected" en la opción correspondiente
+		    option2.selected = true;
+		    break; // Si encontramos la opción, terminamos el bucle
+		  }
+		}
+		
     }
 	</script>
 	<script type="text/javascript">

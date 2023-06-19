@@ -22,6 +22,13 @@ public class Main {
 		((ConfigurableApplicationContext)(appContext)).close();
 		System.out.println(articulo.toString());
 		System.out.println(stock.toString());
+		
+		ConfigHibernate configHibernate = new ConfigHibernate();
+        Session session = configHibernate.abrirConexion();
+
+        // Aquí puedes realizar operaciones de persistencia utilizando la sesión abierta
+
+        configHibernate.cerrarSession();
 
 	}
 

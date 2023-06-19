@@ -10,60 +10,51 @@ import javax.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
-@Table(name = "Marca")
-public class Marca {
+@Table(name = "Tipo")
+public class Tipo {
+	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Autowired
-	private String nombreM;
+	private String nombre;
 	@Autowired
-	private String descripcionM;
+	private String descripcion;
 	@Autowired
-	private boolean EstadoM;
-
-
-	public Marca() {
+	private boolean status;
+	
+	public Tipo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public boolean isEstadoM() {
-		return EstadoM;
-	}
-
-	public void setEstadoM(boolean estadoM) {
-		EstadoM = estadoM;
-	}
-	
+	 
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public String getNombreM() {
-		return nombreM;
+	public String getNombre() {
+		return nombre;
 	}
-
-	public void setNombreM(String nombreM) {
-		this.nombreM = nombreM;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-
-	public String getDescripcionM() {
-		return descripcionM;
+	public String getDescripcion() {
+		return descripcion;
 	}
-
-	public void setDescripcionM(String descripcionM) {
-		this.descripcionM = descripcionM;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
-
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
-		return "Marca [id=" + id + ", nombreM=" + nombreM + ", descripcionM=" + descripcionM + "]";
+		return "Tipo [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", status=" + status + "]";
 	}
-
 }

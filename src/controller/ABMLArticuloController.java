@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import entidad.Articulo;
+import entidad.Marca;
+import entidad.Tipo;
 import servicioImpl.ServicioImplArticulo;
+import servicioImpl.ServicioImplMarca;
+import servicioImpl.ServicioImplTipo;
 
 @Controller
 public class ABMLArticuloController {
@@ -42,6 +46,12 @@ public class ABMLArticuloController {
 		System.out.println(estado);
 		MV.addObject("pudoAgregarse", estado);
 		MV = fetchData(MV, "0","0","");
+		ServicioImplMarca derImplMarca = (ServicioImplMarca) appContext.getBean("serviceBeanMarca");
+		List<Marca> Marcas = derImplMarca.obtenerTodasLasMarcas();
+		ServicioImplTipo derImplTipo = (ServicioImplTipo) appContext.getBean("serviceBeanTipo");
+		List<Tipo> Tipos = derImplTipo.obtenerTodosLosTipos();
+		MV.addObject("Marcas", Marcas);
+		MV.addObject("Tipos", Tipos);
 		return MV;
 	}
 
@@ -54,6 +64,12 @@ public class ABMLArticuloController {
 		int estado = derImplArticulo.eliminarArticulo(id);
 		MV.addObject("pudoEliminarse", estado);
 		MV = fetchData(MV, "0","0","");
+		ServicioImplMarca derImplMarca = (ServicioImplMarca) appContext.getBean("serviceBeanMarca");
+		List<Marca> Marcas = derImplMarca.obtenerTodasLasMarcas();
+		ServicioImplTipo derImplTipo = (ServicioImplTipo) appContext.getBean("serviceBeanTipo");
+		List<Tipo> Tipos = derImplTipo.obtenerTodosLosTipos();
+		MV.addObject("Marcas", Marcas);
+		MV.addObject("Tipos", Tipos);
 		return MV;
 	}
 
@@ -66,6 +82,12 @@ public class ABMLArticuloController {
 		System.out.println(estado);
 		MV.addObject("pudoModificarse", estado);
 		MV = fetchData(MV, "0","0","");
+		ServicioImplMarca derImplMarca = (ServicioImplMarca) appContext.getBean("serviceBeanMarca");
+		List<Marca> Marcas = derImplMarca.obtenerTodasLasMarcas();
+		ServicioImplTipo derImplTipo = (ServicioImplTipo) appContext.getBean("serviceBeanTipo");
+		List<Tipo> Tipos = derImplTipo.obtenerTodosLosTipos();
+		MV.addObject("Marcas", Marcas);
+		MV.addObject("Tipos", Tipos);
 		return MV;
 	}
 	
@@ -80,6 +102,12 @@ public class ABMLArticuloController {
 		MV.addObject("cantPaginas", Math.ceil(todosLosArticulos.size() / 5));
 		MV.addObject("paginaActual",pagina);
 		MV.setViewName("ABMLProducto");
+		ServicioImplMarca derImplMarca = (ServicioImplMarca) appContext.getBean("serviceBeanMarca");
+		List<Marca> Marcas = derImplMarca.obtenerTodasLasMarcas();
+		ServicioImplTipo derImplTipo = (ServicioImplTipo) appContext.getBean("serviceBeanTipo");
+		List<Tipo> Tipos = derImplTipo.obtenerTodosLosTipos();
+		MV.addObject("Marcas", Marcas);
+		MV.addObject("Tipos", Tipos);
 		return MV;
 	}
 

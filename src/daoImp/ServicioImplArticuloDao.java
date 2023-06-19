@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import dao.DaoArticulo;
 import entidad.Articulo;
 import entidad.Marca;
+import entidad.Tipo;
 import entidad.Usuario;
 import servicioImpl.ServicioImplArticulo;
 
@@ -120,12 +121,13 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 			session.beginTransaction();
 
 			Marca marcaBD = (Marca) session.createQuery("SELECT m FROM Marca m WHERE m.id = " + marca).uniqueResult();
-
+			Tipo tipoBD = (Tipo) session.createQuery("SELECT t FROM Tipo t WHERE t.id = " + tipo).uniqueResult();
+			
 			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 			Articulo articulo = (Articulo) appContext.getBean("ArticuloInicial");
 			articulo.setNombreA(nombre);
 			articulo.setDescripcionA(descripcion);
-			articulo.setTipoA(tipo);
+			articulo.setTipoA(tipoBD);
 			articulo.setMarcaA(marcaBD);
 			session.save(articulo);
 
@@ -173,10 +175,11 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 			session.beginTransaction();
 
 			Marca marcaBD = (Marca) session.createQuery("SELECT m FROM Marca m WHERE m.id = " + marca).uniqueResult();
+			Tipo tipoBD = (Tipo) session.createQuery("SELECT t FROM Tipo t WHERE t.id = " + tipo).uniqueResult();
 			String hql = "UPDATE Articulo a SET a.status = 1 , a.nombreA = :nombre , a.descripcionA = :descripcion , a.tipoA = :tipo , a.marcaA = :marca WHERE a.id = :id";
 
 			estado = session.createQuery(hql).setParameter("id", id).setParameter("nombre", nombre)
-					.setParameter("descripcion", descripcion).setParameter("tipo", tipo).setParameter("marca", marcaBD)
+					.setParameter("descripcion", descripcion).setParameter("tipo", tipoBD).setParameter("marca", marcaBD)
 					.executeUpdate();
 
 			session.getTransaction().commit();

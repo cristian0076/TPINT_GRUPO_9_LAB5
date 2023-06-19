@@ -29,7 +29,9 @@ public class Articulo {
 	@JoinColumn(name="marcaA")
 	private Marca marcaA;
 	@Autowired
-	private String tipoA;
+	@ManyToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name="TipoA")
+	private Tipo tipoA;
 	@Autowired
 	private boolean status; // 0 inactivo, 1 activo
 
@@ -49,6 +51,18 @@ public class Articulo {
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+
+
+	public Tipo getTipoA() {
+		return tipoA;
+	}
+
+
+
+	public void setTipoA(Tipo tipoA) {
+		this.tipoA = tipoA;
 	}
 
 
@@ -85,14 +99,6 @@ public class Articulo {
 		this.marcaA = marcaA;
 	}
 
-	public String getTipoA() {
-		return tipoA;
-	}
-
-	public void setTipoA(String tipoA) {
-		this.tipoA = tipoA;
-	}
-
 
 
 	@Override
@@ -100,7 +106,6 @@ public class Articulo {
 		return "Articulo [id=" + id + ", nombreA=" + nombreA + ", descripcionA=" + descripcionA + ", marcaA=" + marcaA
 				+ ", tipoA=" + tipoA + ", status=" + status + "]";
 	}
-
-
+	
 
 }
