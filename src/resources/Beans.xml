@@ -136,4 +136,15 @@
 	<bean id="dataAccessBeanVentas"
 		class="daoImp.ServicioImplVentasDao" scope="singleton">
 	</bean>
+	
+	<!-- CREO EL SERVICIO PARA CLIENTE -->
+	<bean id="serviceBeanCliente"
+		class="servicioImpl.ServicioImplCliente">
+		<property name="dataAccess" ref="dataAccessBeanCliente"></property>
+	</bean>
+
+	<!-- EL SERVICIO NECESITA EL DAO -->
+	<bean id="dataAccessBeanCliente"
+		class="daoImp.ServicioImplClienteDao" scope="singleton">
+	</bean>
 </beans>

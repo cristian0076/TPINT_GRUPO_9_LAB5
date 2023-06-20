@@ -21,12 +21,6 @@ public class Cliente {
 	@Column(name = "ID_C")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Override
-	public String toString() {
-		return "Cliente [id=" + id + ", DNI_C=" + DNI_C + ", Nombre_C=" + Nombre_C + ", Apellido_C=" + Apellido_C
-				+ ", Sexo_C=" + Sexo_C + ", Fecha_Nacimiento_C=" + Fecha_Nacimiento_C + ", Direccion_C=" + Direccion_C
-				+ ", Localidad_C=" + Localidad_C + ", Mail_C=" + Mail_C + ", Telefono_C=" + Telefono_C + "]";
-	}
 
 	@Autowired
 	private String DNI_C;
@@ -140,6 +134,14 @@ public class Cliente {
 
 	public void setTelefono_C(String telefono_C) {
 		Telefono_C = telefono_C;
+	}
+	
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", DNI_C=" + DNI_C + ", Nombre_C=" + Nombre_C + ", Apellido_C=" + Apellido_C
+				+ ", Sexo_C=" + Sexo_C + ", Fecha_Nacimiento_C=" + Fecha_Nacimiento_C + ", Direccion_C=" + Direccion_C
+				+ ", Localidad_C=" + Localidad_C + ", Mail_C=" + Mail_C + ", Telefono_C=" + Telefono_C + ", EstadoC="
+				+ EstadoC + "]";
 	}
 
 		
