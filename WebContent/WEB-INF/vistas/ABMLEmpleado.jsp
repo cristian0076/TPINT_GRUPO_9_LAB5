@@ -29,51 +29,53 @@
 					class="navbar-brand btn btn-outline-dark text-light font-weight-bold"
 					name="btnIndex">
 			</form>
+			<%
+			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId()==1) {
+			%>
+			<div class="dropdown show d-flex flex-row">
+				<div>
+					<a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+						id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> ABML </a>
 
-			<div>
-				<a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-					id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> ABML </a>
-
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					<form action="Redireccionar_ABMLProducto.html" method="post">
-						<input type="submit" value="Productos" class="dropdown-item"
-							name="btnProducto">
-					</form>
-					<form action="Redireccionar_ABMLStock.html" method="post">
-						<input type="submit" value="Stock" class="dropdown-item"
-							name="btnProducto">
-					</form>
-					<form action="Redireccionar_ABMLEmpleado.html" method="post">
-						<input type="submit" value="Empleados" class="dropdown-item"
-							name="btnEmpleado">
-					</form>
-					<form action="Redireccionar_ABMLUsuario.html" method="post">
-						<input type="submit" value="Usuarios" class="dropdown-item"
-							name="btnUsuarios">
-					</form>
-					<form action="Redireccionar_ABMLMarca.html" method="post">
-						<input type="submit" value="Marcas" class="dropdown-item"
-							name="btnMarca">
-					</form>
-					<form action="Redireccionar_ABMLVentas.html" method="post">
-						<input type="submit" value="Ventas" class="dropdown-item"
-							name="btnVenta">
-					</form>
-					<form action="Redireccionar_ABMLCliente.html" method="post">
-						<input type="submit" value="Cliente" class="dropdown-item"
-							name="btnCliente">
-					</form>
-					<form action="Redireccionar_ABMLVentaContador.html" method="post">
-						<input type="submit" value="VentaContador" class="dropdown-item"
-							name="btnVentaContador">
-					</form>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<form action="Redireccionar_ABMLProducto.html" method="post">
+							<input type="submit" value="Productos" class="dropdown-item"
+								name="btnProducto">
+						</form>
+						<form action="Redireccionar_ABMLStock.html" method="post">
+							<input type="submit" value="Stock" class="dropdown-item"
+								name="btnProducto">
+						</form>
+						<form action="Redireccionar_ABMLEmpleado.html" method="post">
+							<input type="submit" value="Empleados" class="dropdown-item"
+								name="btnEmpleado">
+						</form>
+						<form action="Redireccionar_ABMLUsuario.html" method="post">
+							<input type="submit" value="Usuarios" class="dropdown-item"
+								name="btnUsuarios">
+						</form>
+						<form action="Redireccionar_ABMLMarca.html" method="post">
+							<input type="submit" value="Marcas" class="dropdown-item"
+								name="btnMarca">
+						</form>
+						<form action="Redireccionar_ABMLVentas.html" method="post">
+							<input type="submit" value="Ventas" class="dropdown-item"
+								name="btnVenta">
+						</form>
+						<form action="Redireccionar_ABMLCliente.html" method="post">
+							<input type="submit" value="Cliente" class="dropdown-item"
+								name="btnCliente">
+						</form>
+					</div>
 				</div>
 			</div>
-
+			<%
+				}
+			%>
 		</div>
 		<div class="d-flex flex-row">
-		<span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
+			<span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
 			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 				fill="currentColor" class="bi bi-person-circle text-white"
 				viewBox="0 0 16 16"> <path
@@ -81,9 +83,10 @@
 				d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
 			</svg>
 		</div>
-
 		</nav>
-
+			<%
+			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId()==1) {
+			%>
 		<!-- Titulo -->
 		<h2 class="my-3 ml-2 text-center">Empleados</h2>
 
@@ -148,7 +151,39 @@
 				class="page-link" name="btnPagina"></li>
 		</ul>
 		</nav>
-
+		<%
+			} 
+			else {
+				if (session.getAttribute("usuario") != null){
+		%>
+				<head>
+<meta http-equiv="refresh"
+	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
+<title>Redireccionando...</title>
+		</head>
+		<h1>Redireccionando...</h1>
+		<p>Estás siendo redirigido a otra página. Si no eres redirigido
+			automáticamente, haz clic en el siguiente enlace:</p>
+		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace de
+			redirección</a>
+		<%
+			} else {
+		%>
+		
+		<head>
+<meta http-equiv="refresh"
+	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
+<title>Redireccionando...</title>
+		</head>
+		<h1>Redireccionando...</h1>
+		<p>Estás siendo redirigido a otra página. Si no eres redirigido
+			automáticamente, haz clic en el siguiente enlace:</p>
+		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/">Enlace de
+			redirección</a>
+		<%
+			}
+			}
+		%>
 		<!-- Footer -->
 		<footer id="sticky-footer"
 			class="py-4 bg-dark text-white-50 fixed-bottom">

@@ -31,49 +31,50 @@
 					class="navbar-brand btn btn-outline-dark text-light font-weight-bold"
 					name="btnIndex">
 			</form>
+			<%
+				if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId()==1) {
+			%>
+			<div class="dropdown show d-flex flex-row">
+				<div>
+					<a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+						id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> ABML </a>
 
-			<div>
-				<a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-					id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> ABML </a>
-
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					<form action="Redireccionar_ABMLProducto.html" method="post">
-						<input type="submit" value="Productos" class="dropdown-item"
-							name="btnProducto">
-					</form>
-					<form action="Redireccionar_ABMLStock.html" method="post">
-						<input type="submit" value="Stock" class="dropdown-item"
-							name="btnProducto">
-					</form>
-					<form action="Redireccionar_ABMLEmpleado.html" method="post">
-						<input type="submit" value="Empleados" class="dropdown-item"
-							name="btnEmpleado">
-					</form>
-					<form action="Redireccionar_ABMLUsuario.html" method="post">
-						<input type="submit" value="Usuarios" class="dropdown-item"
-							name="btnUsuarios">
-					</form>
-					<form action="Redireccionar_ABMLMarca.html" method="post">
-						<input type="submit" value="Marcas" class="dropdown-item"
-							name="btnMarca">
-					</form>
-					<form action="Redireccionar_ABMLVentas.html" method="post">
-						<input type="submit" value="Ventas" class="dropdown-item"
-							name="btnVenta">
-					</form>
-					<form action="Redireccionar_ABMLCliente.html" method="post">
-						<input type="submit" value="Cliente" class="dropdown-item"
-							name="btnCliente">
-					</form>
-					<form action="Redireccionar_ABMLVentaContador.html" method="post">
-						<input type="submit" value="VentaContador" class="dropdown-item"
-							name="btnVentaContador">
-					</form>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<form action="Redireccionar_ABMLProducto.html" method="post">
+							<input type="submit" value="Productos" class="dropdown-item"
+								name="btnProducto">
+						</form>
+						<form action="Redireccionar_ABMLStock.html" method="post">
+							<input type="submit" value="Stock" class="dropdown-item"
+								name="btnProducto">
+						</form>
+						<form action="Redireccionar_ABMLEmpleado.html" method="post">
+							<input type="submit" value="Empleados" class="dropdown-item"
+								name="btnEmpleado">
+						</form>
+						<form action="Redireccionar_ABMLUsuario.html" method="post">
+							<input type="submit" value="Usuarios" class="dropdown-item"
+								name="btnUsuarios">
+						</form>
+						<form action="Redireccionar_ABMLMarca.html" method="post">
+							<input type="submit" value="Marcas" class="dropdown-item"
+								name="btnMarca">
+						</form>
+						<form action="Redireccionar_ABMLVentas.html" method="post">
+							<input type="submit" value="Ventas" class="dropdown-item"
+								name="btnVenta">
+						</form>
+						<form action="Redireccionar_ABMLCliente.html" method="post">
+							<input type="submit" value="Cliente" class="dropdown-item"
+								name="btnCliente">
+						</form>
+					</div>
 				</div>
-
 			</div>
-
+			<%
+				}
+			%>
 		</div>
 		<div class="d-flex flex-row">
 			<span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
@@ -86,7 +87,9 @@
 		</div>
 
 		</nav>
-
+			<%
+			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId()==1) {
+			%>
 		<h2 class="my-3 ml-2 text-center">Productos</h2>
 
 		<div
@@ -115,19 +118,20 @@
 									required="required"> <span>Descripcion</span> <input
 									type="text" class="form-control" name="txtDescripcion"
 									placeholder="Descripcion Producto" required="required">
-								<span>Tipo</span> 
-								<select class="form-control" name="txtTipo" required="required">
-  									<option value="" disabled selected>Seleccione un tipo de producto</option>
-  									<c:forEach var="tipo" items="${Tipos}">
-    									<option value="${tipo.id}">${tipo.nombre}</option>
-  									</c:forEach>
-								</select>
-								<span>Marca</span> 
-								<select class="form-control" name="txtMarca" required="required">
-  									<option value="" disabled selected>Seleccione una marca de producto</option>
-  									<c:forEach var="marca" items="${Marcas}">
-    									<option value="${marca.id}">${marca.nombreM}</option>
-  									</c:forEach>
+								<span>Tipo</span> <select class="form-control" name="txtTipo"
+									required="required">
+									<option value="" disabled selected>Seleccione un tipo
+										de producto</option>
+									<c:forEach var="tipo" items="${Tipos}">
+										<option value="${tipo.id}">${tipo.nombre}</option>
+									</c:forEach>
+								</select> <span>Marca</span> <select class="form-control" name="txtMarca"
+									required="required">
+									<option value="" disabled selected>Seleccione una
+										marca de producto</option>
+									<c:forEach var="marca" items="${Marcas}">
+										<option value="${marca.id}">${marca.nombreM}</option>
+									</c:forEach>
 								</select>
 							</div>
 							<div class="modal-footer">
@@ -182,20 +186,21 @@
 								required="required"> <span>Descripcion</span> <input
 								type="text" class="form-control" name="txtDescripcionM"
 								placeholder="Descripcion Producto" required="required">
-								<span>Tipo</span> 
-								<select class="form-control" name="txtTipoM" required="required">
-  									<option value="" disabled selected>Seleccione un tipo de producto</option>
-  									<c:forEach var="tipo" items="${Tipos}">
-    									<option value="${tipo.id}">${tipo.nombre}</option>
-  									</c:forEach>
-								</select>
-								<span>Marca</span> 
-								<select class="form-control" name="txtMarcaM" required="required">
-  									<option value="" disabled selected>Seleccione una marca de producto</option>
-  									<c:forEach var="marca" items="${Marcas}">
-    									<option value="${marca.id}">${marca.nombreM}</option>
-  									</c:forEach>
-								</select>
+							<span>Tipo</span> <select class="form-control" name="txtTipoM"
+								required="required">
+								<option value="" disabled selected>Seleccione un tipo
+									de producto</option>
+								<c:forEach var="tipo" items="${Tipos}">
+									<option value="${tipo.id}">${tipo.nombre}</option>
+								</c:forEach>
+							</select> <span>Marca</span> <select class="form-control" name="txtMarcaM"
+								required="required">
+								<option value="" disabled selected>Seleccione una marca
+									de producto</option>
+								<c:forEach var="marca" items="${Marcas}">
+									<option value="${marca.id}">${marca.nombreM}</option>
+								</c:forEach>
+							</select>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -243,7 +248,8 @@
 								</button>
 						</span></td>
 						<td><span>
-								<form action="EliminarProducto_ABMLProducto.html" method="post" onsubmit="return confirm('¿Está seguro que desea borrar el producto?');">
+								<form action="EliminarProducto_ABMLProducto.html" method="post"
+									onsubmit="return confirm('¿Está seguro que desea borrar el producto?');">
 									<button type="submit" name="btnEliminar" value="${item.id}"
 										class="btn btn-danger">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -275,12 +281,12 @@
 				<c:forEach begin="0" step="1" end="${cantPaginas}" var="variable">
 					<%
 						String paginaActual = "0";
-								int variable = (int) pageContext.getAttribute("variable");
-								if (request.getAttribute("paginaActual") != null) {
-									paginaActual = (String) request.getAttribute("paginaActual");
-								}
-								if (variable >= Integer.parseInt(paginaActual) - 3
-										&& variable <= Integer.parseInt(paginaActual) + 3) {
+									int variable = (int) pageContext.getAttribute("variable");
+									if (request.getAttribute("paginaActual") != null) {
+										paginaActual = (String) request.getAttribute("paginaActual");
+									}
+									if (variable >= Integer.parseInt(paginaActual) - 3
+											&& variable <= Integer.parseInt(paginaActual) + 3) {
 					%>
 					<li class="page-item"><input type="submit" value="${variable}"
 						class="page-link btn btn-secondary
@@ -297,27 +303,59 @@
 
 		<%
 			boolean pudoAgregarse = false;
-				int pudoModificarse = 0;
-				if (request.getAttribute("pudoAgregarse") != null) {
-					pudoAgregarse = (boolean) request.getAttribute("pudoAgregarse");
-				}
-				if (request.getAttribute("pudoModificarse") != null) {
-					pudoModificarse = (int) request.getAttribute("pudoModificarse");
-				}
-				if (pudoAgregarse) {
+					int pudoModificarse = 0;
+					if (request.getAttribute("pudoAgregarse") != null) {
+						pudoAgregarse = (boolean) request.getAttribute("pudoAgregarse");
+					}
+					if (request.getAttribute("pudoModificarse") != null) {
+						pudoModificarse = (int) request.getAttribute("pudoModificarse");
+					}
+					if (pudoAgregarse) {
 		%>
 		<div class="alert alert-success" role="alert">Se salvo
 			correctamente!</div>
 		<%
 			}
-				if (pudoModificarse == 1) {
+					if (pudoModificarse == 1) {
 		%>
 		<div class="alert alert-success" role="alert">Se modifico
 			correctamente!</div>
 		<%
 			}
 		%>
-
+		<%
+			} 
+			else {
+				if (session.getAttribute("usuario") != null){
+		%>
+				<head>
+<meta http-equiv="refresh"
+	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
+<title>Redireccionando...</title>
+		</head>
+		<h1>Redireccionando...</h1>
+		<p>Estás siendo redirigido a otra página. Si no eres redirigido
+			automáticamente, haz clic en el siguiente enlace:</p>
+		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace de
+			redirección</a>
+		<%
+			} else {
+		%>
+		
+		<head>
+<meta http-equiv="refresh"
+	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
+<title>Redireccionando...</title>
+		</head>
+		<h1>Redireccionando...</h1>
+		<p>Estás siendo redirigido a otra página. Si no eres redirigido
+			automáticamente, haz clic en el siguiente enlace:</p>
+		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/">Enlace de
+			redirección</a>
+		<%
+			}
+			}
+		%>
 		<footer id="sticky-footer"
 			class="py-4 bg-dark text-white-50 fixed-bottom">
 		<div class="container text-center">
