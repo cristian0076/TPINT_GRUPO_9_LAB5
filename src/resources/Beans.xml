@@ -34,7 +34,7 @@
 	<bean id="ArticuloInicial" class="entidad.Articulo">
 		<property name="nombreA" value="NombreArticulo"></property>
 		<property name="descripcionA" value="DescripcionArticulo"></property>
-		<property name="tipoA" value="TipoArticulo"></property>
+		<property name="tipoA" ref="TipoInicial"></property>
 		<property name="status" value="1"></property>
 		<property name="marcaA" ref="MarcaInicial"></property>
 	</bean>
@@ -75,6 +75,12 @@
 		<property name="descripcionM" value="DescripcionMarca"></property>
 		<property name="EstadoM" value="false"></property>
 	</bean>
+	
+	<bean id="TipoInicial" class="entidad.Tipo">
+		<property name="nombre" value="NombreTipo"></property>
+		<property name="descripcion" value="DescripcionTipo"></property>
+		<property name="status" value="true"></property>
+	</bean>
 
 
 	<!-- CREO EL SERVICIO PARA USUARIO -->
@@ -96,6 +102,28 @@
 	<!-- EL SERVICIO NECESITA EL DAO -->
 	<bean id="dataAccessBeanArticulo"
 		class="daoImp.ServicioImplArticuloDao" scope="singleton">
+	</bean>
+	
+		<!-- CREO EL SERVICIO PARA MARCA -->
+	<bean id="serviceBeanMarca"
+		class="servicioImpl.ServicioImplMarca">
+		<property name="dataAccess" ref="dataAccessBeanMarca"></property>
+	</bean>
+
+	<!-- EL SERVICIO NECESITA EL DAO -->
+	<bean id="dataAccessBeanMarca"
+		class="daoImp.ServicioImplMarcaDao" scope="singleton">
+	</bean>
+	
+	<!-- CREO EL SERVICIO PARA TIPO -->
+	<bean id="serviceBeanTipo"
+		class="servicioImpl.ServicioImplTipo">
+		<property name="dataAccess" ref="dataAccessBeanTipo"></property>
+	</bean>
+
+	<!-- EL SERVICIO NECESITA EL DAO -->
+	<bean id="dataAccessBeanTipo"
+		class="daoImp.ServicioImplTipoDao" scope="singleton">
 	</bean>
 	
 			<!-- CREO EL SERVICIO PARA VENTA -->

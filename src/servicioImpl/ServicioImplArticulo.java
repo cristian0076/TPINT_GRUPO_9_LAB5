@@ -25,13 +25,13 @@ public class ServicioImplArticulo implements ServicioArticulo {
 	}
 
 	@Override
-	public List<Articulo> obtenerTodosLosArticulosSegunPagina(String pagina) {
-		return dataAccess.obtenerTodosLosArticulosSegunPagina(pagina);
+	public List<Articulo> obtenerTodosLosArticulosSegunPagina(String pagina,String modoFiltro, String textoFiltro) {
+		return dataAccess.obtenerTodosLosArticulosSegunPagina(pagina,modoFiltro,textoFiltro);
 	}
 
 	@Override
-	public List<Articulo> obtenerTodosLosArticulos() {
-		return dataAccess.obtenerTodosLosArticulos();
+	public List<Articulo> obtenerTodosLosArticulos(String modoFiltro, String textoFiltro) {
+		return dataAccess.obtenerTodosLosArticulos(modoFiltro,textoFiltro);
 	}
 
 	@Override

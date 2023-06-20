@@ -17,6 +17,7 @@
         <mapping class="entidad.Stock"/>
         <mapping class="entidad.Articulo"/>
         <mapping class="entidad.Marca"/>
+        <mapping class="entidad.Tipo"/>
         <mapping class="entidad.Venta"/>
         <mapping class="entidad.Cliente"/>
     </session-factory>
