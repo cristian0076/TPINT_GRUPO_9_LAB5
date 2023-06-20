@@ -1,3 +1,6 @@
+<%@page import="entidad.Cliente"%>
+<%@page import="java.util.List"%>
+<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="entidad.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -85,9 +88,133 @@
 		<h2 class="my-3 ml-2 text-center">Cliente</h2>
 
 		<!-- Boton agregar -->
-		<button type="button" class="btn btn-primary my-3 w-[30px] mx-auto"
-			data-toggle="modal" data-target="#exampleModalCenter">Añadir+
-		</button>
+		<div
+			class="d-flex flex-row justify-content-center align-items-center gap-3">
+			<button type="button" class="btn btn-primary my-3 w-[30px]"
+				data-toggle="modal" data-target="#exampleModalCenter">Añadir
+				+</button>
+
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Añadir
+								Cliente</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form action="AgregarCliente_ABMLCliente.html" method="post">
+							<div class="modal-body">
+								<span>DNI</span> <input type="text" class="form-control"
+									name="txtDni" placeholder="DNI Cliente" required="required">
+								<span>Nombre</span> <input type="text" class="form-control"
+									name="txtNombre" placeholder="Nombre Cliente"
+									required="required"> <span>Apellido</span> <input
+									type="text" class="form-control" name="txtApellido"
+									placeholder="Apellido Cliente" required="required"> <span>Sexo</span>
+								<select class="custom-select" name="txtSexo">
+									<option selected value="Masculino">Masculino</option>
+									<option value="Femenino">Femenino</option>
+									<option value="Otro">Otro</option>
+								</select> <span>Fecha de Nac.</span> <input type="date"
+									name="txtFechaNac" value="2023-06-19"> <span>Localidad</span>
+								<input type="text" class="form-control" name="txtLocalidad"
+									placeholder="Localidad" required="required"> <span>Direccion</span>
+								<input type="text" class="form-control" name="txtDireccion"
+									placeholder="Direccion" required="required"> <span>Mail</span>
+								<input type="text" class="form-control" name="txtMail"
+									placeholder="Email del Cliente" required="required"> <span>Telefono</span>
+								<input type="tel" class="form-control" name="txtTelefono"
+									placeholder="Telefono del Cliente" required="required">
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">Cerrar</button>
+								<input type="submit" value="Guardar" class="btn btn-success"
+									name="btnGuardar">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="modalModificar" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Modificar
+								Cliente</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form action="ModificarCliente_ABMLCliente.html" method="post">
+							<div class="modal-body">
+								<span>DNI</span> <input type="text" class="form-control"
+									name="txtDni" placeholder="DNI Cliente" required="required">
+								<span>Nombre</span> <input type="text" class="form-control"
+									name="txtNombre" placeholder="Nombre Cliente"
+									required="required"> <span>Apellido</span> <input
+									type="text" class="form-control" name="txtApellido"
+									placeholder="Apellido Cliente" required="required"> <span>Sexo</span>
+								<select class="custom-select" name="txtSexo">
+									<option selected value="Masculino">Masculino</option>
+									<option value="Femenino">Femenino</option>
+									<option value="Otro">Otro</option>
+								</select> <span>Fecha de Nac.</span> <input type="date"
+									name="txtFechaNac" value="2023-06-19"> <span>Localidad</span>
+								<input type="text" class="form-control" name="txtLocalidad"
+									placeholder="Localidad" required="required"> <span>Direccion</span>
+								<input type="text" class="form-control" name="txtDireccion"
+									placeholder="Direccion" required="required"> <span>Mail</span>
+								<input type="text" class="form-control" name="txtMail"
+									placeholder="Email del Cliente" required="required"> <span>Telefono</span>
+								<input type="tel" class="form-control" name="txtTelefono"
+									placeholder="Telefono del Cliente" required="required">
+								<input type="hidden" name="id_C">
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">Cerrar</button>
+								<input type="submit" value="Guardar" class="btn btn-success"
+									name="btnGuardar">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- Busqueda / Filtro -->
+			<div class="input-group w-50 ml-3">
+				<form action="Redireccionar_ABMLCliente.html" class="input-group">
+					<select class="custom-select ddlFiltroCliente"
+						id="ddlFiltroCliente" name="ddlFiltroCliente">
+						<option selected value="0">Filtros</option>
+						<option value="1">ID</option>
+						<option value="2">DNI</option>
+						<option value="3">Nombre</option>
+						<option value="4">Apellido</option>
+						<option value="5">Sexo</option>
+						<option value="6">Mail</option>
+						<option value="7">Telefono</option>
+						<option value="8">Direccion</option>
+						<option value="9">Localidad</option>
+					</select> <input type="text" class="form-control txtFiltroCliente"
+						aria-label="Text input with dropdown button" id="txtFiltroCliente"
+						name="txtFiltroCliente">
+					<div class="input-group-append">
+						<button class="btn btn-outline-primary" type="submit">Buscar</button>
+					</div>
+				</form>
+			</div>
+		</div>
 
 		<!-- Tabla -->
 		<table class="table table-striped w-75 mx-auto">
@@ -98,6 +225,7 @@
 					<th scope="col">Nombre</th>
 					<th scope="col">Apellido</th>
 					<th scope="col">Sexo</th>
+					<th scope="col">Fecha Nac.</th>
 					<th scope="col">Direccion</th>
 					<th scope="col">Localidad</th>
 					<th scope="col">Correo electronico</th>
@@ -107,42 +235,168 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td><span>430092245</span></td>
-					<td><span>Mariano</span></td>
-					<td><span>Alvez</span></td>
-					<td><span>Hombre</span></td>
-					<td><span>Calle123</span></td>
-					<td><span>Localidad123</span></td>
-					<td><span>MarianoA@gmial.com</span></td>
-					<td><span>+56 322253674</span></td>
-					<td><span><button type="button" class="btn btn-warning">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-									fill="currentColor" class="bi bi-pencil-fill"
-									viewBox="0 0 16 16"> <path
-									d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
-								</svg>
-							</button></span></td>
-					<td><span><button type="button" class="btn btn-danger">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-									fill="currentColor" class="bi bi-trash-fill"
-									viewBox="0 0 16 16"> <path
-									d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-								</svg>
-							</button></span></td>
-				</tr>
+				<c:forEach var="item" items="${clientes}">
+					<tr>
+						<th scope="row">${item.getId() }</th>
+						<td><span>${item.getDNI_C() }</span></td>
+						<td><span>${item.getNombre_C() }</span></td>
+						<td><span>${item.getApellido_C() }</span></td>
+						<td><span>${item.getSexo_C() }</span></td>
+						<td><span>${item.getFecha_Nacimiento_C().getDate()}/${item.getFecha_Nacimiento_C().getMonth() + 1}//${item.getFecha_Nacimiento_C().getYear()+1900 }</span></td>
+						<td><span>${item.getDireccion_C() }</span></td>
+						<td><span>${item.getLocalidad_C() }</span></td>
+						<td><span>${item.getMail_C() }</span></td>
+						<td><span>${item.getTelefono_C() }</span></td>
+						<td><span>
+
+								<button type="submit" class="btn btn-warning "
+									data-toggle="modal" data-target="#modalModificar"
+									onclick="cargarDatos(${item.getId()}, '${item.getDNI_C() }', '${item.getNombre_C() }', '${item.getApellido_C() }', '${item.getSexo_C() }' , '${item.getFecha_Nacimiento_C() }' , '${item.getDireccion_C() }', '${item.getLocalidad_C() }', '${item.getMail_C() }', '${item.getTelefono_C() }')">
+
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+										fill="currentColor" class="bi bi-pencil-fill"
+										viewBox="0 0 16 16"> <path
+										d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+									</svg>
+								</button>
+						</span></td>
+						<td><span>
+								<form action="EliminarCliente_ABMLCliente.html" method="post">
+									<button type="submit" name="btnEliminar"
+										value="${item.getId()}" class="btn btn-danger">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-trash-fill"
+											viewBox="0 0 16 16"> <path
+											d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+										</svg>
+									</button>
+								</form>
+						</span></td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 
 		<!-- Paginacion -->
 		<nav aria-label="Page navigation example" class="mx-auto">
-		<ul class="pagination">
-			<li class="page-item"><input type="submit" value="1"
-				class="page-link" name="btnPagina"></li>
-		</ul>
-		</nav>e		
- 		</f:view>
+		<form action="Redireccionar_ABMLCliente.html" method="post">
+			<select class="custom-select ddlFiltroCliente" id="ddlFiltroCliente"
+				name="ddlFiltroCliente" hidden>
+				<option selected value="0">Filtros</option>
+				<option value="1">ID</option>
+				<option value="2">DNI</option>
+				<option value="3">Nombre</option>
+				<option value="4">Apellido</option>
+				<option value="5">Sexo</option>
+				<option value="6">Mail</option>
+				<option value="7">Telefono</option>
+				<option value="8">Direccion</option>
+				<option value="9">Localidad</option>
+			</select> <input type="text" class="form-control txtFiltroCliente"
+				aria-label="Text input with dropdown button" id="txtFiltroCliente"
+				name="txtFiltroCliente" hidden>
+			<ul class="pagination">
+				<c:forEach begin="0" step="1" end="${cantPaginas}" var="variable">
+					<%
+						String paginaActual = "0";
+								int variable = (int) pageContext.getAttribute("variable");
+								if (request.getAttribute("paginaActual") != null) {
+									paginaActual = (String) request.getAttribute("paginaActual");
+								}
+								if (variable >= Integer.parseInt(paginaActual) - 3
+										&& variable <= Integer.parseInt(paginaActual) + 3) {
+					%>
+					<li class="page-item"><input type="submit" value="${variable}"
+						class="page-link btn btn-secondary
+						<%if(Integer.parseInt(paginaActual)==variable){%> text-white <%} %>"
+						name="btnPagina" <%if(Integer.parseInt(paginaActual)==variable){%>
+						disabled <%} %>></li>
+					<%
+						}
+					%>
+				</c:forEach>
+			</ul>
+		</form>
+		</nav>
+
+		<%
+			boolean pudoAgregarse = false;
+				int pudoModificarse = 0;
+				if (request.getAttribute("pudoAgregarse") != null) {
+					pudoAgregarse = (boolean) request.getAttribute("pudoAgregarse");
+				}
+				if (request.getAttribute("pudoModificarse") != null) {
+					pudoModificarse = (int) request.getAttribute("pudoModificarse");
+				}
+				if (pudoAgregarse) {
+		%>
+		<div class="alert alert-success" role="alert">Se salvo
+			correctamente!</div>
+		<%
+			}
+				if (pudoModificarse == 1) {
+		%>
+		<div class="alert alert-success" role="alert">Se modifico
+			correctamente!</div>
+		<%
+			}
+		%>
+
+		<footer id="sticky-footer"
+			class="py-4 bg-dark text-white-50 fixed-bottom">
+		<div class="container text-center">
+			<span class="logo-text text-white">© 2023 - By Grupo Nro 9
+				LAB5 - todos los derechos reservados </span>
+		</div>
+		</footer>
+	</f:view>
+
+	<script type="text/javascript">
+	function cargarDatos(id, dni, nombre, apellido, sexo ,fechaNac, direccion, localidad, mail, telefono){
+		$('input[name="id_C"]').val(id);
+		$('input[name="txtDni"]').val(dni);
+		$('input[name="txtNombre"]').val(nombre);
+		$('input[name="txtApellido"]').val(apellido);
+		$('input[name="txtSexo"]').val(sexo);
+		$('input[name="txtFechaNac"]').val(fechaNac.slice(0,10));
+		$('input[name="txtLocalidad"]').val(localidad);
+		$('input[name="txtDireccion"]').val(direccion);
+		$('input[name="txtMail"]').val(mail);
+		$('input[name="txtTelefono"]').val(telefono);
+    }
+	</script>
+	<script type="text/javascript">
+	const ddls = document.getElementsByClassName("ddlFiltroCliente");
+	const inputs = document.getElementsByClassName("txtFiltroCliente");
+	
+	for (let i = 0; i < ddls.length; i++) {
+		ddls[i].addEventListener("change", (event) => {
+			sessionStorage.setItem("ddlFiltroCliente", event.target.value);
+		});
+	}
+	
+	for (let i = 0; i < inputs.length; i++) {
+		inputs[i].addEventListener("change", (event) => {
+			sessionStorage.setItem("txtFiltroCliente", event.target.value);
+		});
+	}
+	
+	window.addEventListener("load", function() {
+		for (let i = 0; i < ddls.length; i++) {
+			if(sessionStorage.getItem("ddlFiltroCliente")== null){
+				 ddls[i].value = 0;
+			}else{
+				ddls[i].value = sessionStorage.getItem("ddlFiltroCliente");
+			}
+		}
+		for (let i = 0; i < inputs.length; i++) {
+			inputs[i].value = sessionStorage.getItem("txtFiltroCliente");
+		}
+		
+	})
+	
+	</script>
+
 	<!--Obligatorio-->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
