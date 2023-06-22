@@ -112,7 +112,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 	}
 
 	@Override
-	public boolean agregarArticulo(String nombre, String descripcion, String tipo, String marca) {
+	public boolean agregarArticulo(String nombre, String descripcion, String tipo, String marca,int preciounitario) {
 		boolean noError = true;
 
 		try {
@@ -166,7 +166,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 	}
 
 	@Override
-	public int modificarArticulo(int id, String nombre, String descripcion, String tipo, String marca) {
+	public int modificarArticulo(int id, String nombre, String descripcion, String tipo, String marca, int preciounitario) {
 		int estado = 0;
 		System.out.println(marca);
 		try {
@@ -176,10 +176,10 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 
 			Marca marcaBD = (Marca) session.createQuery("SELECT m FROM Marca m WHERE m.id = " + marca).uniqueResult();
 			Tipo tipoBD = (Tipo) session.createQuery("SELECT t FROM Tipo t WHERE t.id = " + tipo).uniqueResult();
-			String hql = "UPDATE Articulo a SET a.status = 1 , a.nombreA = :nombre , a.descripcionA = :descripcion , a.tipoA = :tipo , a.marcaA = :marca WHERE a.id = :id";
+			String hql = "UPDATE Articulo a SET a.status = 1 , a.nombreA = :nombre , a.descripcionA = :descripcion , a.tipoA = :tipo , a.marcaA = :marca, a.PrecioUnitario= :preciounitario WHERE a.id = :id";
 
 			estado = session.createQuery(hql).setParameter("id", id).setParameter("nombre", nombre)
-					.setParameter("descripcion", descripcion).setParameter("tipo", tipoBD).setParameter("marca", marcaBD)
+					.setParameter("descripcion", descripcion).setParameter("tipo", tipoBD).setParameter("marca", marcaBD).setParameter("preciounitario", preciounitario)
 					.executeUpdate();
 
 			session.getTransaction().commit();

@@ -32,8 +32,23 @@ public class Articulo {
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name="TipoA")
 	private Tipo tipoA;
+	private int PrecioUnitario;
+
 	@Autowired
 	private boolean status; // 0 inactivo, 1 activo
+	
+	public int isPrecioUnitario() {
+		return PrecioUnitario;
+	}
+
+
+
+	public void setPrecioUnitario(int precioUnitario) {
+		PrecioUnitario = precioUnitario;
+	}
+
+
+
 
 
 	public Articulo() {

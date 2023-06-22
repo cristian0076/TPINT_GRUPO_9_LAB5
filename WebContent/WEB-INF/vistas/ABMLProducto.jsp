@@ -220,6 +220,7 @@
 					<th scope="col">Descripcion</th>
 					<th scope="col">Marca</th>
 					<th scope="col">Tipo</th>
+					<th scope="col">Precio Unitario</th>
 					<th scope="col">Estado</th>
 					<th scope="col"></th>
 					<th scope="col"></th>
@@ -234,11 +235,12 @@
 						<td><span>${item.descripcionA}</span></td>
 						<td><span>${item.marcaA.nombreM}</span></td>
 						<td><span>${item.tipoA.nombre}</span></td>
+						<td><span>${item.isPrecioUnitario()}</span></td>
 						<td><span>
 
 								<button type="submit" class="btn btn-warning "
 									data-toggle="modal" data-target="#modalModificar"
-									onclick="cargarDatos(${item.id}, '${item.nombreA}', '${item.descripcionA}', '${item.tipoA.id}', ${item.marcaA.id})">
+									onclick="cargarDatos(${item.id}, '${item.nombreA}', '${item.descripcionA}', '${item.tipoA.id}', ${item.marcaA.id},${item.isPrecioUnitario()})">
 
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="currentColor" class="bi bi-pencil-fill"

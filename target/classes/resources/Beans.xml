@@ -37,6 +37,7 @@
 		<property name="tipoA" ref="TipoInicial"></property>
 		<property name="status" value="1"></property>
 		<property name="marcaA" ref="MarcaInicial"></property>
+		<property name="PrecioUnitario" value="100"></property>
 	</bean>
 	
 	

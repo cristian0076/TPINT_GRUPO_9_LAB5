@@ -39,10 +39,10 @@ public class ABMLArticuloController {
 
 	@RequestMapping("AgregarProducto_ABMLProducto.html")
 	public ModelAndView eventoAgregarProducto(String txtNombre, String txtDescripcion, String txtTipo,
-			String txtMarca) {
+			String txtMarca,int txtPrecio) {
 		ModelAndView MV = new ModelAndView();
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
-		boolean estado = derImplArticulo.agregarArticulo(txtNombre, txtDescripcion, txtTipo, txtMarca);
+		boolean estado = derImplArticulo.agregarArticulo(txtNombre, txtDescripcion, txtTipo, txtMarca,txtPrecio);
 		System.out.println(estado);
 		MV.addObject("pudoAgregarse", estado);
 		MV = fetchData(MV, "0","0","");
@@ -75,10 +75,10 @@ public class ABMLArticuloController {
 
 	@RequestMapping("ModificarProducto_ABMLProducto.html")
 	public ModelAndView eventoModificarProducto(int id_M, String txtNombreM, String txtDescripcionM, String txtTipoM,
-			String txtMarcaM) {
+			String txtMarcaM, int txtPrecio) {
 		ModelAndView MV = new ModelAndView();
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
-		int estado = derImplArticulo.modificarArticulo(id_M, txtNombreM, txtDescripcionM, txtTipoM, txtMarcaM);
+		int estado = derImplArticulo.modificarArticulo(id_M, txtNombreM, txtDescripcionM, txtTipoM, txtMarcaM,txtPrecio);
 		System.out.println(estado);
 		MV.addObject("pudoModificarse", estado);
 		MV = fetchData(MV, "0","0","");

@@ -31,7 +31,7 @@
 					name="btnIndex">
 			</form>
 			<%
-				if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId()==1) {
+				if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
 			%>
 			<div class="dropdown show d-flex flex-row">
 				<div>
@@ -85,17 +85,69 @@
 			</svg>
 		</div>
 		</nav>
-			<%
-				if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId()==1) {
-			%>
+		<%
+			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
+		%>
 		<!-- Titulo -->
 		<h2 class="my-3 ml-2 text-center">Ventas</h2>
 
 		<!-- Boton agregar -->
-		<button type="button" class="btn btn-primary my-3 w-[30px] mx-auto"
-			data-toggle="modal" data-target="#exampleModalCenter">Añadir
-			+</button>
+		<div
+			class="d-flex flex-row justify-content-center align-items-center gap-3">
+			<button type="button" class="btn btn-primary my-3 w-[30px]"
+				data-toggle="modal" data-target="#exampleModalCenter">Añadir
+				+</button>
 
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Añadir
+								Venta</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form action="AgregarVenta_ABMLVenta.html" method="post">
+							<div class="modal-body">
+								<span>Fecha: </span> 
+									<input type="label" name=" txtFechaVentA" style="border: 0;" id="fechaActual" disabled> <br><br> 
+								<span>Cliente</span> 
+									<select class="form-control" name="txtCliente" required="required">
+	                                      <c:forEach var="client" items="${clientes}">
+	                                       	 <option value="${client}">${client.getNombre_C()} - ${client.getApellido_C()}</option>
+	                                      </c:forEach>
+                               		</select><br><br> 	
+								<span>Producto</span>
+									<select class="form-control" name="txtProducto" required="required">
+                                      <option value="" disabled selected>Seleccione un producto</option>
+	                                      <c:forEach var="prod" items="${productos}">
+	                                       	 <option value="${prod}">${prod.getNombreA()} - ${prod.getMarcaA().getNombreM()} - ${prod.isPrecioUnitario()}</option>
+	                                      </c:forEach>
+                               		</select>
+								<span>Cantidad</span>
+									<input style="Width:90px;height:35px" type="number" value="0" name=" txtCantidadProdA"  id="fechaActual">
+								<button type="button" class="btn btn-primary my-3 w-[30px]">
+									<span aria-hidden="true">Agregar</span>
+								</button>
+							</div>
+							<div class="modal-footer" id="CointeinerProductos">
+							
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">Cerrar</button>
+								<input type="submit" value="Guardar" class="btn btn-success"
+									name="btnGuardar">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- Tabla -->
 		<table class="table table-striped w-75 mx-auto">
 			<thead>
@@ -130,11 +182,10 @@
 		</form>
 		</nav>
 		<%
-			} 
-			else {
-				if (session.getAttribute("usuario") != null){
+			} else {
+					if (session.getAttribute("usuario") != null) {
 		%>
-				<head>
+		<head>
 <meta http-equiv="refresh"
 	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
 <title>Redireccionando...</title>
@@ -142,12 +193,13 @@
 		<h1>Redireccionando...</h1>
 		<p>Estás siendo redirigido a otra página. Si no eres redirigido
 			automáticamente, haz clic en el siguiente enlace:</p>
-		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace de
-			redirección</a>
+		<a
+			href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace
+			de redirección</a>
 		<%
 			} else {
 		%>
-		
+
 		<head>
 <meta http-equiv="refresh"
 	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
@@ -160,7 +212,7 @@
 			redirección</a>
 		<%
 			}
-			}
+				}
 		%>
 		<!-- Footer -->
 		<footer id="sticky-footer"
@@ -172,6 +224,18 @@
 		</footer>
 
 	</f:view>
+	<script>
+			var fecha = new Date(); // Obtener la fecha actual
+			var dia = fecha.getDate(); // Obtener el día del mes (1-31)
+			var mes = fecha.getMonth() + 1; // Obtener el mes (0-11)
+			var anio = fecha.getFullYear(); // Obtener el año
+
+			// Formatear la fecha como dd/mm/yyyy
+			var fechaFormateada = dia + '/' + mes + '/' + anio;
+
+			// Mostrar la fecha en la etiqueta con id "fechaActual"
+			document.getElementById("fechaActual").value = fechaFormateada;
+	</script>
 	<!--Obligatorio-->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

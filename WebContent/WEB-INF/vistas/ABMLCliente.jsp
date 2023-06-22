@@ -145,7 +145,7 @@
 					</div>
 				</div>
 			</div>
-
+			<!-- modificar -->
 			<div class="modal fade" id="modalModificar" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalCenterTitle"
 				aria-hidden="true">

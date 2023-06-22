@@ -35,8 +35,8 @@ public class ServicioImplArticulo implements ServicioArticulo {
 	}
 
 	@Override
-	public boolean agregarArticulo(String nombre, String descripcion, String tipo, String marca) {
-		return dataAccess.agregarArticulo(nombre, descripcion, tipo, marca);
+	public boolean agregarArticulo(String nombre, String descripcion, String tipo, String marca, int preciounitario) {
+		return dataAccess.agregarArticulo(nombre, descripcion, tipo, marca,preciounitario);
 	}
 
 	@Override
@@ -45,8 +45,8 @@ public class ServicioImplArticulo implements ServicioArticulo {
 	}
 
 	@Override
-	public int modificarArticulo(int id,String nombre, String descripcion, String tipo, String marca) {
-		return dataAccess.modificarArticulo(id,nombre, descripcion, tipo, marca);
+	public int modificarArticulo(int id,String nombre, String descripcion, String tipo, String marca,int preciounitario) {
+		return dataAccess.modificarArticulo(id,nombre, descripcion, tipo, marca,preciounitario);
 	}
 
 }
