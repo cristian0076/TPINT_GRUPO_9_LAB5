@@ -227,7 +227,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="item" items="${articulos}">
+				<c:forEach var="item" items="${Stocks}">
 					<tr>
 						<th scope="row">${item.id}<input type="hidden"
 							value="${item.id}"></th>

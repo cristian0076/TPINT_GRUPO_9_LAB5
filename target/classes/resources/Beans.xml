@@ -93,6 +93,16 @@
 	<bean id="dataAccessBean" class="daoImp.ServicioImplUsuarioDao"
 		scope="singleton">
 	</bean>
+	
+		<!-- CREO EL SERVICIO PARA STOCK -->
+	<bean id="serviceBeanStock" class="servicioImpl.ServicioImplStock">
+		<property name="dataAccess" ref="dataAccessBeanStock"></property>
+	</bean>
+
+	<!-- EL SERVICIO NECESITA EL DAO -->
+	<bean id="dataAccessBeanStock"
+		class="daoImp.ServicioImplStockDao" scope="singleton">
+	</bean>
 
 	<!-- CREO EL SERVICIO PARA ARTICULO -->
 	<bean id="serviceBeanArticulo"

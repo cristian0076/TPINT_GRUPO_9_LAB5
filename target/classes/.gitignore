@@ -1,8 +1,7 @@
-/entidad/
-/controller/
-/resources/
-/servicio/
-/servicioImpl/
 /dao/
 /daoImp/
-/principal/
+/entidad/
+/servicio/
+/servicioImpl/
+/controller/
+/resources/
