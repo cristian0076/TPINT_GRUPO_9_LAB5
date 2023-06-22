@@ -1,5 +1,8 @@
 package daoImp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -48,6 +51,20 @@ public class ServicioImplVentaArticuloDao implements DaoVentaArticulo{
 		}
 
 		return noError;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<VentaArticulo> obtenerTodosLasVentasArticulos() {
+		ConfigHibernate ch = new ConfigHibernate();
+		Session session = ch.abrirConexion();
+		List<VentaArticulo> listaArticulos = new ArrayList<VentaArticulo>();
+
+			listaArticulos = (List<VentaArticulo>) session
+					.createQuery("SELECT a FROM VentaArticulo a ").list();
+
+		ch.cerrarSession();
+		return listaArticulos;
 	}
 
 }

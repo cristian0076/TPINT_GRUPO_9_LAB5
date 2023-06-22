@@ -22,6 +22,7 @@ import entidad.Cliente;
 
 import entidad.Usuario;
 import entidad.Venta;
+import entidad.VentaArticulo;
 import servicioImpl.ServicioImplArticulo;
 import servicioImpl.ServicioImplCliente;
 import servicioImpl.ServicioImplVentaArticulo;
@@ -55,11 +56,12 @@ public class ABMLVentasController {
 		List<Cliente> todosLosClientes = derImplCliente.obtenerTodosLosClientes("0", "");
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
 		List<Articulo> todosLosArticulos = derImplArticulo.obtenerTodosLosArticulos("0", "");
+		ServicioImplVentaArticulo derImplVentaArticulo = (ServicioImplVentaArticulo) appContext.getBean("serviceBeanVentaArticulo");
+		List<VentaArticulo> todasLasVentasArticulos = derImplVentaArticulo.obtenerTodosLasVentasArticulos();
 
+		MV.addObject("ventasArticulos", todasLasVentasArticulos);
 		MV.addObject("productos", todosLosArticulos);
-		System.out.println(todosLosArticulos.toString());
 		MV.addObject("clientes", todosLosClientes);
-		System.out.println(todosLosClientes.toString());
 		MV.addObject("ventas", ventas);
 		MV.addObject("paginaActual", pagina);
 		MV.addObject("cantPaginas", Math.ceil(todosLasVentas.size() / 5));

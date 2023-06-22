@@ -1,7 +1,10 @@
 package servicioImpl;
 
+import java.util.List;
+
 import dao.DaoArticulo;
 import dao.DaoVentaArticulo;
+import entidad.VentaArticulo;
 import servicio.ServicioVentaArticulo;
 
 public class ServicioImplVentaArticulo implements ServicioVentaArticulo{
@@ -28,6 +31,12 @@ public class ServicioImplVentaArticulo implements ServicioVentaArticulo{
 
 	public void setDataAccess(DaoVentaArticulo dataAccess) {
 		this.dataAccess = dataAccess;
+	}
+
+
+	@Override
+	public List<VentaArticulo> obtenerTodosLasVentasArticulos() {
+		return dataAccess.obtenerTodosLasVentasArticulos();
 	}
 
 }

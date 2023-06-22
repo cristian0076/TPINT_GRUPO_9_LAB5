@@ -1,6 +1,8 @@
+<%@page import="entidad.VentaArticulo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidad.Usuario"%>
 <%@page import="entidad.Venta"%>
+<%@page import="entidad.VentaArticulo"%>
 <%@page import="entidad.Articulo"%>
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -99,12 +101,12 @@
 			<button type="button" class="btn btn-primary my-3 w-[30px]"
 				data-toggle="modal" data-target="#exampleModalCenter">Añadir
 				+</button>
-				
+
 			<!-- Busqueda / Filtro -->
 			<div class="input-group w-50 ml-3">
 				<form action="Redireccionar_ABMLVentas.html" class="input-group">
 					<select class="custom-select ddlFiltroVenta" id="ddlFiltroVenta"
-						name="ddlFiltroVenta" >
+						name="ddlFiltroVenta">
 						<option selected value="0">Filtros</option>
 						<option value="1">Fecha</option>
 						<option value="2">Cliente</option>
@@ -112,7 +114,7 @@
 						<option value="4">Total</option>
 					</select> <input type="text" class="form-control txtFiltroVenta"
 						aria-label="Text input with dropdown button" id="txtFiltroVenta"
-						name="txtFiltroVenta" >
+						name="txtFiltroVenta">
 					<div class="input-group-append">
 						<button class="btn btn-outline-primary" type="submit">Buscar</button>
 					</div>
@@ -135,24 +137,24 @@
 						<form action="AgregarVenta_ABMLVenta.html" method="post">
 							<div class="modal-body">
 								<span>Fecha: </span> <input type="text" name="txtFechaVentA"
-									style="border: 0;" id="fechaActual"> <br>
-								<br> <span>Cliente</span> <select class="form-control"
+									style="border: 0;" id="fechaActual"> <br> <br>
+								<span>Cliente</span> <select class="form-control"
 									name="txtCliente" required="required" id="txtCliente">
 									<c:forEach var="client" items="${clientes}">
 										<option value="${client.getId()}">${client.getNombre_C()}-
 											${client.getApellido_C()}</option>
 									</c:forEach>
-								</select>
-								<br> <span>Producto</span> <select class="form-control"
+								</select> <br> <span>Producto</span> <select class="form-control"
 									name="txtProducto" required="required" id="txtProducto">
 									<c:forEach var="prod" items="${productos}">
 										<option value="${prod}">${prod.getNombreA()}-
-											${prod.getMarcaA().getNombreM()} - $${prod.isPrecioUnitario()}</option>
+											${prod.getMarcaA().getNombreM()} -
+											$${prod.isPrecioUnitario()}</option>
 									</c:forEach>
 								</select> <span>Cantidad</span> <input style="Width: 90px; height: 35px"
 									type="number" value="1" name="txtCantidadProdA"
-									id="txtCantidad"  onkeyup="if(value<1) value=1;" >
-									<input name="txtUsuario" value="${usuario.getId()}" hidden>
+									id="txtCantidad" onkeyup="if(value<1) value=1;"> <input
+									name="txtUsuario" value="${usuario.getId()}" hidden>
 								<button type="button" class="btn btn-primary my-3 w-[30px]"
 									onClick="cargarTabla()">
 									<span aria-hidden="true">Agregar</span>
@@ -162,13 +164,17 @@
 								<ul class="list-group" id="CointeinerProductos">
 
 								</ul>
-								<span>Total: $<input name="txtTotal" style="border:0;background: transparent;" id="txtTotal" value="0"></span></span>
+								<span>Total: $<input name="txtTotal"
+									style="border: 0; background: transparent;" id="txtTotal"
+									value="0"></span></span>
 							</div>
-							
+
 							<div class="modal-footer">
-							<%ArrayList<Articulo> listaArticulosComprar = new ArrayList<Articulo>();
-							%>
-							<input name="listaArticulosComprar" id="listaArticulosComprar" value="${listaArticulosComprar }" hidden>
+								<%
+									ArrayList<Articulo> listaArticulosComprar = new ArrayList<Articulo>();
+								%>
+								<input name="listaArticulosComprar" id="listaArticulosComprar"
+									value="${listaArticulosComprar }" hidden>
 								<button type="button" class="btn btn-danger"
 									data-dismiss="modal" onClick="cargarSession();">Cerrar</button>
 								<input type="submit" value="Guardar" class="btn btn-success"
@@ -183,6 +189,7 @@
 		<table class="table table-striped w-75 mx-auto">
 			<thead>
 				<tr>
+					<th></th>
 					<th scope="col">ID</th>
 					<th scope="col">Fecha</th>
 					<th scope="col">Cliente</th>
@@ -194,12 +201,21 @@
 			<tbody>
 				<c:forEach var="item" items="${ventas}">
 					<tr>
+						<td style="transition: all 0.5s;"><a class="btn btn-primary" data-toggle="collapse"
+							href="#collapseExample${item.id}" role="button"
+							aria-expanded="false" aria-controls="collapseExample${item.id}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+									fill="currentColor" class="bi bi-arrow-down-circle-fill"
+									viewBox="0 0 16 16"> <path
+									d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+								</svg>
+						</a></td>
 						<th scope="row">${item.id}</th>
-						<td><span>${item.getFecha_V().getDate()}/${item.getFecha_V().getMonth() + 1}//${item.getFecha_V().getYear()+1900 }</span></td>
-						<td><span>${item.getId_Cliente().getNombre_C()}</span></td>
-						<td><span>${item.getId_usuario().getEmpleadoU().getNombreE()}</span></td>
-						<td><span>${item.getTotal_V()}</span></td>
-						<td><span>
+						<td style="transition: all 0.5s;"><span>${item.getFecha_V().getDate()}/${item.getFecha_V().getMonth() + 1}//${item.getFecha_V().getYear()+1900 }</span></td>
+						<td style="transition: all 0.5s;"><span>${item.getId_Cliente().getNombre_C()}</span></td>
+						<td style="transition: all 0.5s;"><span>${item.getId_usuario().getEmpleadoU().getNombreE()}</span></td>
+						<td style="transition: all 0.5s;"><span>${item.getTotal_V()}</span></td>
+						<td style="transition: all 0.5s;"><span>
 								<form action="EliminarVenta_ABMLVenta.html" method="post">
 									<button type="submit" name="btnEliminar"
 										value="${item.getId()}" class="btn btn-danger">
@@ -211,6 +227,25 @@
 									</button>
 								</form>
 						</span></td>
+					</tr>
+					<tr>
+						<td>
+							<div class="collapse" id="collapseExample${item.id}">
+								<div class="card card-body">
+									<ul class="list-group">
+										<c:forEach var="ite" items="${ventasArticulos}">
+										<%
+											Venta ve = (Venta) pageContext.getAttribute("item");
+											VentaArticulo va = (VentaArticulo) pageContext.getAttribute("ite");
+											if(va.getVentaVA().getId()==ve.getId()){
+										%>
+											<li class="list-group-item"><b>Articulo:</b><%=va.getArticuloVA().getNombreA()%> <b>Marca:</b><%=va.getArticuloVA().getMarcaA().getNombreM() %> <b>Cantidad:</b><%=va.getCantidadVA() %> <b>Subtotal:</b>$<%=va.getSubtotalVA() %></li>
+											<%} %>
+										</c:forEach>
+									</ul>
+								</div>
+							</div>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -321,8 +356,8 @@
 			listaCarrito.value = JSON.stringify(carrito)
 		}
 	</script>
-	
-		<script type="text/javascript">
+
+	<script type="text/javascript">
 	const ddls = document.getElementsByClassName("ddlFiltroVenta");
 	const inputs = document.getElementsByClassName("txtFiltroVenta");
 	
