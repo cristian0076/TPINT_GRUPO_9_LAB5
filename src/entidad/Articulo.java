@@ -118,8 +118,8 @@ public class Articulo {
 
 	@Override
 	public String toString() {
-		return "Articulo [id=" + id + ", nombreA=" + nombreA + ", descripcionA=" + descripcionA + ", marcaA=" + marcaA
-				+ ", tipoA=" + tipoA + ", status=" + status + "]";
+		return "{'id':" + id + ", 'nombreA':'" + nombreA + "', 'descripcionA':'" + descripcionA + "', 'marcaA':" + marcaA
+				+ ", 'tipoA':" + tipoA + ", 'status':" + status + ", 'precio':"+PrecioUnitario+"}";
 	}
 	
 

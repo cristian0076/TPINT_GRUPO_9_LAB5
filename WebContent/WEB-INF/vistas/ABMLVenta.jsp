@@ -97,6 +97,25 @@
 			<button type="button" class="btn btn-primary my-3 w-[30px]"
 				data-toggle="modal" data-target="#exampleModalCenter">Añadir
 				+</button>
+				
+			<!-- Busqueda / Filtro -->
+			<div class="input-group w-50 ml-3">
+				<form action="Redireccionar_ABMLVentas.html" class="input-group">
+					<select class="custom-select ddlFiltroVenta" id="ddlFiltroVenta"
+						name="ddlFiltroVenta" >
+						<option selected value="0">Filtros</option>
+						<option value="1">Fecha</option>
+						<option value="2">Cliente</option>
+						<option value="3">Vendedor</option>
+						<option value="4">Total</option>
+					</select> <input type="text" class="form-control txtFiltroVenta"
+						aria-label="Text input with dropdown button" id="txtFiltroVenta"
+						name="txtFiltroVenta" >
+					<div class="input-group-append">
+						<button class="btn btn-outline-primary" type="submit">Buscar</button>
+					</div>
+				</form>
+			</div>
 
 			<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -113,33 +132,40 @@
 						</div>
 						<form action="AgregarVenta_ABMLVenta.html" method="post">
 							<div class="modal-body">
-								<span>Fecha: </span> 
-									<input type="label" name=" txtFechaVentA" style="border: 0;" id="fechaActual" disabled> <br><br> 
-								<span>Cliente</span> 
-									<select class="form-control" name="txtCliente" required="required">
-	                                      <c:forEach var="client" items="${clientes}">
-	                                       	 <option value="${client}">${client.getNombre_C()} - ${client.getApellido_C()}</option>
-	                                      </c:forEach>
-                               		</select><br><br> 	
-								<span>Producto</span>
-									<select class="form-control" name="txtProducto" required="required">
-                                      <option value="" disabled selected>Seleccione un producto</option>
-	                                      <c:forEach var="prod" items="${productos}">
-	                                       	 <option value="${prod}">${prod.getNombreA()} - ${prod.getMarcaA().getNombreM()} - ${prod.isPrecioUnitario()}</option>
-	                                      </c:forEach>
-                               		</select>
-								<span>Cantidad</span>
-									<input style="Width:90px;height:35px" type="number" value="0" name=" txtCantidadProdA"  id="fechaActual">
-								<button type="button" class="btn btn-primary my-3 w-[30px]">
+								<span>Fecha: </span> <input type="text" name="txtFechaVentA"
+									style="border: 0;" id="fechaActual"> <br>
+								<br> <span>Cliente</span> <select class="form-control"
+									name="txtCliente" required="required" id="txtCliente">
+									<c:forEach var="client" items="${clientes}">
+										<option value="${client.getId()}">${client.getNombre_C()}-
+											${client.getApellido_C()}</option>
+									</c:forEach>
+								</select>
+								<br> <span>Producto</span> <select class="form-control"
+									name="txtProducto" required="required" id="txtProducto">
+									<c:forEach var="prod" items="${productos}">
+										<option value="${prod}">${prod.getNombreA()}-
+											${prod.getMarcaA().getNombreM()} - $${prod.isPrecioUnitario()}</option>
+									</c:forEach>
+								</select> <span>Cantidad</span> <input style="Width: 90px; height: 35px"
+									type="number" value="1" name="txtCantidadProdA"
+									id="txtCantidad"  onkeyup="if(value<1) value=1;" >
+									<input name="txtUsuario" value="${usuario.getId()}" hidden>
+								<button type="button" class="btn btn-primary my-3 w-[30px]"
+									onClick="cargarTabla()">
 									<span aria-hidden="true">Agregar</span>
 								</button>
 							</div>
-							<div class="modal-footer" id="CointeinerProductos">
-							
+							<div class="modal-header">
+								<ul class="list-group" id="CointeinerProductos">
+
+								</ul>
+								<span>Total: $<input name="txtTotal" style="border:0;background: transparent;" id="txtTotal" value="0"></span></span>
 							</div>
+							
 							<div class="modal-footer">
 								<button type="button" class="btn btn-danger"
-									data-dismiss="modal">Cerrar</button>
+									data-dismiss="modal" onClick="cargarSession()">Cerrar</button>
 								<input type="submit" value="Guardar" class="btn btn-success"
 									name="btnGuardar">
 							</div>
@@ -157,26 +183,65 @@
 					<th scope="col">Cliente</th>
 					<th scope="col">Vendedor</th>
 					<th scope="col">Total</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="item" items="${ventas}">
 					<tr>
 						<th scope="row">${item.id}</th>
-						<td><span>${item.getFecha_V()}</span></td>
+						<td><span>${item.getFecha_V().getDate()}/${item.getFecha_V().getMonth() + 1}//${item.getFecha_V().getYear()+1900 }</span></td>
 						<td><span>${item.getId_Cliente().getNombre_C()}</span></td>
 						<td><span>${item.getId_usuario().getEmpleadoU().getNombreE()}</span></td>
 						<td><span>${item.getTotal_V()}</span></td>
+						<td><span>
+								<form action="EliminarVenta_ABMLVenta.html" method="post">
+									<button type="submit" name="btnEliminar"
+										value="${item.getId()}" class="btn btn-danger">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-trash-fill"
+											viewBox="0 0 16 16"> <path
+											d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+										</svg>
+									</button>
+								</form>
+						</span></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		<!-- Paginacion -->
 		<nav aria-label="Page navigation example" class="mx-auto">
 		<form action="Redireccionar_ABMLVentas.html" method="post">
+			<select class="custom-select ddlFiltroVenta" id="ddlFiltroVenta"
+				name="ddlFiltroVenta" hidden>
+				<option selected value="0">Filtros</option>
+				<option value="1">Fecha</option>
+				<option value="2">Cliente</option>
+				<option value="3">Vendedor</option>
+				<option value="4">Total</option>
+			</select> <input type="text" class="form-control txtFiltroVenta"
+				aria-label="Text input with dropdown button" id="txtFiltroVenta"
+				name="txtFiltroVenta" hidden>
 			<ul class="pagination">
 				<c:forEach begin="0" step="1" end="${cantPaginas}" var="variable">
+					<%
+						String paginaActual = "0";
+									int variable = (int) pageContext.getAttribute("variable");
+									if (request.getAttribute("paginaActual") != null) {
+										paginaActual = (String) request.getAttribute("paginaActual");
+									}
+									if (variable >= Integer.parseInt(paginaActual) - 3
+											&& variable <= Integer.parseInt(paginaActual) + 3) {
+					%>
 					<li class="page-item"><input type="submit" value="${variable}"
-						class="page-link" name="btnPagina"></li>
+						class="page-link btn btn-secondary
+						<%if(Integer.parseInt(paginaActual)==variable){%> text-white <%} %>"
+						name="btnPagina" <%if(Integer.parseInt(paginaActual)==variable){%>
+						disabled <%} %>></li>
+					<%
+						}
+					%>
 				</c:forEach>
 			</ul>
 		</form>
@@ -225,16 +290,59 @@
 
 	</f:view>
 	<script>
-			var fecha = new Date(); // Obtener la fecha actual
-			var dia = fecha.getDate(); // Obtener el día del mes (1-31)
-			var mes = fecha.getMonth() + 1; // Obtener el mes (0-11)
-			var anio = fecha.getFullYear(); // Obtener el año
-
-			// Formatear la fecha como dd/mm/yyyy
-			var fechaFormateada = dia + '/' + mes + '/' + anio;
-
-			// Mostrar la fecha en la etiqueta con id "fechaActual"
-			document.getElementById("fechaActual").value = fechaFormateada;
+		var fecha = new Date().toJSON().slice(0, 10);
+		// Mostrar la fecha en la etiqueta con id "fechaActual"
+		document.getElementById("fechaActual").value = fecha;
+	</script>
+	<script type="text/javascript">
+		var total = 0;
+		function cargarTabla() {
+			var producto = document.getElementById("txtProducto");
+			var cantidad = document.getElementById("txtCantidad");
+			const container = document.querySelector("#CointeinerProductos");
+			const item = document.createElement("li");
+			item.classList.add("list-group-item")
+			var productoObj = JSON.parse(producto.value.replaceAll("'", '"'));
+			productoObj.cantidad = parseInt(cantidad.value)
+			item.innerHTML = productoObj.nombreA + " "
+					+ productoObj.marcaA.nombreM + " " + cantidad.value;
+			container.appendChild(item);
+			const txtTotal = document.getElementById("txtTotal");
+			total = Number(parseInt(txtTotal.value)) + productoObj.precio*cantidad.value;
+			txtTotal.value = total;
+		}
+	</script>
+	
+		<script type="text/javascript">
+	const ddls = document.getElementsByClassName("ddlFiltroVenta");
+	const inputs = document.getElementsByClassName("txtFiltroVenta");
+	
+	for (let i = 0; i < ddls.length; i++) {
+		ddls[i].addEventListener("change", (event) => {
+			sessionStorage.setItem("ddlFiltroVenta", event.target.value);
+		});
+	}
+	
+	for (let i = 0; i < inputs.length; i++) {
+		inputs[i].addEventListener("change", (event) => {
+			sessionStorage.setItem("txtFiltroVenta", event.target.value);
+		});
+	}
+	
+	window.addEventListener("load", function() {
+		for (let i = 0; i < ddls.length; i++) {
+			if(sessionStorage.getItem("ddlFiltroVenta")== null){
+				 ddls[i].value = 0;
+			}else{
+				ddls[i].value = sessionStorage.getItem("ddlFiltroVenta");
+			}
+		}
+		for (let i = 0; i < inputs.length; i++) {
+			inputs[i].value = sessionStorage.getItem("txtFiltroVenta");
+		}
+		
+	})
+	
 	</script>
 	<!--Obligatorio-->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

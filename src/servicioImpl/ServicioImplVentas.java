@@ -1,6 +1,6 @@
 package servicioImpl;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import dao.DaoVenta;
@@ -28,18 +28,23 @@ public class ServicioImplVentas implements ServicioVentas {
 	}
 
 	@Override
-	public List<Venta> obtenerTodasLasVentasSegunPagina(String pagina) {
-		return dataAccess.obtenerTodasLasVentasSegunPagina(pagina);
+	public List<Venta> obtenerTodasLasVentasSegunPagina(String pagina, String modoFiltro, String textoFiltro) {
+		return dataAccess.obtenerTodasLasVentasSegunPagina(pagina, modoFiltro, textoFiltro);
 	}
 
 	@Override
-	public List<Venta> obtenerTodasLasVentas() {
-		return dataAccess.obtenerTodasLasVentas();
+	public List<Venta> obtenerTodasLasVentas(String modoFiltro, String textoFiltro) {
+		return dataAccess.obtenerTodasLasVentas(modoFiltro, textoFiltro);
 	}
 
 	@Override
-	public boolean agregarVenta(int id,Date fecha, Cliente id_Cliente, Usuario id_usuario, float total) {
-		return dataAccess.agregarVenta( id, fecha,  id_Cliente,  id_usuario, total);
+	public boolean agregarVenta(Date fecha, String id_Cliente, String id_usuario, float total) {
+		return dataAccess.agregarVenta(fecha, id_Cliente, id_usuario, total);
+	}
+
+	@Override
+	public int eliminarVenta(int id) {
+		return dataAccess.eliminarVenta(id);
 	}
 
 }

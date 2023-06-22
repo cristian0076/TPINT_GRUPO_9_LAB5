@@ -55,6 +55,6 @@ public class Tipo {
 	}
 	@Override
 	public String toString() {
-		return "Tipo [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", status=" + status + "]";
+		return "{'id':" + id + ", 'nombre':'" + nombre + "', 'descripcion':'" + descripcion + "', 'status':" + status + "}";
 	}
 }
