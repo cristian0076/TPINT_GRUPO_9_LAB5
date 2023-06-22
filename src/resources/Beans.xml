@@ -39,8 +39,8 @@
 		<property name="marcaA" ref="MarcaInicial"></property>
 		<property name="PrecioUnitario" value="100"></property>
 	</bean>
-	
-	
+
+
 	<bean id="StockInicial" class="entidad.Stock">
 		<property name="fechaIngreso" value="10/10/2000"></property>
 		<property name="articulo" ref="ArticuloInicial"></property>
@@ -49,8 +49,8 @@
 		<property name="EstadoS" value="false"></property>
 		<property name="FechaVencimientoS" value="10/12/2024"></property>
 	</bean>
-	
-		<bean id="ClienteInicial" class="entidad.Cliente">
+
+	<bean id="ClienteInicial" class="entidad.Cliente">
 		<property name="DNI_C" value="42123123123"></property>
 		<property name="Nombre_C" value="Pepe"></property>
 		<property name="Apellido_C" value="Caseros"></property>
@@ -62,7 +62,7 @@
 		<property name="Telefono_C" value="1112312312"></property>
 		<property name="EstadoC" value="false"></property>
 	</bean>
-	
+
 	<bean id="VentaInicial" class="entidad.Venta">
 		<property name="Fecha_V" value="2023/01/01"></property>
 		<property name="Id_Cliente" ref="ClienteInicial"></property>
@@ -76,11 +76,18 @@
 		<property name="descripcionM" value="DescripcionMarca"></property>
 		<property name="EstadoM" value="false"></property>
 	</bean>
-	
+
 	<bean id="TipoInicial" class="entidad.Tipo">
 		<property name="nombre" value="NombreTipo"></property>
 		<property name="descripcion" value="DescripcionTipo"></property>
 		<property name="status" value="true"></property>
+	</bean>
+
+	<bean id="VentaArticuloInicial" class="entidad.VentaArticulo">
+		<property name="ventaVA" ref="VentaInicial"></property>
+		<property name="articuloVA" ref="ArticuloInicial"></property>
+		<property name="cantidadVA" value="0"></property>
+		<property name="subtotalVA" value="0"></property>
 	</bean>
 
 
@@ -93,15 +100,15 @@
 	<bean id="dataAccessBean" class="daoImp.ServicioImplUsuarioDao"
 		scope="singleton">
 	</bean>
-	
-		<!-- CREO EL SERVICIO PARA STOCK -->
+
+	<!-- CREO EL SERVICIO PARA STOCK -->
 	<bean id="serviceBeanStock" class="servicioImpl.ServicioImplStock">
 		<property name="dataAccess" ref="dataAccessBeanStock"></property>
 	</bean>
 
 	<!-- EL SERVICIO NECESITA EL DAO -->
-	<bean id="dataAccessBeanStock"
-		class="daoImp.ServicioImplStockDao" scope="singleton">
+	<bean id="dataAccessBeanStock" class="daoImp.ServicioImplStockDao"
+		scope="singleton">
 	</bean>
 
 	<!-- CREO EL SERVICIO PARA ARTICULO -->
@@ -114,30 +121,28 @@
 	<bean id="dataAccessBeanArticulo"
 		class="daoImp.ServicioImplArticuloDao" scope="singleton">
 	</bean>
-	
-		<!-- CREO EL SERVICIO PARA MARCA -->
-	<bean id="serviceBeanMarca"
-		class="servicioImpl.ServicioImplMarca">
+
+	<!-- CREO EL SERVICIO PARA MARCA -->
+	<bean id="serviceBeanMarca" class="servicioImpl.ServicioImplMarca">
 		<property name="dataAccess" ref="dataAccessBeanMarca"></property>
 	</bean>
 
 	<!-- EL SERVICIO NECESITA EL DAO -->
-	<bean id="dataAccessBeanMarca"
-		class="daoImp.ServicioImplMarcaDao" scope="singleton">
+	<bean id="dataAccessBeanMarca" class="daoImp.ServicioImplMarcaDao"
+		scope="singleton">
 	</bean>
-	
+
 	<!-- CREO EL SERVICIO PARA TIPO -->
-	<bean id="serviceBeanTipo"
-		class="servicioImpl.ServicioImplTipo">
+	<bean id="serviceBeanTipo" class="servicioImpl.ServicioImplTipo">
 		<property name="dataAccess" ref="dataAccessBeanTipo"></property>
 	</bean>
 
 	<!-- EL SERVICIO NECESITA EL DAO -->
-	<bean id="dataAccessBeanTipo"
-		class="daoImp.ServicioImplTipoDao" scope="singleton">
+	<bean id="dataAccessBeanTipo" class="daoImp.ServicioImplTipoDao"
+		scope="singleton">
 	</bean>
-	
-			<!-- CREO EL SERVICIO PARA VENTA -->
+
+	<!-- CREO EL SERVICIO PARA VENTA -->
 	<bean id="serviceBeanVenta"
 		class="servicioImpl.ServicioImplVentas">
 		<property name="dataAccess" ref="dataAccessBeanVentas"></property>
@@ -147,7 +152,7 @@
 	<bean id="dataAccessBeanVentas"
 		class="daoImp.ServicioImplVentasDao" scope="singleton">
 	</bean>
-	
+
 	<!-- CREO EL SERVICIO PARA CLIENTE -->
 	<bean id="serviceBeanCliente"
 		class="servicioImpl.ServicioImplCliente">
@@ -157,5 +162,16 @@
 	<!-- EL SERVICIO NECESITA EL DAO -->
 	<bean id="dataAccessBeanCliente"
 		class="daoImp.ServicioImplClienteDao" scope="singleton">
+	</bean>
+
+	<!-- CREO EL SERVICIO PARA VENTA ARTICULO -->
+	<bean id="serviceBeanVentaArticulo"
+		class="servicioImpl.ServicioImplVentaArticulo">
+		<property name="dataAccess" ref="dataAccessBeanVentaArticulo"></property>
+	</bean>
+
+	<!-- EL SERVICIO NECESITA EL DAO -->
+	<bean id="dataAccessBeanVentaArticulo"
+		class="daoImp.ServicioImplVentaArticuloDao" scope="singleton">
 	</bean>
 </beans>

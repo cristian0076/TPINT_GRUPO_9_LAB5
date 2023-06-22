@@ -20,5 +20,6 @@
         <mapping class="entidad.Tipo"/>
         <mapping class="entidad.Venta"/>
         <mapping class="entidad.Cliente"/>
+        <mapping class="entidad.VentaArticulo"/>
     </session-factory>
 </hibernate-configuration>

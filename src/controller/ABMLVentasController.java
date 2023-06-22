@@ -3,10 +3,14 @@ package controller;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -20,8 +24,9 @@ import entidad.Usuario;
 import entidad.Venta;
 import servicioImpl.ServicioImplArticulo;
 import servicioImpl.ServicioImplCliente;
-
+import servicioImpl.ServicioImplVentaArticulo;
 import servicioImpl.ServicioImplVentas;
+import com.google.gson.Gson;
 
 @Controller
 public class ABMLVentasController {
@@ -64,9 +69,8 @@ public class ABMLVentasController {
 
 	@RequestMapping("AgregarVenta_ABMLVenta.html")
 	public ModelAndView eventoAgregarVenta(String txtFechaVentA, String txtCliente, String txtTotal,
-			String txtUsuario) {
-		System.out.println(txtCliente);
-		System.out.println(txtUsuario);
+			String txtUsuario,String listaArticulosComprar) {
+		
 		ModelAndView MV = new ModelAndView();
 		try {
 
@@ -76,7 +80,24 @@ public class ABMLVentasController {
 
 			ServicioImplVentas derImplVenta = (ServicioImplVentas) appContext.getBean("serviceBeanVenta");
 			boolean estado = derImplVenta.agregarVenta(fecha, txtCliente, txtUsuario, total);
-			System.out.println(estado);
+			
+			ServicioImplVentaArticulo derImplVentaArticulo = (ServicioImplVentaArticulo) appContext.getBean("serviceBeanVentaArticulo");
+		    JSONParser parser = new JSONParser();
+		    JSONArray jsonArray = (JSONArray) parser.parse(listaArticulosComprar);
+
+		    for (Object obj : jsonArray) {
+		        JSONObject ventaArticulo = (JSONObject) obj;
+		        JSONObject productoObj = (JSONObject) ventaArticulo.get("productoObj");
+		        String cantidad = (String) ventaArticulo.get("cantidad");
+		        Long subtotal = (Long) ventaArticulo.get("subtotal");
+
+		        // Realiza las operaciones necesarias con los datos obtenidos
+		        int idArticulo=((Long) productoObj.get("id")).intValue();
+		        int cantidadArticulo=Integer.parseInt(cantidad);
+		        float subtotalArticulo=subtotal.floatValue();
+		        derImplVentaArticulo.agregarVentaArticulo(idArticulo, cantidadArticulo, subtotalArticulo);
+		    }
+			
 			MV.addObject("pudoAgregarse", estado);
 			MV = fetchData(MV, "0", "0", "");
 			MV.setViewName("ABMLVenta");

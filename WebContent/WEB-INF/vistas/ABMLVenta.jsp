@@ -1,5 +1,7 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="entidad.Usuario"%>
 <%@page import="entidad.Venta"%>
+<%@page import="entidad.Articulo"%>
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -164,8 +166,11 @@
 							</div>
 							
 							<div class="modal-footer">
+							<%ArrayList<Articulo> listaArticulosComprar = new ArrayList<Articulo>();
+							%>
+							<input name="listaArticulosComprar" id="listaArticulosComprar" value="${listaArticulosComprar }" hidden>
 								<button type="button" class="btn btn-danger"
-									data-dismiss="modal" onClick="cargarSession()">Cerrar</button>
+									data-dismiss="modal" onClick="cargarSession();">Cerrar</button>
 								<input type="submit" value="Guardar" class="btn btn-success"
 									name="btnGuardar">
 							</div>
@@ -296,9 +301,11 @@
 	</script>
 	<script type="text/javascript">
 		var total = 0;
+		var carrito = []
 		function cargarTabla() {
 			var producto = document.getElementById("txtProducto");
 			var cantidad = document.getElementById("txtCantidad");
+			var listaCarrito = document.getElementById("listaArticulosComprar");
 			const container = document.querySelector("#CointeinerProductos");
 			const item = document.createElement("li");
 			item.classList.add("list-group-item")
@@ -310,6 +317,8 @@
 			const txtTotal = document.getElementById("txtTotal");
 			total = Number(parseInt(txtTotal.value)) + productoObj.precio*cantidad.value;
 			txtTotal.value = total;
+			carrito.push({productoObj:productoObj,cantidad:cantidad.value,subtotal:Number(productoObj.precio*cantidad.value)})
+			listaCarrito.value = JSON.stringify(carrito)
 		}
 	</script>
 	
