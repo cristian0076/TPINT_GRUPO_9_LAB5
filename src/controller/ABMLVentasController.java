@@ -1,6 +1,11 @@
 package controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -10,47 +15,88 @@ import org.springframework.web.servlet.ModelAndView;
 
 import entidad.Articulo;
 import entidad.Cliente;
+
+import entidad.Usuario;
 import entidad.Venta;
 import servicioImpl.ServicioImplArticulo;
 import servicioImpl.ServicioImplCliente;
+
 import servicioImpl.ServicioImplVentas;
-
-
 
 @Controller
 public class ABMLVentasController {
-	
-	ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
-	
-	@RequestMapping("Redireccionar_ABMLVentas.html")
-	public ModelAndView eventoRedireccionarProducto(String btnPagina)
-	{
-		ModelAndView MV = new ModelAndView();
-		MV = fetchData(MV, btnPagina);
 
+	ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+
+	@RequestMapping("Redireccionar_ABMLVentas.html")
+	public ModelAndView eventoRedireccionarProducto(String btnPagina, HttpServletRequest request,
+			String ddlFiltroVenta, String txtFiltroVenta) {
+		ModelAndView MV = new ModelAndView();
+		if (ddlFiltroVenta == null)
+			ddlFiltroVenta = "0";
+		if (txtFiltroVenta == null)
+			txtFiltroVenta = "";
+		MV = fetchData(MV, btnPagina, ddlFiltroVenta, txtFiltroVenta);
 		return MV;
 	}
-	
-	
-	private ModelAndView fetchData(ModelAndView MV, String pagina) {
-		if(pagina == null)
-			pagina="0";
-		ServicioImplVentas derImplVenta = (ServicioImplVentas)appContext.getBean("serviceBeanVenta");
-		List<Venta> todosLasVentas = derImplVenta.obtenerTodasLasVentas();
-		List<Venta> ventas = derImplVenta.obtenerTodasLasVentasSegunPagina(pagina);
+
+	private ModelAndView fetchData(ModelAndView MV, String pagina, String ddlFiltroCliente, String txtFiltroCliente) {
+		if (pagina == null)
+			pagina = "0";
+		ServicioImplVentas derImplVenta = (ServicioImplVentas) appContext.getBean("serviceBeanVenta");
+		List<Venta> todosLasVentas = derImplVenta.obtenerTodasLasVentas( ddlFiltroCliente,  txtFiltroCliente);
+		List<Venta> ventas = derImplVenta.obtenerTodasLasVentasSegunPagina(pagina,ddlFiltroCliente,txtFiltroCliente);
 		ServicioImplCliente derImplCliente = (ServicioImplCliente) appContext.getBean("serviceBeanCliente");
-		List<Cliente> todosLosClientes = derImplCliente.obtenerTodosLosClientes("0","");
+		List<Cliente> todosLosClientes = derImplCliente.obtenerTodosLosClientes("0", "");
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
-		List<Articulo> todosLosArticulos = derImplArticulo.obtenerTodosLosArticulos("0","");
-		
-		MV.addObject("productos",todosLosArticulos);
+		List<Articulo> todosLosArticulos = derImplArticulo.obtenerTodosLosArticulos("0", "");
+
+		MV.addObject("productos", todosLosArticulos);
 		System.out.println(todosLosArticulos.toString());
-		MV.addObject("clientes",todosLosClientes);
+		MV.addObject("clientes", todosLosClientes);
 		System.out.println(todosLosClientes.toString());
-		MV.addObject("ventas",ventas);
-		MV.addObject("cantPaginas",Math.ceil(todosLasVentas.size()/5));
+		MV.addObject("ventas", ventas);
+		MV.addObject("paginaActual", pagina);
+		MV.addObject("cantPaginas", Math.ceil(todosLasVentas.size() / 5));
 		MV.setViewName("ABMLVenta");
 		return MV;
 	}
+
+	@RequestMapping("AgregarVenta_ABMLVenta.html")
+	public ModelAndView eventoAgregarVenta(String txtFechaVentA, String txtCliente, String txtTotal,
+			String txtUsuario) {
+		System.out.println(txtCliente);
+		System.out.println(txtUsuario);
+		ModelAndView MV = new ModelAndView();
+		try {
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
+			Date fecha = formatter.parse(txtFechaVentA + " 00:00:00");
+			float total = Float.valueOf(txtTotal);
+
+			ServicioImplVentas derImplVenta = (ServicioImplVentas) appContext.getBean("serviceBeanVenta");
+			boolean estado = derImplVenta.agregarVenta(fecha, txtCliente, txtUsuario, total);
+			System.out.println(estado);
+			MV.addObject("pudoAgregarse", estado);
+			MV = fetchData(MV, "0", "0", "");
+			MV.setViewName("ABMLVenta");
+
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return MV;
+	}
 	
+	@RequestMapping("EliminarVenta_ABMLVenta.html")
+	public ModelAndView eventoEliminarVenta(int btnEliminar) {
+
+		int id = btnEliminar;
+		ModelAndView MV = new ModelAndView();
+		ServicioImplVentas derImplVenta = (ServicioImplVentas) appContext.getBean("serviceBeanVenta");
+		int estado = derImplVenta.eliminarVenta(id);
+		MV.addObject("pudoEliminarse", estado);
+		MV = fetchData(MV, "0", "0", "");
+		return MV;
+	}
+
 }
