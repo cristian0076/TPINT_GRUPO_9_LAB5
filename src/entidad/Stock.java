@@ -35,13 +35,7 @@ public class Stock {
     @Autowired
 	private Date FechaVencimientoS;
 
-    public boolean isEstadoS() {
-		return EstadoS;
-	}
-
-	public void setEstadoS(boolean estadoS) {
-		EstadoS = estadoS;
-	}
+  
 
 	public Stock() {
     }
@@ -53,7 +47,17 @@ public class Stock {
         this.precioCompra = precioCompra;
     }
 
-    public int getId() {
+    
+    
+    public boolean isEstadoS() {
+		return EstadoS;
+	}
+
+	public void setEstadoS(boolean estadoS) {
+		EstadoS = estadoS;
+	}
+
+	public int getId() {
         return id;
     }
 
