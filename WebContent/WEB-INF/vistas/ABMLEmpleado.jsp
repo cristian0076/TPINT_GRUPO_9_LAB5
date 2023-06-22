@@ -47,17 +47,9 @@
 							<input type="submit" value="Stock" class="dropdown-item"
 								name="btnProducto">
 						</form>
-						<form action="Redireccionar_ABMLEmpleado.html" method="post">
-							<input type="submit" value="Empleados" class="dropdown-item"
-								name="btnEmpleado">
-						</form>
 						<form action="Redireccionar_ABMLUsuario.html" method="post">
 							<input type="submit" value="Usuarios" class="dropdown-item"
 								name="btnUsuarios">
-						</form>
-						<form action="Redireccionar_ABMLMarca.html" method="post">
-							<input type="submit" value="Marcas" class="dropdown-item"
-								name="btnMarca">
 						</form>
 						<form action="Redireccionar_ABMLVentas.html" method="post">
 							<input type="submit" value="Ventas" class="dropdown-item"
