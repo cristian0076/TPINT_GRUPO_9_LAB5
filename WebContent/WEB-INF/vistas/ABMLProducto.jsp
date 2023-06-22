@@ -32,7 +32,7 @@
 					name="btnIndex">
 			</form>
 			<%
-				if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId()==1) {
+				if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
 			%>
 			<div class="dropdown show d-flex flex-row">
 				<div>
@@ -87,9 +87,9 @@
 		</div>
 
 		</nav>
-			<%
-			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId()==1) {
-			%>
+		<%
+			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
+		%>
 		<h2 class="my-3 ml-2 text-center">Productos</h2>
 
 		<div
@@ -132,7 +132,9 @@
 									<c:forEach var="marca" items="${Marcas}">
 										<option value="${marca.id}">${marca.nombreM}</option>
 									</c:forEach>
-								</select>
+								</select> <span>Precio</span> <input type="number" class="form-control"
+									name="txtPrecio" placeholder="Precio Producto"
+									required="required">
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-danger"
@@ -200,7 +202,11 @@
 								<c:forEach var="marca" items="${Marcas}">
 									<option value="${marca.id}">${marca.nombreM}</option>
 								</c:forEach>
-							</select>
+							</select> <span>Precio</span> <input type="number" class="form-control"
+								name="txtPrecioM" placeholder="Precio Producto"
+								required="required">
+								 <input hidden
+								name="id_M" >
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -227,7 +233,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="item" items="${Stocks}">
+				<c:forEach var="item" items="${articulos}">
 					<tr>
 						<th scope="row">${item.id}<input type="hidden"
 							value="${item.id}"></th>
@@ -326,11 +332,10 @@
 			}
 		%>
 		<%
-			} 
-			else {
-				if (session.getAttribute("usuario") != null){
+			} else {
+					if (session.getAttribute("usuario") != null) {
 		%>
-				<head>
+		<head>
 <meta http-equiv="refresh"
 	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
 <title>Redireccionando...</title>
@@ -338,12 +343,13 @@
 		<h1>Redireccionando...</h1>
 		<p>Estás siendo redirigido a otra página. Si no eres redirigido
 			automáticamente, haz clic en el siguiente enlace:</p>
-		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace de
-			redirección</a>
+		<a
+			href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace
+			de redirección</a>
 		<%
 			} else {
 		%>
-		
+
 		<head>
 <meta http-equiv="refresh"
 	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
@@ -356,7 +362,7 @@
 			redirección</a>
 		<%
 			}
-			}
+				}
 		%>
 		<footer id="sticky-footer"
 			class="py-4 bg-dark text-white-50 fixed-bottom">
@@ -368,10 +374,11 @@
 	</f:view>
 
 	<script type="text/javascript">
-	function cargarDatos(id,nombre, descripcion, tipo, marcaId) {
+	function cargarDatos(id,nombre, descripcion, tipo, marcaId,precio) {
 		$('input[name="id_M"]').val(id);
 		$('input[name="txtNombreM"]').val(nombre);
 		$('input[name="txtDescripcionM"]').val(descripcion);
+		$('input[name="txtPrecioM"]').val(precio);
 		//$('input[name="txtTipoM"]').val(tipo);
 		//$('input[name="txtMarcaM"]').val(marcaId);
 		

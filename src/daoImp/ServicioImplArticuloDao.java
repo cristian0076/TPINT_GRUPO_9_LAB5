@@ -93,7 +93,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 			break;
 		case "4":
 			listaArticulos = (List<Articulo>) session
-					.createQuery("SELECT a FROM Articulo a WHERE a.status = 1 AND a.tipoA LIKE '%" + textoFiltro + "%'")
+					.createQuery("SELECT a FROM Articulo a JOIN a.tipoA t WHERE a.status = 1 AND t.nombre LIKE '%" + textoFiltro + "%'")
 					.list();
 			break;
 		case "5":
