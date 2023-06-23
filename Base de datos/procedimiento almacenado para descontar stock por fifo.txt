@@ -1,0 +1,63 @@
+CALL DescontarStockVenta(cantidad vendida,id articulo vendido);
+
+
+DELIMITER //
+
+CREATE PROCEDURE DescontarStockVenta(IN pCantidadVA INT, IN pArticuloVA INT)
+BEGIN
+    -- guardo en esta variable la cantidad restante a descontar del stock.alter
+    -- seteo la cantidad vendida.
+    SET @cantidadRestante = pCantidadVA;
+
+    -- Variable para guardar idStock y CantidadStock
+    SET @stockId := 0;
+    SET @stockCantidad := 0;
+
+    -- Si no queda mas stock para descontar pongo en uno 1 esta variable para salir del while
+    SET @existeStock := 1;
+
+    -- while en el que voy a descontar por fifo hasta cumplir con la cantidad vendida.
+    WHILE @cantidadRestante > 0 AND @existeStock = 1 DO
+    
+        -- Busco el primer registro por fifo que tenga stock para el producto vendido
+        SET @stockId = (
+            SELECT s.id
+            FROM stock s
+            WHERE s.articulo_id = pArticuloVA AND s.cantidad > 0
+            ORDER BY s.fechaVencimientoS ASC, s.id ASC
+            LIMIT 1
+        );
+
+        -- Verifico si encuentro stock disponible del producto vendido, si no encuentro
+        -- salgo por el else y pongo la variable existe stock en 1 para salir del while
+        IF @stockId IS NOT NULL THEN
+            -- busco con el stockID la cantidad que tiene el registro que encontre por fifo
+            SET @stockCantidad = (
+                SELECT s.cantidad
+                FROM stock s
+                WHERE s.id = @stockId
+            );
+
+            -- calculo la cantidad a descontar de stock, uso la funcion LEAST ya que sirve para
+            -- encontrar el valor minimo entre dos valores, en este caso
+            -- si el registro de stock encontrado es mayor a la cantidadRestante a consumir
+            -- entonces la cantidada a descontar es es la cantidadRestante, porque si no consumiria
+            -- mas stock de lo vendido, pero caso cotrario que el stock encontrado sea menor a la cantidadRestante
+            -- a consumir, en ese caso consumo el total de ese stock, para seguir buscando en el while mas stock.
+            SET @cantidadDescontar = LEAST(@stockCantidad, @cantidadRestante);
+
+            -- actualizo el registro de stock con la cantidad a descontar.
+            UPDATE stock
+            SET cantidad = cantidad - @cantidadDescontar
+            WHERE id = @stockId;
+
+            -- Actualizo la cantidad vendida restante
+            SET @cantidadRestante = @cantidadRestante - @cantidadDescontar;
+        ELSE
+            -- No hay mas registros disponibles en el stock para descontar
+            SET @existeStock := 0;
+        END IF;
+    END WHILE;
+END //
+
+DELIMITER ;
