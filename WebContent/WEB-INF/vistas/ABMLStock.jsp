@@ -236,6 +236,18 @@
 		</form>
 		</nav>
 
+	<%
+			boolean menor1 = true;
+					if (request.getAttribute("menor1") != null) {
+						menor1 = (boolean) request.getAttribute("menor1");
+					}
+					if (menor1 == true) {
+		%>
+		<div class="alert alert-danger" role="alert">La cantidad o precio indicado son menores a 1!</div>
+		<%
+			}
+					%>
+	
 	
 		
 		<%
