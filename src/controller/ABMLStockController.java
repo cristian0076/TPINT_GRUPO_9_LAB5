@@ -30,6 +30,7 @@ public class ABMLStockController {
 		List<Articulo> todosLosArticulos = derImplArticulo.obtenerTodosLosArticulos("0", "");
 		ModelAndView MV = new ModelAndView();
 		MV.addObject("Productos", todosLosArticulos);
+		MV.addObject("menor1", false);
 		System.out.println(todosLosArticulos);
 		if(ddlFiltroStock==null)
 			ddlFiltroStock="0";
@@ -42,13 +43,22 @@ public class ABMLStockController {
 	@RequestMapping("AgregarStock_ABMLStock.html")
 	public ModelAndView eventoAgregarStock(String txtProducto,String txtCantidad,String txtPrecioC,String txtVencimiento)
 	{
+		ModelAndView MV = new ModelAndView();
+		
+		int cantidad = Integer.parseInt(txtCantidad);
+		int precio = Integer.parseInt(txtPrecioC);
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
 		List<Articulo> todosLosArticulos = derImplArticulo.obtenerTodosLosArticulos("0", "");
-		boolean status = false;
-		ServicioImplStock derImplStock = (ServicioImplStock) appContext.getBean("serviceBeanStock");
-		status  = derImplStock.agregarStock(txtProducto, txtCantidad, txtPrecioC, txtVencimiento);
-		ModelAndView MV = new ModelAndView();
-		MV.addObject("pudoAgregarse", status);
+		if(cantidad < 1 || precio < 1) {
+			MV.addObject("menor1", true);
+		}else {
+			MV.addObject("menor1", false);
+			boolean status = false;
+			ServicioImplStock derImplStock = (ServicioImplStock) appContext.getBean("serviceBeanStock");
+			status  = derImplStock.agregarStock(txtProducto, txtCantidad, txtPrecioC, txtVencimiento);
+			MV.addObject("pudoAgregarse", status);
+		}
+		
 		MV = fetchData(MV, "0","0","");
 		MV.addObject("Productos", todosLosArticulos);
 		System.out.println(todosLosArticulos);

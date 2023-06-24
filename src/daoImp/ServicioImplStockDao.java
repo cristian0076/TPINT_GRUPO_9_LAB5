@@ -32,15 +32,23 @@ public class ServicioImplStockDao implements DaoStock {
 		Date fechaActual = new Date();
 		Articulo ArticuloDB = (Articulo) session.createQuery("SELECT a FROM Articulo a WHERE a.id = " + idArticulo).uniqueResult();
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
-		Stock stock = (Stock) appContext.getBean("StockInicial");
-		stock.setArticulo(ArticuloDB);
-		stock.setCantidad(Integer.parseInt(cantidad));
-		stock.setPrecioCompra(Integer.parseInt(precio));
-		stock.setFechaIngreso(fechaActual);
-		stock.setFechaVencimientoS(fechaVenc);
-		stock.setEstadoS(true);
-		session.save(stock);
-		session.getTransaction().commit();
+		boolean existe = false;
+		existe = verificarStock(fechaActual,Integer.parseInt(cantidad),Integer.parseInt(idArticulo),fechaVenc,Integer.parseInt(precio));
+		
+		if(existe == true) {
+			
+		}else {
+			Stock stock = (Stock) appContext.getBean("StockInicial");
+			stock.setArticulo(ArticuloDB);
+			stock.setCantidad(Integer.parseInt(cantidad));
+			stock.setPrecioCompra(Integer.parseInt(precio));
+			stock.setFechaIngreso(fechaActual);
+			stock.setFechaVencimientoS(fechaVenc);
+			stock.setEstadoS(true);
+			session.save(stock);
+			session.getTransaction().commit();
+		}
+		
 		ch.cerrarSession();
 		return noError;
 		} catch (Exception e) {
@@ -48,6 +56,46 @@ public class ServicioImplStockDao implements DaoStock {
 			return false;
 		}
 		
+	}
+	
+	public boolean verificarStock(Date fecha, int Cantidad, int id, Date vencimiento, double precio) {
+		boolean existe = false;
+		int update = 0;
+		try {
+		ConfigHibernate ch = new ConfigHibernate();
+		Session session = ch.abrirConexion();
+		session.beginTransaction();
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+	    String fechaFormateada = formato.format(fecha);
+	    String fechavenc = formato.format(vencimiento);
+	    String hql1 = "SELECT s FROM Stock s JOIN s.articulo a WHERE s.EstadoS = 1 AND a.id = "+id+" AND s.fechaIngreso LIKE '%" + fechaFormateada + "%' AND s.FechaVencimientoS LIKE '%" + fechavenc +"%' ";
+	    Stock StockDB = (Stock) session.createQuery(hql1).uniqueResult();
+		
+		if (StockDB == null) {
+		    existe = false;
+		} else {
+		    existe = true;
+		    String hql = "UPDATE Stock s SET s.cantidad = :cant, s.precioCompra = :precio WHERE s.id ="+ StockDB.getId();
+		    
+		    int sumaCantidad = StockDB.getCantidad() + Cantidad;
+		    double sumaPrecio =  StockDB.getPrecioCompra() + precio;
+		    
+		    System.out.println("suma: "+ sumaCantidad);
+		    update = session.createQuery(hql)
+		    .setParameter("cant", sumaCantidad)
+		    .setParameter("precio", sumaPrecio)
+		    .executeUpdate();
+			session.getTransaction().commit();
+		}
+		
+		ch.cerrarSession();
+		
+		return existe;
+		
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			return existe;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
