@@ -31,7 +31,7 @@
 					name="btnIndex">
 			</form>
 			<%
-			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId()==1) {
+				if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
 			%>
 			<div class="dropdown show d-flex flex-row">
 				<div>
@@ -47,10 +47,6 @@
 						<form action="Redireccionar_ABMLStock.html" method="post">
 							<input type="submit" value="Stock" class="dropdown-item"
 								name="btnProducto">
-						</form>
-						<form action="Redireccionar_ABMLUsuario.html" method="post">
-							<input type="submit" value="Usuarios" class="dropdown-item"
-								name="btnUsuarios">
 						</form>
 						<form action="Redireccionar_ABMLVentas.html" method="post">
 							<input type="submit" value="Ventas" class="dropdown-item"
@@ -78,7 +74,7 @@
 		</div>
 		</nav>
 		<%
-			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId()==1) {
+			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
 		%>
 		<!-- Titulo -->
 		<h2 class="my-3 ml-2 text-center">Cliente</h2>
@@ -103,15 +99,16 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="AgregarCliente_ABMLCliente.html" method="post">
+						<form action="AgregarCliente_ABMLCliente.html" method="post"
+							id="resetForm">
 							<div class="modal-body">
 								<span>DNI</span> <input type="text" class="form-control"
-									name="txtDni" placeholder="DNI Cliente" required="required">
+									name="txtDni" placeholder="DNI Cliente" required="required" maxlength="10">
 								<span>Nombre</span> <input type="text" class="form-control"
 									name="txtNombre" placeholder="Nombre Cliente"
-									required="required"> <span>Apellido</span> <input
+									required="required" maxlength="20"> <span>Apellido</span> <input
 									type="text" class="form-control" name="txtApellido"
-									placeholder="Apellido Cliente" required="required"> <span>Sexo</span>
+									placeholder="Apellido Cliente" required="required" maxlength="20"> <span>Sexo</span>
 								<select class="custom-select" name="txtSexo">
 									<option selected value="Masculino">Masculino</option>
 									<option value="Femenino">Femenino</option>
@@ -123,13 +120,13 @@
 								<input type="text" class="form-control" name="txtDireccion"
 									placeholder="Direccion" required="required"> <span>Mail</span>
 								<input type="text" class="form-control" name="txtMail"
-									placeholder="Email del Cliente" required="required"> <span>Telefono</span>
+									placeholder="Email del Cliente" required="required" maxlength="50"> <span>Telefono</span>
 								<input type="tel" class="form-control" name="txtTelefono"
-									placeholder="Telefono del Cliente" required="required">
+									placeholder="Telefono del Cliente" required="required" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '')">
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger"
-									data-dismiss="modal">Cerrar</button>
+								<button class="btn btn-danger" data-dismiss="modal" type="reset"
+									value="Reset" onclick="resetForm()">Cerrar</button>
 								<input type="submit" value="Guardar" class="btn btn-success"
 									name="btnGuardar">
 							</div>
@@ -154,12 +151,12 @@
 						<form action="ModificarCliente_ABMLCliente.html" method="post">
 							<div class="modal-body">
 								<span>DNI</span> <input type="text" class="form-control"
-									name="txtDni" placeholder="DNI Cliente" required="required">
+									name="txtDni" placeholder="DNI Cliente" required="required" maxlength="10">
 								<span>Nombre</span> <input type="text" class="form-control"
 									name="txtNombre" placeholder="Nombre Cliente"
-									required="required"> <span>Apellido</span> <input
+									required="required" maxlength="20"> <span>Apellido</span> <input
 									type="text" class="form-control" name="txtApellido"
-									placeholder="Apellido Cliente" required="required"> <span>Sexo</span>
+									placeholder="Apellido Cliente" required="required" maxlength="20"> <span>Sexo</span>
 								<select class="custom-select" name="txtSexo">
 									<option selected value="Masculino">Masculino</option>
 									<option value="Femenino">Femenino</option>
@@ -171,14 +168,14 @@
 								<input type="text" class="form-control" name="txtDireccion"
 									placeholder="Direccion" required="required"> <span>Mail</span>
 								<input type="text" class="form-control" name="txtMail"
-									placeholder="Email del Cliente" required="required"> <span>Telefono</span>
+									placeholder="Email del Cliente" required="required" maxlength="50"> <span>Telefono</span>
 								<input type="tel" class="form-control" name="txtTelefono"
-									placeholder="Telefono del Cliente" required="required">
+									placeholder="Telefono del Cliente" required="required" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '')">
 								<input type="hidden" name="id_C">
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger"
-									data-dismiss="modal">Cerrar</button>
+								<button class="btn btn-danger" data-dismiss="modal" type="reset"
+									value="Reset" onclick="resetForm()">Cerrar</button>
 								<input type="submit" value="Guardar" class="btn btn-success"
 									name="btnGuardar">
 							</div>
@@ -338,11 +335,10 @@
 			}
 		%>
 		<%
-			} 
-			else {
-				if (session.getAttribute("usuario") != null){
+			} else {
+					if (session.getAttribute("usuario") != null) {
 		%>
-				<head>
+		<head>
 <meta http-equiv="refresh"
 	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
 <title>Redireccionando...</title>
@@ -350,12 +346,13 @@
 		<h1>Redireccionando...</h1>
 		<p>Estás siendo redirigido a otra página. Si no eres redirigido
 			automáticamente, haz clic en el siguiente enlace:</p>
-		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace de
-			redirección</a>
+		<a
+			href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace
+			de redirección</a>
 		<%
 			} else {
 		%>
-		
+
 		<head>
 <meta http-equiv="refresh"
 	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
@@ -368,7 +365,7 @@
 			redirección</a>
 		<%
 			}
-			}
+				}
 		%>
 		<footer id="sticky-footer"
 			class="py-4 bg-dark text-white-50 fixed-bottom">
@@ -424,6 +421,12 @@
 	})
 	
 	</script>
+	<script>
+      function resetForm(){
+        var element = document.getElementById("resetForm");
+         element.reset()
+      }
+   </script>
 
 	<!--Obligatorio-->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

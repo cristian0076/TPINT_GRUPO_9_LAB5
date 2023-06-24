@@ -45,10 +45,6 @@
 				<input type="submit" value="Stock" class="dropdown-item"
 					name="btnProducto">
 			</form>
-			<form action="Redireccionar_ABMLUsuario.html" method="post">
-				<input type="submit" value="Usuarios" class="dropdown-item"
-					name="btnProducto">
-			</form>
 			<form action="Redireccionar_ABMLVentas.html" method="post">
 				<input type="submit" value="Ventas" class="dropdown-item"
 					name="btnProducto">

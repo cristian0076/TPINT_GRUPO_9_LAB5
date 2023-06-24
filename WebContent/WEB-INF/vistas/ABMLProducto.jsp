@@ -49,10 +49,6 @@
 							<input type="submit" value="Stock" class="dropdown-item"
 								name="btnProducto">
 						</form>
-						<form action="Redireccionar_ABMLUsuario.html" method="post">
-							<input type="submit" value="Usuarios" class="dropdown-item"
-								name="btnUsuarios">
-						</form>
 						<form action="Redireccionar_ABMLVentas.html" method="post">
 							<input type="submit" value="Ventas" class="dropdown-item"
 								name="btnVenta">
@@ -103,13 +99,14 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="AgregarProducto_ABMLProducto.html" method="post">
+						<form action="AgregarProducto_ABMLProducto.html" method="post"
+							id="resetForm">
 							<div class="modal-body">
 								<span>Nombre</span> <input type="text" class="form-control"
 									name="txtNombre" placeholder="Nombre Producto"
-									required="required"> <span>Descripcion</span> <input
+									required="required"  maxlength="20"> <span>Descripcion</span> <input
 									type="text" class="form-control" name="txtDescripcion"
-									placeholder="Descripcion Producto" required="required">
+									placeholder="Descripcion Producto" required="required"  maxlength="20">
 								<span>Tipo</span> <select class="form-control" name="txtTipo"
 									required="required">
 									<option value="" disabled selected>Seleccione un tipo
@@ -126,11 +123,11 @@
 									</c:forEach>
 								</select> <span>Precio</span> <input type="number" class="form-control"
 									name="txtPrecio" placeholder="Precio Producto"
-									required="required">
+									required="required" min="1" max="100000">
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger"
-									data-dismiss="modal">Cerrar</button>
+								<button class="btn btn-danger" data-dismiss="modal" type="reset"
+									value="Reset" onclick="resetForm()">Cerrar</button>
 								<input type="submit" value="Guardar" class="btn btn-success"
 									name="btnGuardar">
 							</div>
@@ -177,9 +174,9 @@
 						<div class="modal-body">
 							<span>Nombre</span> <input type="text" class="form-control"
 								name="txtNombreM" placeholder="Nombre Producto"
-								required="required"> <span>Descripcion</span> <input
+								required="required" maxlength="20"> <span>Descripcion</span> <input
 								type="text" class="form-control" name="txtDescripcionM"
-								placeholder="Descripcion Producto" required="required">
+								placeholder="Descripcion Producto" required="required" maxlength="20">
 							<span>Tipo</span> <select class="form-control" name="txtTipoM"
 								required="required">
 								<option value="" disabled selected>Seleccione un tipo
@@ -196,14 +193,12 @@
 								</c:forEach>
 							</select> <span>Precio</span> <input type="number" class="form-control"
 								name="txtPrecioM" placeholder="Precio Producto"
-								required="required">
-								 <input hidden
-								name="id_M" >
+								required="required" min="1" max="100000"> <input hidden name="id_M">
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-							<input type="submit" value="Guardar" class="btn btn-success"
-								name="btnGuardar">
+							<input type="reset" class="btn btn-danger" data-dismiss="modal"
+								value="Cerrar"> <input type="submit" value="Guardar"
+								class="btn btn-success" name="btnGuardar">
 						</div>
 					</form>
 				</div>
@@ -436,6 +431,13 @@
 	})
 	
 	</script>
+
+	<script>
+      function resetForm(){
+        var element = document.getElementById("resetForm");
+         element.reset()
+      }
+   </script>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

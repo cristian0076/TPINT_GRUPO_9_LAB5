@@ -52,10 +52,6 @@
 							<input type="submit" value="Stock" class="dropdown-item"
 								name="btnProducto">
 						</form>
-						<form action="Redireccionar_ABMLUsuario.html" method="post">
-							<input type="submit" value="Usuarios" class="dropdown-item"
-								name="btnUsuarios">
-						</form>
 						<form action="Redireccionar_ABMLVentas.html" method="post">
 							<input type="submit" value="Ventas" class="dropdown-item"
 								name="btnVenta">
@@ -126,10 +122,11 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<form action="AgregarVenta_ABMLVenta.html" method="post">
+						<form action="AgregarVenta_ABMLVenta.html" method="post"
+							id="resetForm">
 							<div class="modal-body">
-								<span>Fecha: </span> <input type="text" name="txtFechaVentA"
-									style="border: 0;" id="fechaActual"> <br> <br>
+								<span>Fecha: </span> <input type="text" style="pointer-events: none; user-select: none;border: 0;" name="txtFechaVentA"
+									 id="fechaActual"> <br> <br>
 								<span>Cliente</span> <select class="form-control"
 									name="txtCliente" required="required" id="txtCliente">
 									<c:forEach var="client" items="${clientes}">
@@ -144,8 +141,8 @@
 											$${prod.isPrecioUnitario()}</option>
 									</c:forEach>
 								</select> <span>Cantidad</span> <input style="Width: 90px; height: 35px"
-									type="number" value="1" name="txtCantidadProdA"
-									id="txtCantidad" onkeyup="if(value<1) value=1;"> <input
+									type="number" value="1" name="txtCantidadProdA" 
+									id="txtCantidad" onchange="if(value<0) value=0; if(value>1000) value=1000;"> <input
 									name="txtUsuario" value="${usuario.getId()}" hidden>
 								<button type="button" class="btn btn-primary my-3 w-[30px]"
 									onClick="cargarTabla()">
@@ -157,7 +154,7 @@
 
 								</ul>
 								<span>Total: $<input name="txtTotal"
-									style="border: 0; background: transparent;" id="txtTotal"
+									style="pointer-events: none; user-select: none;border: 0;" id="txtTotal"
 									value="0"></span></span>
 							</div>
 
@@ -167,8 +164,8 @@
 								%>
 								<input name="listaArticulosComprar" id="listaArticulosComprar"
 									value="${listaArticulosComprar }" hidden>
-								<button type="button" class="btn btn-danger"
-									data-dismiss="modal" onClick="cargarSession();">Cerrar</button>
+								<a class="btn btn-danger"  href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_ABMLVentas.html"
+									 onclick="resetForm()">Cerrar</a>
 								<input type="submit" value="Guardar" class="btn btn-success"
 									name="btnGuardar">
 							</div>
@@ -193,17 +190,18 @@
 			<tbody>
 				<c:forEach var="item" items="${ventas}">
 					<tr>
-						<td style="transition: all 0.5s;"><a class="btn btn-primary" data-toggle="collapse"
-							href="#collapseExample${item.id}" role="button"
-							aria-expanded="false" aria-controls="collapseExample${item.id}">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+						<td style="transition: all 0.5s;"><a class="btn btn-primary"
+							data-toggle="collapse" href="#collapseExample${item.id}"
+							role="button" aria-expanded="false"
+							aria-controls="collapseExample${item.id}"> <svg
+									xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 									fill="currentColor" class="bi bi-arrow-down-circle-fill"
 									viewBox="0 0 16 16"> <path
 									d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
 								</svg>
 						</a></td>
 						<th scope="row">${item.id}</th>
-						<td style="transition: all 0.5s;"><span>${item.getFecha_V().getDate()}/${item.getFecha_V().getMonth() + 1}//${item.getFecha_V().getYear()+1900 }</span></td>
+						<td style="transition: all 0.5s;"><span>${item.getFecha_V().getDate()}/${item.getFecha_V().getMonth() + 1}/${item.getFecha_V().getYear()+1900 }</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getId_Cliente().getNombre_C()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getId_usuario().getEmpleadoU().getNombreE()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getTotal_V()}</span></td>
@@ -226,13 +224,17 @@
 								<div class="card card-body">
 									<ul class="list-group">
 										<c:forEach var="ite" items="${ventasArticulos}">
-										<%
-											Venta ve = (Venta) pageContext.getAttribute("item");
-											VentaArticulo va = (VentaArticulo) pageContext.getAttribute("ite");
-											if(va.getVentaVA().getId()==ve.getId()){
-										%>
-											<li class="list-group-item"><b>Articulo:</b><%=va.getArticuloVA().getNombreA()%> <b>Marca:</b><%=va.getArticuloVA().getMarcaA().getNombreM() %> <b>Cantidad:</b><%=va.getCantidadVA() %> <b>Subtotal:</b>$<%=va.getSubtotalVA() %></li>
-											<%} %>
+											<%
+												Venta ve = (Venta) pageContext.getAttribute("item");
+																VentaArticulo va = (VentaArticulo) pageContext.getAttribute("ite");
+																if (va.getVentaVA().getId() == ve.getId()) {
+											%>
+											<li class="list-group-item"><b>Articulo:</b><%=va.getArticuloVA().getNombreA()%>
+												<b>Marca:</b><%=va.getArticuloVA().getMarcaA().getNombreM()%>
+												<b>Cantidad:</b><%=va.getCantidadVA()%> <b>Subtotal:</b>$<%=va.getSubtotalVA()%></li>
+											<%
+												}
+											%>
 										</c:forEach>
 									</ul>
 								</div>
@@ -380,6 +382,13 @@
 	})
 	
 	</script>
+
+	<script>
+      function resetForm(){
+        var element = document.getElementById("resetForm");
+         element.reset()
+      }
+   </script>
 	<!--Obligatorio-->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
