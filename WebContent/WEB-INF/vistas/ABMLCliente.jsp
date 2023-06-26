@@ -103,26 +103,46 @@
 							id="resetForm">
 							<div class="modal-body">
 								<span>DNI</span> <input type="text" class="form-control"
-									name="txtDni" placeholder="DNI Cliente" required="required" maxlength="10">
-								<span>Nombre</span> <input type="text" class="form-control"
-									name="txtNombre" placeholder="Nombre Cliente"
-									required="required" maxlength="20"> <span>Apellido</span> <input
-									type="text" class="form-control" name="txtApellido"
-									placeholder="Apellido Cliente" required="required" maxlength="20"> <span>Sexo</span>
-								<select class="custom-select" name="txtSexo">
+									name="txtDni" placeholder="DNI Cliente" required="required"
+									maxlength="10"> <span>Nombre</span> <input type="text"
+									class="form-control" name="txtNombre"
+									placeholder="Nombre Cliente" required="required" maxlength="20">
+								<span>Apellido</span> <input type="text" class="form-control"
+									name="txtApellido" placeholder="Apellido Cliente"
+									required="required" maxlength="20"> <span>Sexo</span> <select
+									class="custom-select" name="txtSexo">
 									<option selected value="Masculino">Masculino</option>
 									<option value="Femenino">Femenino</option>
 									<option value="Otro">Otro</option>
 								</select> <span>Fecha de Nac.</span> <input type="date"
 									name="txtFechaNac" value="2023-06-19"> <span>Localidad</span>
-								<input type="text" class="form-control" name="txtLocalidad"
-									placeholder="Localidad" required="required"> <span>Direccion</span>
-								<input type="text" class="form-control" name="txtDireccion"
-									placeholder="Direccion" required="required"> <span>Mail</span>
-								<input type="text" class="form-control" name="txtMail"
-									placeholder="Email del Cliente" required="required" maxlength="50"> <span>Telefono</span>
+								<select class="form-control"
+									name="txtLocalidad" required="required">
+									<option value="">Selecciona una localidad</option>
+									<option value="Buenos Aires">Buenos Aires</option>
+									<option value="La Plata">La Plata</option>
+									<option value="Mar del Plata">Mar del Plata</option>
+									<option value="Bahía Blanca">Bahía Blanca</option>
+									<option value="Quilmes">Quilmes</option>
+									<option value="Lomas de Zamora">Lomas de Zamora</option>
+									<option value="Morón">Morón</option>
+									<option value="Pilar">Pilar</option>
+									<option value="San Isidro">San Isidro</option>
+									<option value="Tigre">Tigre</option>
+									<option value="San Martín">San Martín</option>
+									<option value="San Miguel">San Miguel</option>
+									<option value="Avellaneda">Avellaneda</option>
+									<option value="Lanús">Lanús</option>
+									<option value="Berazategui">Berazategui</option>
+								</select> <span>Direccion</span> <input type="text" class="form-control"
+									name="txtDireccion" placeholder="Direccion" required="required">
+								<span>Mail</span> <input type="text" class="form-control"
+									name="txtMail" placeholder="Email del Cliente"
+									required="required" maxlength="50"> <span>Telefono</span>
 								<input type="tel" class="form-control" name="txtTelefono"
-									placeholder="Telefono del Cliente" required="required" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '')">
+									placeholder="Telefono del Cliente" required="required"
+									maxlength="15"
+									oninput="this.value = this.value.replace(/\D/g, '')">
 							</div>
 							<div class="modal-footer">
 								<button class="btn btn-danger" data-dismiss="modal" type="reset"
@@ -151,27 +171,47 @@
 						<form action="ModificarCliente_ABMLCliente.html" method="post">
 							<div class="modal-body">
 								<span>DNI</span> <input type="text" class="form-control"
-									name="txtDni" placeholder="DNI Cliente" required="required" maxlength="10">
-								<span>Nombre</span> <input type="text" class="form-control"
-									name="txtNombre" placeholder="Nombre Cliente"
-									required="required" maxlength="20"> <span>Apellido</span> <input
-									type="text" class="form-control" name="txtApellido"
-									placeholder="Apellido Cliente" required="required" maxlength="20"> <span>Sexo</span>
-								<select class="custom-select" name="txtSexo">
+									name="txtDni" placeholder="DNI Cliente" required="required"
+									maxlength="10"> <span>Nombre</span> <input type="text"
+									class="form-control" name="txtNombre"
+									placeholder="Nombre Cliente" required="required" maxlength="20">
+								<span>Apellido</span> <input type="text" class="form-control"
+									name="txtApellido" placeholder="Apellido Cliente"
+									required="required" maxlength="20"> <span>Sexo</span> <select
+									class="custom-select" name="txtSexo">
 									<option selected value="Masculino">Masculino</option>
 									<option value="Femenino">Femenino</option>
 									<option value="Otro">Otro</option>
 								</select> <span>Fecha de Nac.</span> <input type="date"
 									name="txtFechaNac" value="2023-06-19"> <span>Localidad</span>
-								<input type="text" class="form-control" name="txtLocalidad"
-									placeholder="Localidad" required="required"> <span>Direccion</span>
-								<input type="text" class="form-control" name="txtDireccion"
-									placeholder="Direccion" required="required"> <span>Mail</span>
-								<input type="text" class="form-control" name="txtMail"
-									placeholder="Email del Cliente" required="required" maxlength="50"> <span>Telefono</span>
+								<select class="form-control"
+									name="txtLocalidad" required="required">
+									<option value="">Selecciona una localidad</option>
+									<option value="Buenos Aires">Buenos Aires</option>
+									<option value="La Plata">La Plata</option>
+									<option value="Mar del Plata">Mar del Plata</option>
+									<option value="Bahía Blanca">Bahía Blanca</option>
+									<option value="Quilmes">Quilmes</option>
+									<option value="Lomas de Zamora">Lomas de Zamora</option>
+									<option value="Morón">Morón</option>
+									<option value="Pilar">Pilar</option>
+									<option value="San Isidro">San Isidro</option>
+									<option value="Tigre">Tigre</option>
+									<option value="San Martín">San Martín</option>
+									<option value="San Miguel">San Miguel</option>
+									<option value="Avellaneda">Avellaneda</option>
+									<option value="Lanús">Lanús</option>
+									<option value="Berazategui">Berazategui</option>
+								</select> <span>Direccion</span> <input type="text" class="form-control"
+									name="txtDireccion" placeholder="Direccion" required="required">
+								<span>Mail</span> <input type="text" class="form-control"
+									name="txtMail" placeholder="Email del Cliente"
+									required="required" maxlength="50"> <span>Telefono</span>
 								<input type="tel" class="form-control" name="txtTelefono"
-									placeholder="Telefono del Cliente" required="required" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '')">
-								<input type="hidden" name="id_C">
+									placeholder="Telefono del Cliente" required="required"
+									maxlength="15"
+									oninput="this.value = this.value.replace(/\D/g, '')"> <input
+									type="hidden" name="id_C">
 							</div>
 							<div class="modal-footer">
 								<button class="btn btn-danger" data-dismiss="modal" type="reset"
@@ -254,7 +294,8 @@
 								</button>
 						</span></td>
 						<td><span>
-								<form action="EliminarCliente_ABMLCliente.html" method="post" onsubmit="return confirm('¿Está seguro que desea borrar el Cliente?');">
+								<form action="EliminarCliente_ABMLCliente.html" method="post"
+									onsubmit="return confirm('¿Está seguro que desea borrar el Cliente?');">
 									<button type="submit" name="btnEliminar"
 										value="${item.getId()}" class="btn btn-danger">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -335,6 +376,21 @@
 			}
 		%>
 		<%
+			if (request.getAttribute("pudoEliminarse") != null) {
+						Integer pudoEliminarse = (Integer) request.getAttribute("pudoEliminarse");
+						if (pudoEliminarse != 0) {
+		%>
+		<div class="alert alert-success" role="alert">Se elimino
+			correctamente!</div>
+		<%
+			} else {
+		%>
+		<div class="alert alert-danger" role="alert">Error al eliminar</div>
+		<%
+			}
+					}
+		%>
+		<%
 			} else {
 					if (session.getAttribute("usuario") != null) {
 		%>
@@ -384,7 +440,7 @@
 		$('input[name="txtApellido"]').val(apellido);
 		$('input[name="txtSexo"]').val(sexo);
 		$('input[name="txtFechaNac"]').val(fechaNac.slice(0,10));
-		$('input[name="txtLocalidad"]').val(localidad);
+		$('select[name="txtLocalidad"]').val(localidad);
 		$('input[name="txtDireccion"]').val(direccion);
 		$('input[name="txtMail"]').val(mail);
 		$('input[name="txtTelefono"]').val(telefono);

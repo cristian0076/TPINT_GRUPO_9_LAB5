@@ -216,9 +216,9 @@
 						<td style="transition: all 0.5s;"><span>${item.getId_usuario().getEmpleadoU().getNombreE()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getTotal_V()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.isStockDescontadoV()}</span></td>
-						<td style="transition: all 0.5s;"><span>
-						<%
-						if(!((Venta)pageContext.getAttribute("item")).isStockDescontadoV()){%>
+						<td style="transition: all 0.5s;"><span> <%
+ 	if (!((Venta) pageContext.getAttribute("item")).isStockDescontadoV()) {
+ %>
 								<form action="EliminarVenta_ABMLVenta.html" method="post"
 									onsubmit="return confirm('¿Está seguro que desea borrar la venta?');">
 									<button type="submit" name="btnEliminar"
@@ -229,21 +229,21 @@
 											d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
 										</svg>
 									</button>
-								</form>
-								<%} %>
+								</form> <%
+ 	}
+ %>
 						</span></td>
-						<td><span> 
-							<% 
-								if(!((Venta)pageContext.getAttribute("item")).isStockDescontadoV()){
-									%>
-									<form action="ActualizarVenta_ABMLVenta.html" method="post">
-									<input type="text" name="txtIDVenta" value="${item.getId() }" hidden>
-										<button type="submit" class="btn btn-warning">Cerrar venta</button>
-									</form>
-										
-							<%
-								}
-							%>
+						<td><span> <%
+ 	if (!((Venta) pageContext.getAttribute("item")).isStockDescontadoV()) {
+ %>
+								<form action="ActualizarVenta_ABMLVenta.html" method="post">
+									<input type="text" name="txtIDVenta" value="${item.getId() }"
+										hidden>
+									<button type="submit" class="btn btn-warning">Cerrar
+										venta</button>
+								</form> <%
+ 	}
+ %>
 						</span></td>
 					</tr>
 					<tr>
@@ -308,6 +308,57 @@
 			</ul>
 		</form>
 		</nav>
+		<%
+			if (request.getAttribute("pudoActualizarse") != null) {
+						boolean pudoActualizarse = (boolean) request.getAttribute("pudoActualizarse");
+						if (pudoActualizarse) {
+		%>
+		<div class="alert alert-success" role="alert">Se cerro la venta
+			correctamente!</div>
+		<%
+			} else {
+		%>
+		<div class="alert alert-danger" role="alert">Insuficiente stock!</div>
+		<%
+			}
+					}
+		%>
+
+		<%
+			if (request.getAttribute("pudoEliminarse") != null) {
+						Integer pudoEliminarse = (Integer) request.getAttribute("pudoEliminarse");
+						if (pudoEliminarse != 0) {
+		%>
+		<div class="alert alert-success" role="alert">Se elimino
+			correctamente!</div>
+		<%
+			} else {
+		%>
+		<div class="alert alert-danger" role="alert">Error al eliminar</div>
+		<%
+			}
+					}
+		%>
+
+		<%
+			if (request.getAttribute("pudoAgregarse") != null) {
+						Boolean pudoAgregarse = (Boolean) request.getAttribute("pudoAgregarse");
+						if (pudoAgregarse) {
+		%>
+		<div class="alert alert-success" role="alert">Se agrego correctamente!</div>
+		<%
+			} else {
+		%>
+		<div class="alert alert-danger" role="alert">Error al agregar</div>
+		<%
+			}
+					}
+		%>
+
+
+
+
+
 		<%
 			} else {
 					if (session.getAttribute("usuario") != null) {

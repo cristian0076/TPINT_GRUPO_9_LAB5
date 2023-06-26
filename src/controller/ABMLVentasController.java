@@ -130,7 +130,7 @@ public class ABMLVentasController {
 			ServicioImplVentas derImplVenta = (ServicioImplVentas) appContext.getBean("serviceBeanVenta");
 			boolean seActualizo = derImplVenta.actualizarVenta(txtIDVenta);
 			
-			MV.addObject("pudoAgregarse", seActualizo);
+			MV.addObject("pudoActualizarse", seActualizo);
 			MV = fetchData(MV, "0", "0", "");
 			MV.setViewName("ABMLVenta");
 
