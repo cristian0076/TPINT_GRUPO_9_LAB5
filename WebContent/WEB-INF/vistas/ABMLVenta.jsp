@@ -181,7 +181,7 @@
 								</select> <span>Cantidad</span> <input style="Width: 90px; height: 35px"
 									type="number" value="1" name="txtCantidadProdA"
 									id="txtCantidad"
-									onchange="if(value<0) value=0; if(value>1000) value=1000;">
+									onchange="if(value<0) value=0; if(value>1000) value=1000; if(value.lenght>5)value.lenght=5">
 								<input name="txtUsuario" value="${usuario.getId()}" hidden>
 								<button type="button" class="btn btn-primary my-3 w-[30px]"
 									onClick="cargarTabla()">
@@ -485,6 +485,7 @@
 		function cargarTabla() {
 			var producto = document.getElementById("txtProducto");
 			var cantidad = document.getElementById("txtCantidad");
+			if(Number(cantidad.value)>0){
 			var listaCarrito = document.getElementById("listaArticulosComprar");
 			var container = document.querySelector("#CointeinerProductos");
 			var item = document.createElement("li");
@@ -519,6 +520,9 @@
 						listaCarrito.value = JSON.stringify(carrito)
 					}
 				}
+			}
+			}else{
+				alert("La canidad debe ser mayor a cero.")
 			}
 		}
 		function resetearTabla(){
