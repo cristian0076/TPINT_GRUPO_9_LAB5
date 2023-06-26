@@ -125,8 +125,9 @@
 						<form action="AgregarVenta_ABMLVenta.html" method="post"
 							id="resetForm">
 							<div class="modal-body">
-								<span>Fecha: </span> <input type="text" style="pointer-events: none; user-select: none;border: 0;" name="txtFechaVentA"
-									 id="fechaActual"> <br> <br>
+								<span>Fecha: </span> <input type="text"
+									style="pointer-events: none; user-select: none; border: 0;"
+									name="txtFechaVentA" id="fechaActual"> <br> <br>
 								<span>Cliente</span> <select class="form-control"
 									name="txtCliente" required="required" id="txtCliente">
 									<c:forEach var="client" items="${clientes}">
@@ -141,33 +142,40 @@
 											$${prod.isPrecioUnitario()}</option>
 									</c:forEach>
 								</select> <span>Cantidad</span> <input style="Width: 90px; height: 35px"
-									type="number" value="1" name="txtCantidadProdA" 
-									id="txtCantidad" onchange="if(value<0) value=0; if(value>1000) value=1000;"> <input
-									name="txtUsuario" value="${usuario.getId()}" hidden>
+									type="number" value="1" name="txtCantidadProdA"
+									id="txtCantidad"
+									onchange="if(value<0) value=0; if(value>1000) value=1000;">
+								<input name="txtUsuario" value="${usuario.getId()}" hidden>
 								<button type="button" class="btn btn-primary my-3 w-[30px]"
 									onClick="cargarTabla()">
 									<span aria-hidden="true">Agregar</span>
 								</button>
+								<button type="button" class="btn btn-primary my-3 w-[30px]"
+									onClick="resetearTabla()">
+									<span aria-hidden="true">Resetear</span>
+								</button>
+
 							</div>
-							<div class="modal-header">
+							<div class="" style="height: 150px;overflow-y: scroll;">
 								<ul class="list-group" id="CointeinerProductos">
-
+									
 								</ul>
-								<span>Total: $<input name="txtTotal"
-									style="pointer-events: none; user-select: none;border: 0;" id="txtTotal"
-									value="0"></span></span>
 							</div>
-
+							<div class="container">
+								<span>Total: $<input name="txtTotal"
+									style="pointer-events: none; user-select: none; border: 0;"
+									id="txtTotal" value="0"></span>
+							</div>
 							<div class="modal-footer">
 								<%
 									ArrayList<Articulo> listaArticulosComprar = new ArrayList<Articulo>();
 								%>
 								<input name="listaArticulosComprar" id="listaArticulosComprar"
-									value="${listaArticulosComprar }" hidden>
-								<a class="btn btn-danger"  href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_ABMLVentas.html"
-									 onclick="resetForm()">Cerrar</a>
-								<input type="submit" value="Guardar" class="btn btn-success"
-									name="btnGuardar">
+									value="${listaArticulosComprar }" hidden required> <a
+									class="btn btn-danger"
+									href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_ABMLVentas.html"
+									onclick="resetForm()">Cerrar</a> <input type="submit"
+									value="Guardar" class="btn btn-success" name="btnGuardar">
 							</div>
 						</form>
 					</div>
@@ -335,19 +343,50 @@
 			var producto = document.getElementById("txtProducto");
 			var cantidad = document.getElementById("txtCantidad");
 			var listaCarrito = document.getElementById("listaArticulosComprar");
-			const container = document.querySelector("#CointeinerProductos");
-			const item = document.createElement("li");
+			var container = document.querySelector("#CointeinerProductos");
+			var item = document.createElement("li");
 			item.classList.add("list-group-item")
+			item.classList.add("itemList")
 			var productoObj = JSON.parse(producto.value.replaceAll("'", '"'));
-			productoObj.cantidad = parseInt(cantidad.value)
-			item.innerHTML = productoObj.nombreA + " "
-					+ productoObj.marcaA.nombreM + " " + cantidad.value;
-			container.appendChild(item);
+			let repetido = false;
+			let indexOfProducto
+			carrito.forEach((itemList,index)=>{
+				if(itemList.productoObj.id==productoObj.id){
+					itemList.cantidad=(Number(itemList.cantidad)+Number(cantidad.value)).toString();
+					repetido=true;
+					indexOfProducto=index
+				}
+			})
+			if(!repetido){
+				productoObj.cantidad = cantidad.value;
+				item.innerHTML = productoObj.nombreA + " "+productoObj.marcaA.nombreM + " " + cantidad.value;
+				container.appendChild(item);
+				const txtTotal = document.getElementById("txtTotal");
+				total = Number(parseInt(txtTotal.value)) + productoObj.precio*cantidad.value;
+				txtTotal.value = total;
+				carrito.push({productoObj:productoObj,cantidad:cantidad.value,subtotal:Number(productoObj.precio*cantidad.value)})
+				listaCarrito.value = JSON.stringify(carrito)
+			}else{
+				var itemsToLocate = document.getElementsByClassName("itemList");
+				for (var i = 0; i < itemsToLocate.length; i++) {
+					if(itemsToLocate[i].innerHTML.includes(productoObj.nombreA) && itemsToLocate[i].innerHTML.includes(productoObj.marcaA.nombreM)){
+						itemsToLocate[i].innerHTML = productoObj.nombreA + " "+productoObj.marcaA.nombreM + " " + (Number(carrito[indexOfProducto].cantidad));
+						total = Number(parseInt(txtTotal.value)) + productoObj.precio*cantidad.value;
+						txtTotal.value = total;
+						listaCarrito.value = JSON.stringify(carrito)
+					}
+				}
+			}
+		}
+		function resetearTabla(){
+			carrito = [];
+			total=0;
+			const container = document.querySelector("#CointeinerProductos");
+			var listaCarrito = document.getElementById("listaArticulosComprar");
 			const txtTotal = document.getElementById("txtTotal");
-			total = Number(parseInt(txtTotal.value)) + productoObj.precio*cantidad.value;
-			txtTotal.value = total;
-			carrito.push({productoObj:productoObj,cantidad:cantidad.value,subtotal:Number(productoObj.precio*cantidad.value)})
-			listaCarrito.value = JSON.stringify(carrito)
+			listaCarrito.value="";
+			container.innerHTML = '';
+			txtTotal.value=0;
 		}
 	</script>
 
