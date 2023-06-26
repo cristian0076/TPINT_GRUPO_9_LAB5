@@ -55,12 +55,12 @@ public class ABMLClienteController {
 	}
 
 	@RequestMapping("ModificarCliente_ABMLCliente.html")
-	public ModelAndView eventoModificarCliente(int id_C,String txtDni, String txtNombre, String txtApellido, String txtDireccion,
-			String txtFechaNac, String txtLocalidad, String txtMail, String txtSexo, String txtTelefono) {
+	public ModelAndView eventoModificarCliente(int id_CM,String txtDniM, String txtNombreM, String txtApellidoM, String txtDireccionM,
+			String txtFechaNacM, String txtLocalidadM, String txtMailM, String txtSexoM, String txtTelefonoM) {
 		ModelAndView MV = new ModelAndView();
 		ServicioImplCliente derImplCliente = (ServicioImplCliente) appContext.getBean("serviceBeanCliente");
-		int estado = derImplCliente.modificarCliente(id_C,txtDni, txtNombre, txtApellido, txtDireccion, txtFechaNac,
-				txtLocalidad, txtMail, txtSexo, txtTelefono);
+		int estado = derImplCliente.modificarCliente(id_CM,txtDniM, txtNombreM, txtApellidoM, txtDireccionM, txtFechaNacM,
+				txtLocalidadM, txtMailM, txtSexoM, txtTelefonoM);
 		MV.addObject("pudoModificarse", estado);
 		MV = fetchData(MV, "0", "0", "");
 		return MV;

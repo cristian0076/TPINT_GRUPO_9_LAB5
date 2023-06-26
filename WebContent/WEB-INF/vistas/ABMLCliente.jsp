@@ -208,20 +208,20 @@
 						<form action="ModificarCliente_ABMLCliente.html" method="post">
 							<div class="modal-body">
 								<span>DNI</span> <input type="text" class="form-control"
-									name="txtDni" placeholder="DNI Cliente" required="required"
+									name="txtDniM" placeholder="DNI Cliente" required="required"
 									maxlength="10"> <span>Nombre</span> <input type="text"
-									class="form-control" name="txtNombre"
+									class="form-control" name="txtNombreM"
 									placeholder="Nombre Cliente" required="required" maxlength="20">
 								<span>Apellido</span> <input type="text" class="form-control"
-									name="txtApellido" placeholder="Apellido Cliente"
+									name="txtApellidoM" placeholder="Apellido Cliente"
 									required="required" maxlength="20"> <span>Sexo</span> <select
-									class="custom-select" name="txtSexo">
+									class="custom-select" name="txtSexoM">
 									<option selected value="Masculino">Masculino</option>
 									<option value="Femenino">Femenino</option>
 									<option value="Otro">Otro</option>
 								</select> <span>Fecha de Nac.</span> <input type="date"
-									name="txtFechaNac" value="2023-06-19"> <span>Localidad</span>
-								<select class="form-control" name="txtLocalidad"
+									name="txtFechaNacM" value="2023-06-19"> <span>Localidad</span>
+								<select class="form-control" name="txtLocalidadM"
 									required="required">
 									<option value="">Selecciona una localidad</option>
 									<option value="Buenos Aires">Buenos Aires</option>
@@ -240,15 +240,15 @@
 									<option value="Lanús">Lanús</option>
 									<option value="Berazategui">Berazategui</option>
 								</select> <span>Direccion</span> <input type="text" class="form-control"
-									name="txtDireccion" placeholder="Direccion" required="required">
+									name="txtDireccionM" placeholder="Direccion" required="required">
 								<span>Mail</span> <input type="text" class="form-control"
-									name="txtMail" placeholder="Email del Cliente"
+									name="txtMailM" placeholder="Email del Cliente"
 									required="required" maxlength="50"> <span>Telefono</span>
-								<input type="tel" class="form-control" name="txtTelefono"
+								<input type="tel" class="form-control" name="txtTelefonoM"
 									placeholder="Telefono del Cliente" required="required"
 									maxlength="15"
 									oninput="this.value = this.value.replace(/\D/g, '')"> <input
-									type="hidden" name="id_C">
+									type="hidden" name="id_CM">
 							</div>
 							<div class="modal-footer">
 								<button class="btn btn-danger" data-dismiss="modal" type="reset"
@@ -390,34 +390,29 @@
 		</form>
 		</nav>
 
+		<!-- AGREGADO -->
 		<%
-			boolean pudoAgregarse = false;
-					int pudoModificarse = 0;
-					if (request.getAttribute("pudoAgregarse") != null) {
-						pudoAgregarse = (boolean) request.getAttribute("pudoAgregarse");
-					}
-					if (request.getAttribute("pudoModificarse") != null) {
-						pudoModificarse = (int) request.getAttribute("pudoModificarse");
-					}
-					if (pudoAgregarse) {
+			if (request.getAttribute("pudoAgregarse") != null) {
+						Boolean pudoAgregarse = (Boolean) request.getAttribute("pudoAgregarse");
+						if (pudoAgregarse) {
 		%>
-		<div class="alert alert-success" role="alert">Se salvo
+		<div class="alert alert-success" role="alert">Se agrego
 			correctamente!</div>
 		<%
-			}
-					if (pudoModificarse == 1) {
+			} else {
 		%>
-		<div class="alert alert-success" role="alert">Se modifico
-			correctamente!</div>
+		<div class="alert alert-danger" role="alert">Error al agregar, usuario repetido</div>
 		<%
 			}
+					}
 		%>
-		<%
+		<!-- ELIMINADO -->
+				<%
 			if (request.getAttribute("pudoEliminarse") != null) {
 						Integer pudoEliminarse = (Integer) request.getAttribute("pudoEliminarse");
-						if (pudoEliminarse != 0) {
+						if (pudoEliminarse>0) {
 		%>
-		<div class="alert alert-success" role="alert">Se elimino
+		<div class="alert alert-success" role="alert">Se Elimino
 			correctamente!</div>
 		<%
 			} else {
@@ -427,6 +422,23 @@
 			}
 					}
 		%>
+		<!-- MODIFICACION -->
+				<%
+			if (request.getAttribute("pudoModificarse") != null) {
+						Integer pudoModificarse = (Integer) request.getAttribute("pudoModificarse");
+						if (pudoModificarse>0) {
+		%>
+		<div class="alert alert-success" role="alert">Se modifico
+			correctamente!</div>
+		<%
+			} else {
+		%>
+		<div class="alert alert-danger" role="alert">Error al modificar</div>
+		<%
+			}
+					}
+		%>
+
 		<%
 			} else {
 					if (session.getAttribute("usuario") != null) {
@@ -506,16 +518,16 @@
 
 	<script type="text/javascript">
 	function cargarDatos(id, dni, nombre, apellido, sexo ,fechaNac, direccion, localidad, mail, telefono){
-		$('input[name="id_C"]').val(id);
-		$('input[name="txtDni"]').val(dni);
-		$('input[name="txtNombre"]').val(nombre);
-		$('input[name="txtApellido"]').val(apellido);
-		$('input[name="txtSexo"]').val(sexo);
-		$('input[name="txtFechaNac"]').val(fechaNac.slice(0,10));
-		$('select[name="txtLocalidad"]').val(localidad);
-		$('input[name="txtDireccion"]').val(direccion);
-		$('input[name="txtMail"]').val(mail);
-		$('input[name="txtTelefono"]').val(telefono);
+		$('input[name="id_CM"]').val(id);
+		$('input[name="txtDniM"]').val(dni);
+		$('input[name="txtNombreM"]').val(nombre);
+		$('input[name="txtApellidoM"]').val(apellido);
+		$('input[name="txtSexoM"]').val(sexo);
+		$('input[name="txtFechaNacM"]').val(fechaNac.slice(0,10));
+		$('select[name="txtLocalidadM"]').val(localidad);
+		$('input[name="txtDireccionM"]').val(direccion);
+		$('input[name="txtMailM"]').val(mail);
+		$('input[name="txtTelefonoM"]').val(telefono);
     }
 	</script>
 	<script type="text/javascript">

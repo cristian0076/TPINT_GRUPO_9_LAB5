@@ -393,10 +393,6 @@
 					}
 		%>
 
-
-
-
-
 		<%
 			} else {
 					if (session.getAttribute("usuario") != null) {
