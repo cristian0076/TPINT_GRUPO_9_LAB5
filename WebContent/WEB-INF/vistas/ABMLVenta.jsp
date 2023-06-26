@@ -156,9 +156,9 @@
 								</button>
 
 							</div>
-							<div class="" style="height: 150px;overflow-y: scroll;">
+							<div class="" style="height: 150px; overflow-y: scroll;">
 								<ul class="list-group" id="CointeinerProductos">
-									
+
 								</ul>
 							</div>
 							<div class="container">
@@ -192,6 +192,8 @@
 					<th scope="col">Cliente</th>
 					<th scope="col">Vendedor</th>
 					<th scope="col">Total</th>
+					<th scope="col">Venta cerrada?</th>
+					<th scope="col"></th>
 					<th scope="col"></th>
 				</tr>
 			</thead>
@@ -213,8 +215,12 @@
 						<td style="transition: all 0.5s;"><span>${item.getId_Cliente().getNombre_C()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getId_usuario().getEmpleadoU().getNombreE()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getTotal_V()}</span></td>
+						<td style="transition: all 0.5s;"><span>${item.isStockDescontadoV()}</span></td>
 						<td style="transition: all 0.5s;"><span>
-								<form action="EliminarVenta_ABMLVenta.html" method="post" onsubmit="return confirm('¿Está seguro que desea borrar la venta?');">
+						<%
+						if(!((Venta)pageContext.getAttribute("item")).isStockDescontadoV()){%>
+								<form action="EliminarVenta_ABMLVenta.html" method="post"
+									onsubmit="return confirm('¿Está seguro que desea borrar la venta?');">
 									<button type="submit" name="btnEliminar"
 										value="${item.getId()}" class="btn btn-danger">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -224,6 +230,20 @@
 										</svg>
 									</button>
 								</form>
+								<%} %>
+						</span></td>
+						<td><span> 
+							<% 
+								if(!((Venta)pageContext.getAttribute("item")).isStockDescontadoV()){
+									%>
+									<form action="ActualizarVenta_ABMLVenta.html" method="post">
+									<input type="text" name="txtIDVenta" value="${item.getId() }" hidden>
+										<button type="submit" class="btn btn-warning">Cerrar venta</button>
+									</form>
+										
+							<%
+								}
+							%>
 						</span></td>
 					</tr>
 					<tr>

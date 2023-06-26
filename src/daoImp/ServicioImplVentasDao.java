@@ -7,12 +7,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -20,9 +22,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import dao.DaoVenta;
 import entidad.Venta;
+import entidad.VentaArticulo;
 import servicio.ServicioVentas;
 import entidad.Cliente;
 import entidad.Marca;
+import entidad.Stock;
 import entidad.Usuario;
 
 public class ServicioImplVentasDao implements DaoVenta  {
@@ -126,6 +130,7 @@ public class ServicioImplVentasDao implements DaoVenta  {
 			Venta.setId_Cliente(ClienteBD);
 			Venta.setId_usuario(UsuarioBD);
 			Venta.setEstadoV(true);
+			Venta.setStockDescontadoV(false);
 			Venta.setTotal_V(total);
 			
 			session.save(Venta);
@@ -162,6 +167,57 @@ public class ServicioImplVentasDao implements DaoVenta  {
 		}
 
 		return estado;
+	}
+
+	@Override
+	public boolean actualizarVenta(int id) {
+		boolean sinProblemas = true;
+		try {
+			ConfigHibernate ch = new ConfigHibernate();
+			Session session = ch.abrirConexion();
+			session.beginTransaction();
+			//Tomo lista de productos segun venta
+			@SuppressWarnings("unchecked")
+			List<VentaArticulo> listaVentas = (List<VentaArticulo>) session
+					.createQuery("SELECT va FROM VentaArticulo va where va.ventaVA = "+id)
+					.list();
+			//Por cada producto Verifico stock
+			for (VentaArticulo ventaArticulo : listaVentas) {
+				int cantidadDeStock = 0;
+				@SuppressWarnings("unchecked")
+				List<Stock> listaStock = (List<Stock>) session
+						.createQuery("SELECT s FROM Stock s where s.articulo = "+ventaArticulo.getArticuloVA().getId())
+						.list();
+				for (Stock stock : listaStock) {
+					cantidadDeStock+=stock.getCantidad();
+				}
+				if(cantidadDeStock<ventaArticulo.getCantidadVA()) {
+					sinProblemas=false;
+				}
+			}
+			//Si todo sale bien ejecuto pa y actualizo el estado de la venta
+			for (VentaArticulo ventaArticulo : listaVentas) {
+				// Crea la consulta nativa
+				Query query = session.createSQLQuery("CALL DescontarStockVenta(:pCantidadVA, :pArticuloVA)");
+
+				// Configura los parámetros de entrada
+				query.setParameter("pCantidadVA", ventaArticulo.getCantidadVA());
+				query.setParameter("pArticuloVA", ventaArticulo.getArticuloVA().getId());
+
+				// Ejecuta la consulta
+				query.executeUpdate();
+				
+				String hql = "UPDATE Venta v SET v.StockDescontadoV = 1 WHERE v.id = :id";
+
+				session.createQuery(hql).setParameter("id", id).executeUpdate();
+			}
+			
+			session.getTransaction().commit();
+			ch.cerrarSession();
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return sinProblemas;
 	}
 
 }

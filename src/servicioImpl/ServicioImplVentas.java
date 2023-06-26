@@ -47,4 +47,9 @@ public class ServicioImplVentas implements ServicioVentas {
 		return dataAccess.eliminarVenta(id);
 	}
 
+	@Override
+	public boolean actualizarVenta(int id) {
+		return dataAccess.actualizarVenta(id);
+	}
+
 }
