@@ -2,8 +2,8 @@
 <%@page import="entidad.Venta"%>
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,6 +21,7 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    left: -100%;
 }
 
 .dropdown-content form {
@@ -83,7 +84,7 @@
             </div>
             <div id="dropdownContent" class="dropdown-content">
                 <form action="Salir.html" method="post">
-                    <input type="submit" value="Cerrar SesiÛn" name="btnSalir" class="btn btn-link">
+                    <input type="submit" value="Cerrar Sesi√≥n" name="btnSalir" class="btn btn-link">
                 </form>
             </div>
         </div>
@@ -177,9 +178,9 @@
 		<title>Redireccionando...</title>
 
 		<h1>Redireccionando...</h1>
-		<p>Est·s siendo redirigido a otra p·gina. Si no eres redirigido
-			autom·ticamente, haz clic en el siguiente enlace:</p>
-		<a id="redirectionLink" href="#">Enlace de redirecciÛn</a>
+		<p>Est√°s siendo redirigido a otra p√°gina. Si no eres redirigido
+			autom√°ticamente, haz clic en el siguiente enlace:</p>
+		<a id="redirectionLink" href="#">Enlace de redirecci√≥n</a>
 
 		<script>
 			// Obtener el dominio actual del navegador
@@ -188,7 +189,7 @@
 			// Obtener el puerto actual del navegador
 			var currentPort = window.location.port;
 
-			// Construir la URL de redirecciÛn con el dominio y el puerto actuales
+			// Construir la URL de redirecci√≥n con el dominio y el puerto actuales
 			var redirectionUrl = 'http://' + currentDomain + ':' + currentPort
 					+ '/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html';
 
@@ -198,7 +199,7 @@
 			// Modificar el contenido del atributo "content" del meta tag
 			metaElement.setAttribute('content', '0;url=' + redirectionUrl);
 
-			// Actualizar el enlace de redirecciÛn con la URL din·mica
+			// Actualizar el enlace de redirecci√≥n con la URL din√°mica
 			document.getElementById('redirectionLink').href = redirectionUrl;
 		</script>
 		<%
@@ -207,9 +208,9 @@
 		<meta http-equiv="refresh" content="5;url=" id="redirectMeta">
 		<title>Redireccionando...</title>
 		<h1>Redireccionando...</h1>
-		<p>Est·s siendo redirigido a otra p·gina. Si no eres redirigido
-			autom·ticamente, haz clic en el siguiente enlace:</p>
-		<a id="redirectionLink" href="#">Enlace de redirecciÛn</a>
+		<p>Est√°s siendo redirigido a otra p√°gina. Si no eres redirigido
+			autom√°ticamente, haz clic en el siguiente enlace:</p>
+		<a id="redirectionLink" href="#">Enlace de redirecci√≥n</a>
 
 		<script>
 			// Obtener el dominio actual del navegador
@@ -218,9 +219,9 @@
 			// Obtener el puerto actual del navegador
 			var currentPort = window.location.port;
 
-			// Construir la URL de redirecciÛn con el dominio y el puerto actuales
-			var redirectionUrl = 'http://' + currentDomain + ':' + currentPort
-					+ '/TPINT_GRUPO_9_LAB5/';
+			// Construir la URL de redirecci√≥n con el dominio y el puerto actuales
+    		var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/Redireccionar_Login.html';
+
 
 			// Obtener una referencia al elemento meta
 			var metaElement = document.getElementById('redirectMeta');
@@ -228,7 +229,7 @@
 			// Modificar el contenido del atributo "content" del meta tag
 			metaElement.setAttribute('content', '5;url=' + redirectionUrl);
 
-			// Actualizar el enlace de redirecciÛn con la URL din·mica
+			// Actualizar el enlace de redirecci√≥n con la URL din√°mica
 			document.getElementById('redirectionLink').href = redirectionUrl;
 		</script>
 		<%
@@ -239,7 +240,7 @@
 		<footer id="sticky-footer"
 			class="py-4 bg-dark text-white-50 fixed-bottom">
 		<div class="container text-center">
-			<span class="logo-text text-white">© 2023 - By Grupo Nro 9
+			<span class="logo-text text-white">¬© 2023 - By Grupo Nro 9
 				LAB5 - todos los derechos reservados </span>
 		</div>
 		</footer>

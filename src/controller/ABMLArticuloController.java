@@ -25,9 +25,6 @@ public class ABMLArticuloController {
 
 	@RequestMapping("Redireccionar_ABMLProducto.html")
 	public ModelAndView eventoRedireccionarProducto(String btnPagina, HttpServletRequest request,String ddlFiltroProducto, String txtFiltroProducto) {
-		System.out.println("------------");
-		System.out.println(ddlFiltroProducto);
-		System.out.println(txtFiltroProducto);
 		ModelAndView MV = new ModelAndView();
 		if(ddlFiltroProducto==null)
 			ddlFiltroProducto="0";
@@ -43,7 +40,6 @@ public class ABMLArticuloController {
 		ModelAndView MV = new ModelAndView();
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
 		boolean estado = derImplArticulo.agregarArticulo(txtNombre, txtDescripcion, txtTipo, txtMarca,txtPrecio);
-		System.out.println(estado);
 		MV.addObject("pudoAgregarse", estado);
 		MV = fetchData(MV, "0","0","");
 		ServicioImplMarca derImplMarca = (ServicioImplMarca) appContext.getBean("serviceBeanMarca");
@@ -79,7 +75,6 @@ public class ABMLArticuloController {
 		ModelAndView MV = new ModelAndView();
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
 		int estado = derImplArticulo.modificarArticulo(id_M, txtNombreM, txtDescripcionM, txtTipoM, txtMarcaM,txtPrecioM);
-		System.out.println(estado);
 		MV.addObject("pudoModificarse", estado);
 		MV = fetchData(MV, "0","0","");
 		ServicioImplMarca derImplMarca = (ServicioImplMarca) appContext.getBean("serviceBeanMarca");

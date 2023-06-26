@@ -28,10 +28,7 @@ public class LoginController {
 	
 	@RequestMapping("Redireccionar_Index.html")
 	public ModelAndView eventoRedireccionarIndex(String txtUsuario, String txtClave,HttpServletRequest request)
-	{
-		System.out.println(txtUsuario);
-		System.out.println(txtClave);
-		
+	{	
 		ServicioImplUsuario serImplUsuario = (ServicioImplUsuario)appContext.getBean("serviceBean");
 		Usuario usuario = serImplUsuario.obtenerUnRegistro(txtUsuario,txtClave);
 		

@@ -31,7 +31,6 @@ public class ABMLStockController {
 		ModelAndView MV = new ModelAndView();
 		MV.addObject("Productos", todosLosArticulos);
 		MV.addObject("menor1", false);
-		System.out.println(todosLosArticulos);
 		if(ddlFiltroStock==null)
 			ddlFiltroStock="0";
 		if(txtFiltroStock==null)
@@ -61,7 +60,6 @@ public class ABMLStockController {
 		
 		MV = fetchData(MV, "0","0","");
 		MV.addObject("Productos", todosLosArticulos);
-		System.out.println(todosLosArticulos);
 		MV.setViewName("ABMLStock");
 		return MV;
 	}

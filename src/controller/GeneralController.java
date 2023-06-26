@@ -20,10 +20,9 @@ public class GeneralController {
 	@RequestMapping("Salir.html")
     public ModelAndView eventoRedireccionarSalir(HttpServletRequest request, String btnSalir)
     {
-        System.out.println("holitas");
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.invalidate(); // Cierra la sesión y elimina los datos almacenados
+            session.invalidate(); // Cierra la sesiï¿½n y elimina los datos almacenados
         }
         ModelAndView MV = new ModelAndView();
         MV.setViewName("Login");

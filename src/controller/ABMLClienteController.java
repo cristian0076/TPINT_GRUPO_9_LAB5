@@ -61,7 +61,6 @@ public class ABMLClienteController {
 		ServicioImplCliente derImplCliente = (ServicioImplCliente) appContext.getBean("serviceBeanCliente");
 		int estado = derImplCliente.modificarCliente(id_C,txtDni, txtNombre, txtApellido, txtDireccion, txtFechaNac,
 				txtLocalidad, txtMail, txtSexo, txtTelefono);
-		System.out.println(estado);
 		MV.addObject("pudoModificarse", estado);
 		MV = fetchData(MV, "0", "0", "");
 		return MV;

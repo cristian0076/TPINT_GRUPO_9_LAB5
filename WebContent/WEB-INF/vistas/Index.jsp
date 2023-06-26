@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Pagina inicio</title>
 <link href="../Estilos/login.css" rel="StyleSheet" type="text/css">
 <link rel="stylesheet"
@@ -143,28 +143,7 @@
     var currentPort = window.location.port;
 
     // Construir la URL de redirección con el dominio y el puerto actuales
-    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/';
-
-    // Obtener una referencia al elemento meta
-    var metaElement = document.getElementById('redirectMeta');
-
-    // Modificar el contenido del atributo "content" del meta tag
-    metaElement.setAttribute('content', '5;url=' + redirectionUrl);
-
-    // Actualizar el enlace de redirección con la URL dinámica
-    document.getElementById('redirectionLink').href = redirectionUrl;
-  </script>
-
-
-  <script>
-    // Obtener el dominio actual del navegador
-    var currentDomain = window.location.hostname;
-
-    // Obtener el puerto actual del navegador
-    var currentPort = window.location.port;
-
-    // Construir la URL de redirección con el dominio y el puerto actuales
-    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/';
+    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/Redireccionar_Login.html';
 
     // Obtener una referencia al elemento meta
     var metaElement = document.getElementById('redirectMeta');
@@ -177,6 +156,38 @@
   </script>
 <%
 	}
+			}else{
+				%>
+				<head>
+  <meta http-equiv="refresh" content="5;url=" id="redirectMeta">
+  <title>Redireccionando...</title>
+</head>
+
+  <h1>Redireccionando...</h1>
+  <p>Estás siendo redirigido a otra página. Si no eres redirigido automáticamente, haz clic en el siguiente enlace:</p>
+  <a id="redirectionLink" href="#">Enlace de redirección</a>
+
+  <script>
+    // Obtener el dominio actual del navegador
+    var currentDomain = window.location.hostname;
+
+    // Obtener el puerto actual del navegador
+    var currentPort = window.location.port;
+
+    // Construir la URL de redirección con el dominio y el puerto actuales
+    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/Redireccionar_Login.html';
+
+    // Obtener una referencia al elemento meta
+    var metaElement = document.getElementById('redirectMeta');
+
+    // Modificar el contenido del atributo "content" del meta tag
+    metaElement.setAttribute('content', '5;url=' + redirectionUrl);
+
+    // Actualizar el enlace de redirección con la URL dinámica
+    document.getElementById('redirectionLink').href = redirectionUrl;
+  </script>
+				<%
+			
 			}
 %>
 <footer id="align-bottom"
