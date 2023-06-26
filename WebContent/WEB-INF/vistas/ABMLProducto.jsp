@@ -14,8 +14,32 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
 	crossorigin="anonymous">
+	
+	<style>
+	.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content form {
+    padding: 8px 12px;
+}
+
+.btn-icon {
+    cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
+
 </head>
-<body style="height: 100vh; width: 100%;">
+<body style="height: 100vh; width: 100%; overflow:hidden;">
 	<f:view
 		style="width: 100%; display: flex; flex-direction: column; justify-content: center;">
 		<%
@@ -64,15 +88,25 @@
 				}
 			%>
 		</div>
-		<div class="d-flex flex-row">
-			<span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
-			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-				fill="currentColor" class="bi bi-person-circle text-white"
-				viewBox="0 0 16 16"> <path
-				d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" /> <path fill-rule="evenodd"
-				d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-			</svg>
-		</div>
+	<div class="d-flex flex-row">
+    <div class="ml-auto">
+        <div class="dropdown">
+            <div class="btn-icon" onclick="toggleDropdown()">
+                <svg name="btnImage" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle text-white" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+            </div>
+            <div id="dropdownContent" class="dropdown-content">
+                <form action="Salir.html" method="post">
+                    <input type="submit" value="Cerrar Sesión" name="btnSalir" class="btn btn-link">
+                </form>
+            </div>
+        </div>
+    </div>
+    <span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
+</div>
+
 		</nav>
 		<%
 			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
@@ -321,64 +355,31 @@
 			} else {
 					if (session.getAttribute("usuario") != null) {
 		%>
-		
-
-  <meta http-equiv="refresh" content="0;url=" id="redirectMeta">
-  <title>Redireccionando...</title>
-
-  <h1>Redireccionando...</h1>
-  <p>Estás siendo redirigido a otra página. Si no eres redirigido automáticamente, haz clic en el siguiente enlace:</p>
-  <a id="redirectionLink" href="#">Enlace de redirección</a>
-
-  <script>
-    // Obtener el dominio actual del navegador
-    var currentDomain = window.location.hostname;
-
-    // Obtener el puerto actual del navegador
-    var currentPort = window.location.port;
-
-    // Construir la URL de redirección con el dominio y el puerto actuales
-    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html';
-
-    // Obtener una referencia al elemento meta
-    var metaElement = document.getElementById('redirectMeta');
-
-    // Modificar el contenido del atributo "content" del meta tag
-    metaElement.setAttribute('content', '0;url=' + redirectionUrl);
-
-    // Actualizar el enlace de redirección con la URL dinámica
-    document.getElementById('redirectionLink').href = redirectionUrl;
-  </script>
-
+		<head>
+<meta http-equiv="refresh"
+	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
+<title>Redireccionando...</title>
+		</head>
+		<h1>Redireccionando...</h1>
+		<p>Estás siendo redirigido a otra página. Si no eres redirigido
+			automáticamente, haz clic en el siguiente enlace:</p>
+		<a
+			href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace
+			de redirección</a>
 		<%
 			} else {
 		%>
 
-  <meta http-equiv="refresh" content="5;url=" id="redirectMeta">
-  <title>Redireccionando...</title>
-  <h1>Redireccionando...</h1>
-  <p>Estás siendo redirigido a otra página. Si no eres redirigido automáticamente, haz clic en el siguiente enlace:</p>
-  <a id="redirectionLink" href="#">Enlace de redirección</a>
-
-  <script>
-    // Obtener el dominio actual del navegador
-    var currentDomain = window.location.hostname;
-
-    // Obtener el puerto actual del navegador
-    var currentPort = window.location.port;
-
-    // Construir la URL de redirección con el dominio y el puerto actuales
-    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/';
-
-    // Obtener una referencia al elemento meta
-    var metaElement = document.getElementById('redirectMeta');
-
-    // Modificar el contenido del atributo "content" del meta tag
-    metaElement.setAttribute('content', '5;url=' + redirectionUrl);
-
-    // Actualizar el enlace de redirección con la URL dinámica
-    document.getElementById('redirectionLink').href = redirectionUrl;
-  </script>
+		<head>
+<meta http-equiv="refresh"
+	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
+<title>Redireccionando...</title>
+		</head>
+		<h1>Redireccionando...</h1>
+		<p>Estás siendo redirigido a otra página. Si no eres redirigido
+			automáticamente, haz clic en el siguiente enlace:</p>
+		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/">Enlace de
+			redirección</a>
 		<%
 			}
 				}
@@ -391,6 +392,7 @@
 		</div>
 		</footer>
 	</f:view>
+	
 
 	<script type="text/javascript">
 	function cargarDatos(id,nombre, descripcion, tipo, marcaId,precio) {
@@ -431,7 +433,7 @@
 		}
 		
     }
-	</script>	
+	</script>
 	<script type="text/javascript">
 	const ddls = document.getElementsByClassName("ddlFiltroProducto");
 	const inputs = document.getElementsByClassName("txtFiltroProducto");
