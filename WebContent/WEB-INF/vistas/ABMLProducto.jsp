@@ -337,16 +337,35 @@
 			} else {
 		%>
 
-		<head>
-<meta http-equiv="refresh"
-	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
-<title>Redireccionando...</title>
-		</head>
-		<h1>Redireccionando...</h1>
-		<p>Estás siendo redirigido a otra página. Si no eres redirigido
-			automáticamente, haz clic en el siguiente enlace:</p>
-		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/">Enlace de
-			redirección</a>
+<head>
+  <meta http-equiv="refresh" content="5;url=" id="redirectMeta">
+  <title>Redireccionando...</title>
+</head>
+<body>
+  <h1>Redireccionando...</h1>
+  <p>Estás siendo redirigido a otra página. Si no eres redirigido automáticamente, haz clic en el siguiente enlace:</p>
+  <a id="redirectionLink" href="#">Enlace de redirección</a>
+
+  <script>
+    // Obtener el dominio actual del navegador
+    var currentDomain = window.location.hostname;
+
+    // Obtener el puerto actual del navegador
+    var currentPort = window.location.port;
+
+    // Construir la URL de redirección con el dominio y el puerto actuales
+    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/';
+
+    // Obtener una referencia al elemento meta
+    var metaElement = document.getElementById('redirectMeta');
+
+    // Modificar el contenido del atributo "content" del meta tag
+    metaElement.setAttribute('content', '5;url=' + redirectionUrl);
+
+    // Actualizar el enlace de redirección con la URL dinámica
+    document.getElementById('redirectionLink').href = redirectionUrl;
+  </script>
+</body>
 		<%
 			}
 				}
