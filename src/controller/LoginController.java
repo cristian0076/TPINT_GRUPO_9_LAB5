@@ -44,6 +44,7 @@ public class LoginController {
 			MV.setViewName("Index");
 			HttpSession session = request.getSession(true);
 			session.setAttribute("usuario", usuario);
+			session.setMaxInactiveInterval(3600);
 			return MV;
 		}else {
 			String Message = "Verifica las credenciales.";
