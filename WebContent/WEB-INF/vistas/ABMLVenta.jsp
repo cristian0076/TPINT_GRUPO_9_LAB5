@@ -253,7 +253,7 @@
 						<td style="transition: all 0.5s;"><span>${item.getId_Cliente().getNombre_C()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getId_usuario().getEmpleadoU().getNombreE()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getTotal_V()}</span></td>
-						<td style="transition: all 0.5s;"><span>${item.isStockDescontadoV()}</span></td>
+						<td style="transition: all 0.5s;"><span>${item.isStockDescontadoV() ? 'Si' : 'No'}</span></td>
 						<td style="transition: all 0.5s;"><span> <%
  	if (!((Venta) pageContext.getAttribute("item")).isStockDescontadoV()) {
  %>
