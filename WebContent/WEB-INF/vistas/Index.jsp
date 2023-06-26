@@ -20,11 +20,13 @@
 	<!-- Barra navegacion -->
 	<nav
 		class="navbar navbar-expand-lg navbar-light  bg-dark text-white-50">
+	<div>
 	<form action="Redireccionar_IndexGeneral.html" method="post">
 		<input type="submit" value="Mayorista"
 			class="navbar-brand btn btn-outline-dark text-light font-weight-bold"
 			name="btnIndex">
-	</form>
+	</form>	
+	</div>
 	<%
 		if (session.getAttribute("usuario") != null) {
 	%>
@@ -64,7 +66,7 @@
 			<%} %>
 		</div>
 	</div>
-	<div class="ml-auto">
+	<div class="ml-auto ">
     <form action="Salir.html" method="post">
         <input type="submit" value="Cerrar Sesion" name="btnSalir" class="btn btn-link text-white">
     </form>
@@ -72,7 +74,10 @@
 	<%
 		}
 	%> </nav>
-	
+		<%
+			if (session.getAttribute("usuario") != null) {
+		%>
+
 	<div class="container d-flex flex-row my-5">
 		<%
 			if (session.getAttribute("usuario") != null) {
@@ -83,6 +88,7 @@
 			fill-rule="evenodd"
 			d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
 		</svg>
+
 		<div class="ml-5">
 			<h3 class="ml-3 mt-3">Bienvenido a la pagina de inicio
 				${usuario.getUsuarioU()}</h3>
@@ -124,6 +130,7 @@
   <meta http-equiv="refresh" content="5;url=" id="redirectMeta">
   <title>Redireccionando...</title>
 </head>
+
   <h1>Redireccionando...</h1>
   <p>Estás siendo redirigido a otra página. Si no eres redirigido automáticamente, haz clic en el siguiente enlace:</p>
   <a id="redirectionLink" href="#">Enlace de redirección</a>
@@ -148,6 +155,7 @@
     document.getElementById('redirectionLink').href = redirectionUrl;
   </script>
 
+
   <script>
     // Obtener el dominio actual del navegador
     var currentDomain = window.location.hostname;
@@ -169,6 +177,7 @@
   </script>
 <%
 	}
+			}
 %>
 <footer id="align-bottom"
 	class="py-4 bg-dark text-white-50 fixed-bottom">
