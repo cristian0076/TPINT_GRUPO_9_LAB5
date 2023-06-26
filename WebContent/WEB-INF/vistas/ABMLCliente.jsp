@@ -254,7 +254,7 @@
 								</button>
 						</span></td>
 						<td><span>
-								<form action="EliminarCliente_ABMLCliente.html" method="post">
+								<form action="EliminarCliente_ABMLCliente.html" method="post" onsubmit="return confirm('¿Está seguro que desea borrar el Cliente?');">
 									<button type="submit" name="btnEliminar"
 										value="${item.getId()}" class="btn btn-danger">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

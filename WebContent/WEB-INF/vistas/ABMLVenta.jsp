@@ -214,7 +214,7 @@
 						<td style="transition: all 0.5s;"><span>${item.getId_usuario().getEmpleadoU().getNombreE()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getTotal_V()}</span></td>
 						<td style="transition: all 0.5s;"><span>
-								<form action="EliminarVenta_ABMLVenta.html" method="post">
+								<form action="EliminarVenta_ABMLVenta.html" method="post" onsubmit="return confirm('¿Está seguro que desea borrar la venta?');">
 									<button type="submit" name="btnEliminar"
 										value="${item.getId()}" class="btn btn-danger">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
