@@ -17,32 +17,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
 	crossorigin="anonymous">
-	<style>
-	.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content form {
-    padding: 8px 12px;
-}
-
-.btn-icon {
-    cursor: pointer;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-</style>
 </head>
 <body>
 	<f:view
-		style="width: 100%; display: flex; flex-direction: column; justify-content: center;overflow:hidden;">
+		style="width: 100%; display: flex; flex-direction: column; justify-content: center;">
 		<%
 			Usuario usuario = (Usuario) session.getAttribute("usuario");
 		%>
@@ -89,24 +67,15 @@
 				}
 			%>
 		</div>
-<div class="d-flex flex-row">
-    <div class="ml-auto">
-        <div class="dropdown">
-            <div class="btn-icon" onclick="toggleDropdown()">
-                <svg name="btnImage" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle text-white" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                </svg>
-            </div>
-            <div id="dropdownContent" class="dropdown-content">
-                <form action="Salir.html" method="post">
-                    <input type="submit" value="Cerrar Sesión" name="btnSalir" class="btn btn-link">
-                </form>
-            </div>
-        </div>
-    </div>
-    <span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
-</div>
+		<div class="d-flex flex-row">
+			<span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+				fill="currentColor" class="bi bi-person-circle text-white"
+				viewBox="0 0 16 16"> <path
+				d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" /> <path fill-rule="evenodd"
+				d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+			</svg>
+		</div>
 		</nav>
 		<%
 			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
@@ -181,22 +150,28 @@
 									onClick="cargarTabla()">
 									<span aria-hidden="true">Agregar</span>
 								</button>
+								<button type="button" class="btn btn-primary my-3 w-[30px]"
+									onClick="resetearTabla()">
+									<span aria-hidden="true">Resetear</span>
+								</button>
+
 							</div>
-							<div class="modal-header">
+							<div class="" style="height: 150px; overflow-y: scroll;">
 								<ul class="list-group" id="CointeinerProductos">
 
 								</ul>
+							</div>
+							<div class="container">
 								<span>Total: $<input name="txtTotal"
 									style="pointer-events: none; user-select: none; border: 0;"
-									id="txtTotal" value="0"></span></span>
+									id="txtTotal" value="0"></span>
 							</div>
-
 							<div class="modal-footer">
 								<%
 									ArrayList<Articulo> listaArticulosComprar = new ArrayList<Articulo>();
 								%>
 								<input name="listaArticulosComprar" id="listaArticulosComprar"
-									value="${listaArticulosComprar }" hidden> <a
+									value="${listaArticulosComprar }" hidden required> <a
 									class="btn btn-danger"
 									href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_ABMLVentas.html"
 									onclick="resetForm()">Cerrar</a> <input type="submit"
@@ -217,6 +192,8 @@
 					<th scope="col">Cliente</th>
 					<th scope="col">Vendedor</th>
 					<th scope="col">Total</th>
+					<th scope="col">Venta cerrada?</th>
+					<th scope="col"></th>
 					<th scope="col"></th>
 				</tr>
 			</thead>
@@ -238,8 +215,12 @@
 						<td style="transition: all 0.5s;"><span>${item.getId_Cliente().getNombre_C()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getId_usuario().getEmpleadoU().getNombreE()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getTotal_V()}</span></td>
-						<td style="transition: all 0.5s;"><span>
-								<form action="EliminarVenta_ABMLVenta.html" method="post">
+						<td style="transition: all 0.5s;"><span>${item.isStockDescontadoV()}</span></td>
+						<td style="transition: all 0.5s;"><span> <%
+ 	if (!((Venta) pageContext.getAttribute("item")).isStockDescontadoV()) {
+ %>
+								<form action="EliminarVenta_ABMLVenta.html" method="post"
+									onsubmit="return confirm('¿Está seguro que desea borrar la venta?');">
 									<button type="submit" name="btnEliminar"
 										value="${item.getId()}" class="btn btn-danger">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -248,7 +229,21 @@
 											d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
 										</svg>
 									</button>
-								</form>
+								</form> <%
+ 	}
+ %>
+						</span></td>
+						<td><span> <%
+ 	if (!((Venta) pageContext.getAttribute("item")).isStockDescontadoV()) {
+ %>
+								<form action="ActualizarVenta_ABMLVenta.html" method="post">
+									<input type="text" name="txtIDVenta" value="${item.getId() }"
+										hidden>
+									<button type="submit" class="btn btn-warning">Cerrar
+										venta</button>
+								</form> <%
+ 	}
+ %>
 						</span></td>
 					</tr>
 					<tr>
@@ -314,65 +309,85 @@
 		</form>
 		</nav>
 		<%
-			} else {
-					if (session.getAttribute("usuario") != null) {
+			if (request.getAttribute("pudoActualizarse") != null) {
+						boolean pudoActualizarse = (boolean) request.getAttribute("pudoActualizarse");
+						if (pudoActualizarse) {
 		%>
-		<meta http-equiv="refresh" content="5;url=" id="redirectMeta">
-		<title>Redireccionando...</title>
-
-		<h1>Redireccionando...</h1>
-		<p>Estás siendo redirigido a otra página. Si no eres redirigido
-			automáticamente, haz clic en el siguiente enlace:</p>
-		<a id="redirectionLink" href="#">Enlace de redirección</a>
-
-		<script>
-    // Obtener el dominio actual del navegador
-    var currentDomain = window.location.hostname;
-
-    // Obtener el puerto actual del navegador
-    var currentPort = window.location.port;
-
-    // Construir la URL de redirección con el dominio y el puerto actuales
-    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html';
-
-    // Obtener una referencia al elemento meta
-    var metaElement = document.getElementById('redirectMeta');
-
-    // Modificar el contenido del atributo "content" del meta tag
-    metaElement.setAttribute('content', '5;url=' + redirectionUrl);
-
-    // Actualizar el enlace de redirección con la URL dinámica
-    document.getElementById('redirectionLink').href = redirectionUrl;
-  </script>
+		<div class="alert alert-success" role="alert">Se cerro la venta
+			correctamente!</div>
 		<%
 			} else {
 		%>
-		<meta http-equiv="refresh" content="0;url=" id="redirectMeta">
-		<title>Redireccionando...</title>
+		<div class="alert alert-danger" role="alert">Insuficiente stock!</div>
+		<%
+			}
+					}
+		%>
+
+		<%
+			if (request.getAttribute("pudoEliminarse") != null) {
+						Integer pudoEliminarse = (Integer) request.getAttribute("pudoEliminarse");
+						if (pudoEliminarse != 0) {
+		%>
+		<div class="alert alert-success" role="alert">Se elimino
+			correctamente!</div>
+		<%
+			} else {
+		%>
+		<div class="alert alert-danger" role="alert">Error al eliminar</div>
+		<%
+			}
+					}
+		%>
+
+		<%
+			if (request.getAttribute("pudoAgregarse") != null) {
+						Boolean pudoAgregarse = (Boolean) request.getAttribute("pudoAgregarse");
+						if (pudoAgregarse) {
+		%>
+		<div class="alert alert-success" role="alert">Se agrego correctamente!</div>
+		<%
+			} else {
+		%>
+		<div class="alert alert-danger" role="alert">Error al agregar</div>
+		<%
+			}
+					}
+		%>
+
+
+
+
+
+		<%
+			} else {
+					if (session.getAttribute("usuario") != null) {
+		%>
+		<head>
+<meta http-equiv="refresh"
+	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
+<title>Redireccionando...</title>
+		</head>
 		<h1>Redireccionando...</h1>
 		<p>Estás siendo redirigido a otra página. Si no eres redirigido
 			automáticamente, haz clic en el siguiente enlace:</p>
-		<a id="redirectionLink" href="#">Enlace de redirección</a>
+		<a
+			href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace
+			de redirección</a>
+		<%
+			} else {
+		%>
 
-		<script>
-    // Obtener el dominio actual del navegador
-    var currentDomain = window.location.hostname;
-
-    // Obtener el puerto actual del navegador
-    var currentPort = window.location.port;
-
-    // Construir la URL de redirección con el dominio y el puerto actuales
-    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/';
-
-    // Obtener una referencia al elemento meta
-    var metaElement = document.getElementById('redirectMeta');
-
-    // Modificar el contenido del atributo "content" del meta tag
-    metaElement.setAttribute('content', '0;url=' + redirectionUrl);
-
-    // Actualizar el enlace de redirección con la URL dinámica
-    document.getElementById('redirectionLink').href = redirectionUrl;
-  </script>
+		<head>
+<meta http-equiv="refresh"
+	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
+<title>Redireccionando...</title>
+		</head>
+		<h1>Redireccionando...</h1>
+		<p>Estás siendo redirigido a otra página. Si no eres redirigido
+			automáticamente, haz clic en el siguiente enlace:</p>
+		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/">Enlace de
+			redirección</a>
 		<%
 			}
 				}
@@ -399,19 +414,50 @@
 			var producto = document.getElementById("txtProducto");
 			var cantidad = document.getElementById("txtCantidad");
 			var listaCarrito = document.getElementById("listaArticulosComprar");
-			const container = document.querySelector("#CointeinerProductos");
-			const item = document.createElement("li");
+			var container = document.querySelector("#CointeinerProductos");
+			var item = document.createElement("li");
 			item.classList.add("list-group-item")
+			item.classList.add("itemList")
 			var productoObj = JSON.parse(producto.value.replaceAll("'", '"'));
-			productoObj.cantidad = parseInt(cantidad.value)
-			item.innerHTML = productoObj.nombreA + " "
-					+ productoObj.marcaA.nombreM + " " + cantidad.value;
-			container.appendChild(item);
+			let repetido = false;
+			let indexOfProducto
+			carrito.forEach((itemList,index)=>{
+				if(itemList.productoObj.id==productoObj.id){
+					itemList.cantidad=(Number(itemList.cantidad)+Number(cantidad.value)).toString();
+					repetido=true;
+					indexOfProducto=index
+				}
+			})
+			if(!repetido){
+				productoObj.cantidad = cantidad.value;
+				item.innerHTML = productoObj.nombreA + " "+productoObj.marcaA.nombreM + " " + cantidad.value;
+				container.appendChild(item);
+				const txtTotal = document.getElementById("txtTotal");
+				total = Number(parseInt(txtTotal.value)) + productoObj.precio*cantidad.value;
+				txtTotal.value = total;
+				carrito.push({productoObj:productoObj,cantidad:cantidad.value,subtotal:Number(productoObj.precio*cantidad.value)})
+				listaCarrito.value = JSON.stringify(carrito)
+			}else{
+				var itemsToLocate = document.getElementsByClassName("itemList");
+				for (var i = 0; i < itemsToLocate.length; i++) {
+					if(itemsToLocate[i].innerHTML.includes(productoObj.nombreA) && itemsToLocate[i].innerHTML.includes(productoObj.marcaA.nombreM)){
+						itemsToLocate[i].innerHTML = productoObj.nombreA + " "+productoObj.marcaA.nombreM + " " + (Number(carrito[indexOfProducto].cantidad));
+						total = Number(parseInt(txtTotal.value)) + productoObj.precio*cantidad.value;
+						txtTotal.value = total;
+						listaCarrito.value = JSON.stringify(carrito)
+					}
+				}
+			}
+		}
+		function resetearTabla(){
+			carrito = [];
+			total=0;
+			const container = document.querySelector("#CointeinerProductos");
+			var listaCarrito = document.getElementById("listaArticulosComprar");
 			const txtTotal = document.getElementById("txtTotal");
-			total = Number(parseInt(txtTotal.value)) + productoObj.precio*cantidad.value;
-			txtTotal.value = total;
-			carrito.push({productoObj:productoObj,cantidad:cantidad.value,subtotal:Number(productoObj.precio*cantidad.value)})
-			listaCarrito.value = JSON.stringify(carrito)
+			listaCarrito.value="";
+			container.innerHTML = '';
+			txtTotal.value=0;
 		}
 	</script>
 

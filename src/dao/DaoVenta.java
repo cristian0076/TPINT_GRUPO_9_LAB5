@@ -14,4 +14,5 @@ public interface DaoVenta {
 	public List<Venta> obtenerTodasLasVentas(String modoFiltro, String textoFiltro);
 	public boolean agregarVenta(Date fecha, String id_Cliente, String id_usuario, float total);
 	public int eliminarVenta(int id);
+	public boolean actualizarVenta(int id);
 }

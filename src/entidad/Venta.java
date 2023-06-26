@@ -40,6 +40,7 @@ public class Venta {
 	private float Total_V;
 	@Autowired
 	private boolean EstadoV;
+	private boolean StockDescontadoV;
 	
 	public boolean isEstadoV() {
 		return EstadoV;
@@ -101,10 +102,23 @@ public class Venta {
 	}
 
 
+
+
+
+	public boolean isStockDescontadoV() {
+		return StockDescontadoV;
+	}
+
+
+	public void setStockDescontadoV(boolean stockDescontadoV) {
+		StockDescontadoV = stockDescontadoV;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Venta [id=" + id + ", Fecha_V=" + Fecha_V + ", Id_Cliente=" + Id_Cliente + ", Id_usuario=" + Id_usuario
-				+ ", Total_V=" + Total_V + "]";
+				+ ", Total_V=" + Total_V + ", EstadoV=" + EstadoV + ", StockDescontadoV=" + StockDescontadoV + "]";
 	}
 		
 }

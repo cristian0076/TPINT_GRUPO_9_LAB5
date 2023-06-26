@@ -69,6 +69,7 @@
 		<property name="Id_usuario" ref="UsuarioInicial"></property>
 		<property name="Total_V" value="2000"></property>
 		<property name="EstadoV" value="false"></property>
+		<property name="StockDescontadoV" value="false"></property>
 	</bean>
 
 	<bean id="MarcaInicial" class="entidad.Marca">

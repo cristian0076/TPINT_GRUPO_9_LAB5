@@ -121,5 +121,23 @@ public class ABMLVentasController {
 		MV = fetchData(MV, "0", "0", "");
 		return MV;
 	}
+	
+	@RequestMapping("ActualizarVenta_ABMLVenta.html")
+	public ModelAndView eventoActualizarVenta(int txtIDVenta) {
+		
+		ModelAndView MV = new ModelAndView();
+		try {
+			ServicioImplVentas derImplVenta = (ServicioImplVentas) appContext.getBean("serviceBeanVenta");
+			boolean seActualizo = derImplVenta.actualizarVenta(txtIDVenta);
+			
+			MV.addObject("pudoActualizarse", seActualizo);
+			MV = fetchData(MV, "0", "0", "");
+			MV.setViewName("ABMLVenta");
+
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
+		return MV;
+	}
 
 }

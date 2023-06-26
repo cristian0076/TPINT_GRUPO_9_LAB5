@@ -13,34 +13,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
 	crossorigin="anonymous">
-	
-<style>
-	.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content form {
-    padding: 8px 12px;
-}
-
-.btn-icon {
-    cursor: pointer;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-</style>
-
 </head>
 <body>
 	<f:view
-		style="width: 100%; display: flex; flex-direction: column; justify-content: center;overflow:hidden;">
+		style="width: 100%; display: flex; flex-direction: column; justify-content: center;">
 		<%
 			Usuario usuario = (Usuario) session.getAttribute("usuario");
 		%>
@@ -87,24 +63,15 @@
 				}
 			%>
 		</div>
-<div class="d-flex flex-row">
-    <div class="ml-auto">
-        <div class="dropdown">
-            <div class="btn-icon" onclick="toggleDropdown()">
-                <svg name="btnImage" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle text-white" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                </svg>
-            </div>
-            <div id="dropdownContent" class="dropdown-content">
-                <form action="Salir.html" method="post">
-                    <input type="submit" value="Cerrar Sesión" name="btnSalir" class="btn btn-link">
-                </form>
-            </div>
-        </div>
-    </div>
-    <span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
-</div>
+		<div class="d-flex flex-row">
+			<span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
+			<svg name="btnImage" xmlns="http://www.w3.org/2000/svg" width="30"
+				height="30" fill="currentColor"
+				class="bi bi-person-circle text-white" viewBox="0 0 16 16"> <path
+				d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" /> <path fill-rule="evenodd"
+				d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+			</svg>
+		</div>
 		</nav>
 		<%
 			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
@@ -149,14 +116,30 @@
 									<option value="Otro">Otro</option>
 								</select> <span>Fecha de Nac.</span> <input type="date"
 									name="txtFechaNac" value="2023-06-19"> <span>Localidad</span>
-								<input type="text" class="form-control" name="txtLocalidad"
-									placeholder="Localidad" required="required"> <span>Direccion</span>
-								<input type="text" class="form-control" name="txtDireccion"
-									placeholder="Direccion" required="required"> <span>Mail</span>
-								<input type="text" class="form-control" name="txtMail"
-									placeholder="Email del Cliente" required="required"
-									maxlength="50"> <span>Telefono</span> <input type="tel"
-									class="form-control" name="txtTelefono"
+								<select class="form-control"
+									name="txtLocalidad" required="required">
+									<option value="">Selecciona una localidad</option>
+									<option value="Buenos Aires">Buenos Aires</option>
+									<option value="La Plata">La Plata</option>
+									<option value="Mar del Plata">Mar del Plata</option>
+									<option value="Bahía Blanca">Bahía Blanca</option>
+									<option value="Quilmes">Quilmes</option>
+									<option value="Lomas de Zamora">Lomas de Zamora</option>
+									<option value="Morón">Morón</option>
+									<option value="Pilar">Pilar</option>
+									<option value="San Isidro">San Isidro</option>
+									<option value="Tigre">Tigre</option>
+									<option value="San Martín">San Martín</option>
+									<option value="San Miguel">San Miguel</option>
+									<option value="Avellaneda">Avellaneda</option>
+									<option value="Lanús">Lanús</option>
+									<option value="Berazategui">Berazategui</option>
+								</select> <span>Direccion</span> <input type="text" class="form-control"
+									name="txtDireccion" placeholder="Direccion" required="required">
+								<span>Mail</span> <input type="text" class="form-control"
+									name="txtMail" placeholder="Email del Cliente"
+									required="required" maxlength="50"> <span>Telefono</span>
+								<input type="tel" class="form-control" name="txtTelefono"
 									placeholder="Telefono del Cliente" required="required"
 									maxlength="15"
 									oninput="this.value = this.value.replace(/\D/g, '')">
@@ -201,14 +184,30 @@
 									<option value="Otro">Otro</option>
 								</select> <span>Fecha de Nac.</span> <input type="date"
 									name="txtFechaNac" value="2023-06-19"> <span>Localidad</span>
-								<input type="text" class="form-control" name="txtLocalidad"
-									placeholder="Localidad" required="required"> <span>Direccion</span>
-								<input type="text" class="form-control" name="txtDireccion"
-									placeholder="Direccion" required="required"> <span>Mail</span>
-								<input type="text" class="form-control" name="txtMail"
-									placeholder="Email del Cliente" required="required"
-									maxlength="50"> <span>Telefono</span> <input type="tel"
-									class="form-control" name="txtTelefono"
+								<select class="form-control"
+									name="txtLocalidad" required="required">
+									<option value="">Selecciona una localidad</option>
+									<option value="Buenos Aires">Buenos Aires</option>
+									<option value="La Plata">La Plata</option>
+									<option value="Mar del Plata">Mar del Plata</option>
+									<option value="Bahía Blanca">Bahía Blanca</option>
+									<option value="Quilmes">Quilmes</option>
+									<option value="Lomas de Zamora">Lomas de Zamora</option>
+									<option value="Morón">Morón</option>
+									<option value="Pilar">Pilar</option>
+									<option value="San Isidro">San Isidro</option>
+									<option value="Tigre">Tigre</option>
+									<option value="San Martín">San Martín</option>
+									<option value="San Miguel">San Miguel</option>
+									<option value="Avellaneda">Avellaneda</option>
+									<option value="Lanús">Lanús</option>
+									<option value="Berazategui">Berazategui</option>
+								</select> <span>Direccion</span> <input type="text" class="form-control"
+									name="txtDireccion" placeholder="Direccion" required="required">
+								<span>Mail</span> <input type="text" class="form-control"
+									name="txtMail" placeholder="Email del Cliente"
+									required="required" maxlength="50"> <span>Telefono</span>
+								<input type="tel" class="form-control" name="txtTelefono"
 									placeholder="Telefono del Cliente" required="required"
 									maxlength="15"
 									oninput="this.value = this.value.replace(/\D/g, '')"> <input
@@ -295,7 +294,8 @@
 								</button>
 						</span></td>
 						<td><span>
-								<form action="EliminarCliente_ABMLCliente.html" method="post">
+								<form action="EliminarCliente_ABMLCliente.html" method="post"
+									onsubmit="return confirm('¿Está seguro que desea borrar el Cliente?');">
 									<button type="submit" name="btnEliminar"
 										value="${item.getId()}" class="btn btn-danger">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -376,67 +376,49 @@
 			}
 		%>
 		<%
+			if (request.getAttribute("pudoEliminarse") != null) {
+						Integer pudoEliminarse = (Integer) request.getAttribute("pudoEliminarse");
+						if (pudoEliminarse != 0) {
+		%>
+		<div class="alert alert-success" role="alert">Se elimino
+			correctamente!</div>
+		<%
+			} else {
+		%>
+		<div class="alert alert-danger" role="alert">Error al eliminar</div>
+		<%
+			}
+					}
+		%>
+		<%
 			} else {
 					if (session.getAttribute("usuario") != null) {
 		%>
-		<meta http-equiv="refresh" content="5;url=" id="redirectMeta">
-		<title>Redireccionando...</title>
-
+		<head>
+<meta http-equiv="refresh"
+	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
+<title>Redireccionando...</title>
+		</head>
 		<h1>Redireccionando...</h1>
 		<p>Estás siendo redirigido a otra página. Si no eres redirigido
 			automáticamente, haz clic en el siguiente enlace:</p>
-		<a id="redirectionLink" href="#">Enlace de redirección</a>
-
-		<script>
-    // Obtener el dominio actual del navegador
-    var currentDomain = window.location.hostname;
-
-    // Obtener el puerto actual del navegador
-    var currentPort = window.location.port;
-
-    // Construir la URL de redirección con el dominio y el puerto actuales
-    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html';
-
-    // Obtener una referencia al elemento meta
-    var metaElement = document.getElementById('redirectMeta');
-
-    // Modificar el contenido del atributo "content" del meta tag
-    metaElement.setAttribute('content', '5;url=' + redirectionUrl);
-
-    // Actualizar el enlace de redirección con la URL dinámica
-    document.getElementById('redirectionLink').href = redirectionUrl;
-  </script>
+		<a
+			href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace
+			de redirección</a>
 		<%
 			} else {
 		%>
 
-
-		<meta http-equiv="refresh" content="0;url=" id="redirectMeta">
-		<title>Redireccionando...</title>
+		<head>
+<meta http-equiv="refresh"
+	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
+<title>Redireccionando...</title>
+		</head>
 		<h1>Redireccionando...</h1>
 		<p>Estás siendo redirigido a otra página. Si no eres redirigido
 			automáticamente, haz clic en el siguiente enlace:</p>
-		<a id="redirectionLink" href="#">Enlace de redirección</a>
-
-		<script>
-    // Obtener el dominio actual del navegador
-    var currentDomain = window.location.hostname;
-
-    // Obtener el puerto actual del navegador
-    var currentPort = window.location.port;
-
-    // Construir la URL de redirección con el dominio y el puerto actuales
-    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/';
-
-    // Obtener una referencia al elemento meta
-    var metaElement = document.getElementById('redirectMeta');
-
-    // Modificar el contenido del atributo "content" del meta tag
-    metaElement.setAttribute('content', '0;url=' + redirectionUrl);
-
-    // Actualizar el enlace de redirección con la URL dinámica
-    document.getElementById('redirectionLink').href = redirectionUrl;
-  </script>
+		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/">Enlace de
+			redirección</a>
 		<%
 			}
 				}
@@ -449,7 +431,6 @@
 		</div>
 		</footer>
 	</f:view>
-	
 
 	<script type="text/javascript">
 	function cargarDatos(id, dni, nombre, apellido, sexo ,fechaNac, direccion, localidad, mail, telefono){
@@ -459,7 +440,7 @@
 		$('input[name="txtApellido"]').val(apellido);
 		$('input[name="txtSexo"]').val(sexo);
 		$('input[name="txtFechaNac"]').val(fechaNac.slice(0,10));
-		$('input[name="txtLocalidad"]').val(localidad);
+		$('select[name="txtLocalidad"]').val(localidad);
 		$('input[name="txtDireccion"]').val(direccion);
 		$('input[name="txtMail"]').val(mail);
 		$('input[name="txtTelefono"]').val(telefono);
@@ -517,6 +498,5 @@
 		crossorigin="anonymous"></script>
 
 </body>
-
 
 </html>
