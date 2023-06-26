@@ -13,10 +13,34 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
 	crossorigin="anonymous">
+	
+<style>
+	.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content form {
+    padding: 8px 12px;
+}
+
+.btn-icon {
+    cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
+
 </head>
 <body>
 	<f:view
-		style="width: 100%; display: flex; flex-direction: column; justify-content: center;">
+		style="width: 100%; display: flex; flex-direction: column; justify-content: center;overflow:hidden;">
 		<%
 			Usuario usuario = (Usuario) session.getAttribute("usuario");
 		%>
@@ -63,15 +87,24 @@
 				}
 			%>
 		</div>
-		<div class="d-flex flex-row">
-			<span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
-			<svg name="btnImage" xmlns="http://www.w3.org/2000/svg" width="30"
-				height="30" fill="currentColor"
-				class="bi bi-person-circle text-white" viewBox="0 0 16 16"> <path
-				d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" /> <path fill-rule="evenodd"
-				d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-			</svg>
-		</div>
+<div class="d-flex flex-row">
+    <div class="ml-auto">
+        <div class="dropdown">
+            <div class="btn-icon" onclick="toggleDropdown()">
+                <svg name="btnImage" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle text-white" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                </svg>
+            </div>
+            <div id="dropdownContent" class="dropdown-content">
+                <form action="Salir.html" method="post">
+                    <input type="submit" value="Cerrar Sesión" name="btnSalir" class="btn btn-link">
+                </form>
+            </div>
+        </div>
+    </div>
+    <span class="text-white mr-3 font-weight-bold ml-2">${usuario.getEmpleadoU().getNombreE()}</span>
+</div>
 		</nav>
 		<%
 			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
@@ -375,6 +408,7 @@
 		</div>
 		</footer>
 	</f:view>
+	
 
 	<script type="text/javascript">
 	function cargarDatos(id, dni, nombre, apellido, sexo ,fechaNac, direccion, localidad, mail, telefono){
@@ -442,5 +476,6 @@
 		crossorigin="anonymous"></script>
 
 </body>
+
 
 </html>
