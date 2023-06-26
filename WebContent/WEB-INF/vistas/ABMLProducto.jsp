@@ -155,7 +155,7 @@
 									<c:forEach var="marca" items="${Marcas}">
 										<option value="${marca.id}">${marca.nombreM}</option>
 									</c:forEach>
-								</select> <span>Precio</span> <input type="number" class="form-control"
+								</select> <span>Precio</span> <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="9" class="form-control"
 									name="txtPrecio" placeholder="Precio Producto"
 									required="required" min="1" max="100000">
 							</div>
@@ -225,7 +225,7 @@
 								<c:forEach var="marca" items="${Marcas}">
 									<option value="${marca.id}">${marca.nombreM}</option>
 								</c:forEach>
-							</select> <span>Precio</span> <input type="number" class="form-control"
+							</select> <span>Precio</span> <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="9" class="form-control"
 								name="txtPrecioM" placeholder="Precio Producto"
 								required="required" min="1" max="100000"> <input hidden name="id_M">
 						</div>
