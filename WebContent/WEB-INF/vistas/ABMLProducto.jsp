@@ -73,7 +73,6 @@
 				d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
 			</svg>
 		</div>
-
 		</nav>
 		<%
 			if (session.getAttribute("usuario") != null && usuario.getTipoCuentaU().getId() == 1) {
@@ -322,26 +321,41 @@
 			} else {
 					if (session.getAttribute("usuario") != null) {
 		%>
-		<head>
-<meta http-equiv="refresh"
-	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
-<title>Redireccionando...</title>
-		</head>
-		<h1>Redireccionando...</h1>
-		<p>Estás siendo redirigido a otra página. Si no eres redirigido
-			automáticamente, haz clic en el siguiente enlace:</p>
-		<a
-			href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace
-			de redirección</a>
+		
+
+  <meta http-equiv="refresh" content="0;url=" id="redirectMeta">
+  <title>Redireccionando...</title>
+
+  <h1>Redireccionando...</h1>
+  <p>Estás siendo redirigido a otra página. Si no eres redirigido automáticamente, haz clic en el siguiente enlace:</p>
+  <a id="redirectionLink" href="#">Enlace de redirección</a>
+
+  <script>
+    // Obtener el dominio actual del navegador
+    var currentDomain = window.location.hostname;
+
+    // Obtener el puerto actual del navegador
+    var currentPort = window.location.port;
+
+    // Construir la URL de redirección con el dominio y el puerto actuales
+    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html';
+
+    // Obtener una referencia al elemento meta
+    var metaElement = document.getElementById('redirectMeta');
+
+    // Modificar el contenido del atributo "content" del meta tag
+    metaElement.setAttribute('content', '0;url=' + redirectionUrl);
+
+    // Actualizar el enlace de redirección con la URL dinámica
+    document.getElementById('redirectionLink').href = redirectionUrl;
+  </script>
+
 		<%
 			} else {
 		%>
 
-<head>
   <meta http-equiv="refresh" content="5;url=" id="redirectMeta">
   <title>Redireccionando...</title>
-</head>
-<body>
   <h1>Redireccionando...</h1>
   <p>Estás siendo redirigido a otra página. Si no eres redirigido automáticamente, haz clic en el siguiente enlace:</p>
   <a id="redirectionLink" href="#">Enlace de redirección</a>
@@ -365,7 +379,6 @@
     // Actualizar el enlace de redirección con la URL dinámica
     document.getElementById('redirectionLink').href = redirectionUrl;
   </script>
-</body>
 		<%
 			}
 				}
@@ -418,7 +431,7 @@
 		}
 		
     }
-	</script>
+	</script>	
 	<script type="text/javascript">
 	const ddls = document.getElementsByClassName("ddlFiltroProducto");
 	const inputs = document.getElementsByClassName("txtFiltroProducto");

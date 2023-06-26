@@ -125,8 +125,9 @@
 						<form action="AgregarVenta_ABMLVenta.html" method="post"
 							id="resetForm">
 							<div class="modal-body">
-								<span>Fecha: </span> <input type="text" style="pointer-events: none; user-select: none;border: 0;" name="txtFechaVentA"
-									 id="fechaActual"> <br> <br>
+								<span>Fecha: </span> <input type="text"
+									style="pointer-events: none; user-select: none; border: 0;"
+									name="txtFechaVentA" id="fechaActual"> <br> <br>
 								<span>Cliente</span> <select class="form-control"
 									name="txtCliente" required="required" id="txtCliente">
 									<c:forEach var="client" items="${clientes}">
@@ -141,9 +142,10 @@
 											$${prod.isPrecioUnitario()}</option>
 									</c:forEach>
 								</select> <span>Cantidad</span> <input style="Width: 90px; height: 35px"
-									type="number" value="1" name="txtCantidadProdA" 
-									id="txtCantidad" onchange="if(value<0) value=0; if(value>1000) value=1000;"> <input
-									name="txtUsuario" value="${usuario.getId()}" hidden>
+									type="number" value="1" name="txtCantidadProdA"
+									id="txtCantidad"
+									onchange="if(value<0) value=0; if(value>1000) value=1000;">
+								<input name="txtUsuario" value="${usuario.getId()}" hidden>
 								<button type="button" class="btn btn-primary my-3 w-[30px]"
 									onClick="cargarTabla()">
 									<span aria-hidden="true">Agregar</span>
@@ -154,8 +156,8 @@
 
 								</ul>
 								<span>Total: $<input name="txtTotal"
-									style="pointer-events: none; user-select: none;border: 0;" id="txtTotal"
-									value="0"></span></span>
+									style="pointer-events: none; user-select: none; border: 0;"
+									id="txtTotal" value="0"></span></span>
 							</div>
 
 							<div class="modal-footer">
@@ -163,11 +165,11 @@
 									ArrayList<Articulo> listaArticulosComprar = new ArrayList<Articulo>();
 								%>
 								<input name="listaArticulosComprar" id="listaArticulosComprar"
-									value="${listaArticulosComprar }" hidden>
-								<a class="btn btn-danger"  href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_ABMLVentas.html"
-									 onclick="resetForm()">Cerrar</a>
-								<input type="submit" value="Guardar" class="btn btn-success"
-									name="btnGuardar">
+									value="${listaArticulosComprar }" hidden> <a
+									class="btn btn-danger"
+									href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_ABMLVentas.html"
+									onclick="resetForm()">Cerrar</a> <input type="submit"
+									value="Guardar" class="btn btn-success" name="btnGuardar">
 							</div>
 						</form>
 					</div>
@@ -284,31 +286,62 @@
 			} else {
 					if (session.getAttribute("usuario") != null) {
 		%>
-		<head>
-<meta http-equiv="refresh"
-	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
-<title>Redireccionando...</title>
-		</head>
+		<meta http-equiv="refresh" content="5;url=" id="redirectMeta">
+		<title>Redireccionando...</title>
+
 		<h1>Redireccionando...</h1>
 		<p>Estás siendo redirigido a otra página. Si no eres redirigido
 			automáticamente, haz clic en el siguiente enlace:</p>
-		<a
-			href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace
-			de redirección</a>
+		<a id="redirectionLink" href="#">Enlace de redirección</a>
+
+		<script>
+    // Obtener el dominio actual del navegador
+    var currentDomain = window.location.hostname;
+
+    // Obtener el puerto actual del navegador
+    var currentPort = window.location.port;
+
+    // Construir la URL de redirección con el dominio y el puerto actuales
+    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html';
+
+    // Obtener una referencia al elemento meta
+    var metaElement = document.getElementById('redirectMeta');
+
+    // Modificar el contenido del atributo "content" del meta tag
+    metaElement.setAttribute('content', '5;url=' + redirectionUrl);
+
+    // Actualizar el enlace de redirección con la URL dinámica
+    document.getElementById('redirectionLink').href = redirectionUrl;
+  </script>
 		<%
 			} else {
 		%>
-
-		<head>
-<meta http-equiv="refresh"
-	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
-<title>Redireccionando...</title>
-		</head>
+		<meta http-equiv="refresh" content="0;url=" id="redirectMeta">
+		<title>Redireccionando...</title>
 		<h1>Redireccionando...</h1>
 		<p>Estás siendo redirigido a otra página. Si no eres redirigido
 			automáticamente, haz clic en el siguiente enlace:</p>
-		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/">Enlace de
-			redirección</a>
+		<a id="redirectionLink" href="#">Enlace de redirección</a>
+
+		<script>
+    // Obtener el dominio actual del navegador
+    var currentDomain = window.location.hostname;
+
+    // Obtener el puerto actual del navegador
+    var currentPort = window.location.port;
+
+    // Construir la URL de redirección con el dominio y el puerto actuales
+    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/';
+
+    // Obtener una referencia al elemento meta
+    var metaElement = document.getElementById('redirectMeta');
+
+    // Modificar el contenido del atributo "content" del meta tag
+    metaElement.setAttribute('content', '0;url=' + redirectionUrl);
+
+    // Actualizar el enlace de redirección con la URL dinámica
+    document.getElementById('redirectionLink').href = redirectionUrl;
+  </script>
 		<%
 			}
 				}

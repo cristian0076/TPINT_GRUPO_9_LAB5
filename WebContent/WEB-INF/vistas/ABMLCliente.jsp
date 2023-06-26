@@ -103,13 +103,14 @@
 							id="resetForm">
 							<div class="modal-body">
 								<span>DNI</span> <input type="text" class="form-control"
-									name="txtDni" placeholder="DNI Cliente" required="required" maxlength="10">
-								<span>Nombre</span> <input type="text" class="form-control"
-									name="txtNombre" placeholder="Nombre Cliente"
-									required="required" maxlength="20"> <span>Apellido</span> <input
-									type="text" class="form-control" name="txtApellido"
-									placeholder="Apellido Cliente" required="required" maxlength="20"> <span>Sexo</span>
-								<select class="custom-select" name="txtSexo">
+									name="txtDni" placeholder="DNI Cliente" required="required"
+									maxlength="10"> <span>Nombre</span> <input type="text"
+									class="form-control" name="txtNombre"
+									placeholder="Nombre Cliente" required="required" maxlength="20">
+								<span>Apellido</span> <input type="text" class="form-control"
+									name="txtApellido" placeholder="Apellido Cliente"
+									required="required" maxlength="20"> <span>Sexo</span> <select
+									class="custom-select" name="txtSexo">
 									<option selected value="Masculino">Masculino</option>
 									<option value="Femenino">Femenino</option>
 									<option value="Otro">Otro</option>
@@ -120,9 +121,12 @@
 								<input type="text" class="form-control" name="txtDireccion"
 									placeholder="Direccion" required="required"> <span>Mail</span>
 								<input type="text" class="form-control" name="txtMail"
-									placeholder="Email del Cliente" required="required" maxlength="50"> <span>Telefono</span>
-								<input type="tel" class="form-control" name="txtTelefono"
-									placeholder="Telefono del Cliente" required="required" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '')">
+									placeholder="Email del Cliente" required="required"
+									maxlength="50"> <span>Telefono</span> <input type="tel"
+									class="form-control" name="txtTelefono"
+									placeholder="Telefono del Cliente" required="required"
+									maxlength="15"
+									oninput="this.value = this.value.replace(/\D/g, '')">
 							</div>
 							<div class="modal-footer">
 								<button class="btn btn-danger" data-dismiss="modal" type="reset"
@@ -151,13 +155,14 @@
 						<form action="ModificarCliente_ABMLCliente.html" method="post">
 							<div class="modal-body">
 								<span>DNI</span> <input type="text" class="form-control"
-									name="txtDni" placeholder="DNI Cliente" required="required" maxlength="10">
-								<span>Nombre</span> <input type="text" class="form-control"
-									name="txtNombre" placeholder="Nombre Cliente"
-									required="required" maxlength="20"> <span>Apellido</span> <input
-									type="text" class="form-control" name="txtApellido"
-									placeholder="Apellido Cliente" required="required" maxlength="20"> <span>Sexo</span>
-								<select class="custom-select" name="txtSexo">
+									name="txtDni" placeholder="DNI Cliente" required="required"
+									maxlength="10"> <span>Nombre</span> <input type="text"
+									class="form-control" name="txtNombre"
+									placeholder="Nombre Cliente" required="required" maxlength="20">
+								<span>Apellido</span> <input type="text" class="form-control"
+									name="txtApellido" placeholder="Apellido Cliente"
+									required="required" maxlength="20"> <span>Sexo</span> <select
+									class="custom-select" name="txtSexo">
 									<option selected value="Masculino">Masculino</option>
 									<option value="Femenino">Femenino</option>
 									<option value="Otro">Otro</option>
@@ -168,10 +173,13 @@
 								<input type="text" class="form-control" name="txtDireccion"
 									placeholder="Direccion" required="required"> <span>Mail</span>
 								<input type="text" class="form-control" name="txtMail"
-									placeholder="Email del Cliente" required="required" maxlength="50"> <span>Telefono</span>
-								<input type="tel" class="form-control" name="txtTelefono"
-									placeholder="Telefono del Cliente" required="required" maxlength="15" oninput="this.value = this.value.replace(/\D/g, '')">
-								<input type="hidden" name="id_C">
+									placeholder="Email del Cliente" required="required"
+									maxlength="50"> <span>Telefono</span> <input type="tel"
+									class="form-control" name="txtTelefono"
+									placeholder="Telefono del Cliente" required="required"
+									maxlength="15"
+									oninput="this.value = this.value.replace(/\D/g, '')"> <input
+									type="hidden" name="id_C">
 							</div>
 							<div class="modal-footer">
 								<button class="btn btn-danger" data-dismiss="modal" type="reset"
@@ -338,31 +346,64 @@
 			} else {
 					if (session.getAttribute("usuario") != null) {
 		%>
-		<head>
-<meta http-equiv="refresh"
-	content="0;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">
-<title>Redireccionando...</title>
-		</head>
+		<meta http-equiv="refresh" content="5;url=" id="redirectMeta">
+		<title>Redireccionando...</title>
+
 		<h1>Redireccionando...</h1>
 		<p>Estás siendo redirigido a otra página. Si no eres redirigido
 			automáticamente, haz clic en el siguiente enlace:</p>
-		<a
-			href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html">Enlace
-			de redirección</a>
+		<a id="redirectionLink" href="#">Enlace de redirección</a>
+
+		<script>
+    // Obtener el dominio actual del navegador
+    var currentDomain = window.location.hostname;
+
+    // Obtener el puerto actual del navegador
+    var currentPort = window.location.port;
+
+    // Construir la URL de redirección con el dominio y el puerto actuales
+    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/Redireccionar_IndexGeneral.html';
+
+    // Obtener una referencia al elemento meta
+    var metaElement = document.getElementById('redirectMeta');
+
+    // Modificar el contenido del atributo "content" del meta tag
+    metaElement.setAttribute('content', '5;url=' + redirectionUrl);
+
+    // Actualizar el enlace de redirección con la URL dinámica
+    document.getElementById('redirectionLink').href = redirectionUrl;
+  </script>
 		<%
 			} else {
 		%>
 
-		<head>
-<meta http-equiv="refresh"
-	content="5;url=http://localhost:8101/TPINT_GRUPO_9_LAB5/">
-<title>Redireccionando...</title>
-		</head>
+
+		<meta http-equiv="refresh" content="0;url=" id="redirectMeta">
+		<title>Redireccionando...</title>
 		<h1>Redireccionando...</h1>
 		<p>Estás siendo redirigido a otra página. Si no eres redirigido
 			automáticamente, haz clic en el siguiente enlace:</p>
-		<a href="http://localhost:8101/TPINT_GRUPO_9_LAB5/">Enlace de
-			redirección</a>
+		<a id="redirectionLink" href="#">Enlace de redirección</a>
+
+		<script>
+    // Obtener el dominio actual del navegador
+    var currentDomain = window.location.hostname;
+
+    // Obtener el puerto actual del navegador
+    var currentPort = window.location.port;
+
+    // Construir la URL de redirección con el dominio y el puerto actuales
+    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/';
+
+    // Obtener una referencia al elemento meta
+    var metaElement = document.getElementById('redirectMeta');
+
+    // Modificar el contenido del atributo "content" del meta tag
+    metaElement.setAttribute('content', '0;url=' + redirectionUrl);
+
+    // Actualizar el enlace de redirección con la URL dinámica
+    document.getElementById('redirectionLink').href = redirectionUrl;
+  </script>
 		<%
 			}
 				}
