@@ -172,7 +172,7 @@
 									<option value="Lanús">Lanús</option>
 									<option value="Berazategui">Berazategui</option>
 								</select> <span>Direccion</span> <input type="text" class="form-control"
-									name="txtDireccion" placeholder="Direccion" required="required">
+									name="txtDireccion" placeholder="Direccion" required="required" maxlength="20">
 								<span>Mail</span> <input type="text" class="form-control"
 									name="txtMail" placeholder="Email del Cliente"
 									required="required" maxlength="50"> <span>Telefono</span>
@@ -312,7 +312,7 @@
 						<td><span>${item.getNombre_C() }</span></td>
 						<td><span>${item.getApellido_C() }</span></td>
 						<td><span>${item.getSexo_C() }</span></td>
-						<td><span>${item.getFecha_Nacimiento_C().getDate()}/${item.getFecha_Nacimiento_C().getMonth() + 1}//${item.getFecha_Nacimiento_C().getYear()+1900 }</span></td>
+						<td><span>${item.getFecha_Nacimiento_C().getDate()}/${item.getFecha_Nacimiento_C().getMonth() + 1}/${item.getFecha_Nacimiento_C().getYear()+1900 }</span></td>
 						<td><span>${item.getDireccion_C() }</span></td>
 						<td><span>${item.getLocalidad_C() }</span></td>
 						<td><span>${item.getMail_C() }</span></td>
