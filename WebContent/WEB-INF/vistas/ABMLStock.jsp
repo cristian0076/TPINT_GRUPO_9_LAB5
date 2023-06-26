@@ -139,10 +139,10 @@
 										${prod.marcaA.nombreM}</option>
 								</c:forEach>
 							</select> <span>Cantidad</span> <input type="number" class="form-control"
-								name="txtCantidad" placeholder="Cantidad" required="required">
+								name="txtCantidad" placeholder="Cantidad" required="required" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="9">
 							<span>Precio de compra</span> <input type="number"
 								class="form-control" name="txtPrecioC" placeholder="Precio"
-								required="required"> <span>Fecha de vencimiento</span> <input
+								required="required" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="9"> <span>Fecha de vencimiento</span> <input
 								type="date" class="form-control" name="txtVencimiento"
 								id="txtVencimiento" placeholder="Vencimiento"
 								required="required" oninput="validateDate(this)">

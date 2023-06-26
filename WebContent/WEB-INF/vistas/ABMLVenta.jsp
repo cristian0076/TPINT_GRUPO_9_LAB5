@@ -181,7 +181,7 @@
 								</select> <span>Cantidad</span> <input style="Width: 90px; height: 35px"
 									type="number" value="1" name="txtCantidadProdA"
 									id="txtCantidad"
-									onchange="if(value<0) value=0; if(value>1000) value=1000;">
+									onchange="if(value<0) value=0; if(value>1000) value=1000;" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">
 								<input name="txtUsuario" value="${usuario.getId()}" hidden>
 								<button type="button" class="btn btn-primary my-3 w-[30px]"
 									onClick="cargarTabla()">
@@ -210,7 +210,7 @@
 								<input name="listaArticulosComprar" id="listaArticulosComprar"
 									value="${listaArticulosComprar }" hidden required> <a
 									class="btn btn-danger"
-									href="http://localhost:8101/TPINT_GRUPO_9_LAB5/Redireccionar_ABMLVentas.html"
+									id= "btnCerrarAgregar"
 									onclick="resetForm()">Cerrar</a> <input type="submit"
 									value="Guardar" class="btn btn-success" name="btnGuardar">
 							</div>
@@ -570,7 +570,22 @@
         var element = document.getElementById("resetForm");
          element.reset()
       }
+      
    </script>
+   		<script>
+    // Obtener el dominio actual del navegador
+    var currentDomain = window.location.hostname;
+
+    // Obtener el puerto actual del navegador
+    var currentPort = window.location.port;
+
+    // Construir la URL de redirecci�n con el dominio y el puerto actuales
+    var redirectionUrl = 'http://' + currentDomain + ':' + currentPort + '/TPINT_GRUPO_9_LAB5/Redireccionar_ABMLVentas.html';
+    // Obtener una referencia al elemento meta
+    var metaElement = document.getElementById('btnCerrarAgregar');
+     metaElement.setAttribute('href',redirectionUrl);
+  </script>
+  
 	<!--Obligatorio-->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

@@ -196,6 +196,9 @@ public class ServicioImplVentasDao implements DaoVenta  {
 				}
 			}
 			//Si todo sale bien ejecuto pa y actualizo el estado de la venta
+			if(sinProblemas) {
+				
+			
 			for (VentaArticulo ventaArticulo : listaVentas) {
 				// Crea la consulta nativa
 				Query query = session.createSQLQuery("CALL DescontarStockVenta(:pCantidadVA, :pArticuloVA)");
@@ -210,6 +213,7 @@ public class ServicioImplVentasDao implements DaoVenta  {
 				String hql = "UPDATE Venta v SET v.StockDescontadoV = 1 WHERE v.id = :id";
 
 				session.createQuery(hql).setParameter("id", id).executeUpdate();
+			 }
 			}
 			
 			session.getTransaction().commit();
