@@ -1,5 +1,8 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,5 +17,17 @@ public class GeneralController {
 		MV.setViewName("Index");
 		return MV;
 	}
+	@RequestMapping("Salir.html")
+    public ModelAndView eventoRedireccionarSalir(HttpServletRequest request, String btnSalir)
+    {
+        System.out.println("holitas");
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // Cierra la sesión y elimina los datos almacenados
+        }
+        ModelAndView MV = new ModelAndView();
+        MV.setViewName("Login");
+        return MV;
+    }
 
 }

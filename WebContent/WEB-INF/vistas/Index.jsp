@@ -64,6 +64,11 @@
 			<%} %>
 		</div>
 	</div>
+	<div class="ml-auto">
+    <form action="Salir.html" method="post">
+        <input type="submit" value="Cerrar Sesion" name="btnSalir" class="btn btn-link text-white">
+    </form>
+    </div>
 	<%
 		}
 	%> </nav>
