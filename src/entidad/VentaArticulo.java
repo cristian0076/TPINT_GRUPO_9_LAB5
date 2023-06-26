@@ -19,20 +19,13 @@ public class VentaArticulo {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Autowired
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name="ventaVA")
 	private Venta ventaVA;
-	
-	@Autowired
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name="articuloVA")
 	private Articulo articuloVA;
-	
-	@Autowired
 	private int cantidadVA;
-	@Autowired
 	private float subtotalVA;
 
 	public VentaArticulo() {

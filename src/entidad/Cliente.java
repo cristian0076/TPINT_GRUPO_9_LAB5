@@ -22,25 +22,15 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Autowired
 	private String DNI_C;
-	@Autowired
 	private String Nombre_C;
-	@Autowired
 	private String Apellido_C;
-	@Autowired
 	private String Sexo_C;
-	@Autowired
 	private Date Fecha_Nacimiento_C;
-	@Autowired
 	private String Direccion_C;
-	@Autowired
 	private String Localidad_C;
-	@Autowired
 	private String Mail_C;
-	@Autowired
 	private String Telefono_C;
-	@Autowired
 	private boolean EstadoC;
 
 	public boolean isEstadoC() {

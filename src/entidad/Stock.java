@@ -30,10 +30,8 @@ public class Stock {
     @Column(name = "cantidad")
     private int cantidad;
     @Column(name = "precioCompra")
-    private double precioCompra;
-    @Autowired
-	private boolean EstadoS;
-    @Autowired
+    private double precioCompra;    
+	private boolean EstadoS;    
 	private Date FechaVencimientoS;
 
   

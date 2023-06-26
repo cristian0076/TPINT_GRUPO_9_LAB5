@@ -16,12 +16,9 @@ public class Tipo {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Autowired
-	private String nombre;
-	@Autowired
-	private String descripcion;
-	@Autowired
+	private int id;	
+	private String nombre;	
+	private String descripcion;	
 	private boolean status;
 	
 	public Tipo() {

@@ -19,29 +19,17 @@ public class Empleado {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Autowired
 	private String legajoE;
-	@Autowired
 	private String dniE;
-	@Autowired
 	private String nombreE;
-	@Autowired
 	private String apellidoE;
-	@Autowired
 	private String sexoE;
-	@Autowired
 	private Date fechaNacimientoE;
-	@Autowired
 	private String direccionE;
-	@Autowired
 	private String localidadE;
-	@Autowired
 	private String mailE;
-	@Autowired
 	private String telefonoE;
-	@Autowired
 	private boolean EstadoE;
-
 	public boolean isEstadoE() {
 		return EstadoE;
 	}

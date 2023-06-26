@@ -26,19 +26,14 @@ public class Venta {
 	@Column(name = "ID_V")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Autowired
 	private Date Fecha_V;
-	@Autowired
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name="ID_Cliente_V")
 	private Cliente Id_Cliente;
-	@Autowired
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name="ID_Usuario_V")
 	private Usuario Id_usuario;
-	@Autowired
 	private float Total_V;
-	@Autowired
 	private boolean EstadoV;
 	private boolean StockDescontadoV;
 	

@@ -20,20 +20,15 @@ public class Usuario {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Autowired
-	private String usuarioU;
-	@Autowired
+	private int id;	
+	private String usuarioU;	
 	private String contraseniaU;
-	@Autowired
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name="empleadoU")
 	private Empleado empleadoU;
-	@Autowired
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name="tipoCuentaU")
 	private TipoCuenta tipoCuentaU;
-	@Autowired
 	private boolean EstadoU;
 
 	public boolean isEstadoU() {

@@ -15,12 +15,9 @@ public class Marca {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Autowired
-	private String nombreM;
-	@Autowired
-	private String descripcionM;
-	@Autowired
+	private int id;	
+	private String nombreM;	
+	private String descripcionM;	
 	private boolean EstadoM;
 
 

@@ -16,12 +16,10 @@ public class TipoCuenta {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Autowired
-	private String descripcionT;
-	@Autowired
+	private int id;	
+	private String descripcionT;	
 	private boolean EstadoT;
-
+	
 	public boolean isEstadoT() {
 		return EstadoT;
 	}

@@ -19,22 +19,16 @@ public class Articulo {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Autowired
 	private String nombreA;
-	@Autowired
 	private String descripcionA;
-	
-	@Autowired
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name="marcaA")
 	private Marca marcaA;
-	@Autowired
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name="TipoA")
 	private Tipo tipoA;
 	private float PrecioUnitario;
 
-	@Autowired
 	private boolean status; // 0 inactivo, 1 activo
 	
 	public float isPrecioUnitario() {
