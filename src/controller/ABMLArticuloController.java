@@ -25,7 +25,7 @@ public class ABMLArticuloController {
 
 	@RequestMapping("Redireccionar_ABMLProducto.html")
 	public ModelAndView eventoRedireccionarProducto(String btnPagina, HttpServletRequest request,String ddlFiltroProducto, String txtFiltroProducto) {
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		if(ddlFiltroProducto==null)
 			ddlFiltroProducto="0";
 		if(txtFiltroProducto==null)
@@ -37,7 +37,7 @@ public class ABMLArticuloController {
 	@RequestMapping("AgregarProducto_ABMLProducto.html")
 	public ModelAndView eventoAgregarProducto(String txtNombre, String txtDescripcion, String txtTipo,
 			String txtMarca,int txtPrecio) {
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
 		boolean estado = derImplArticulo.agregarArticulo(txtNombre, txtDescripcion, txtTipo, txtMarca,txtPrecio);
 		MV.addObject("pudoAgregarse", estado);
@@ -55,7 +55,7 @@ public class ABMLArticuloController {
 	public ModelAndView eventoEliminarProducto(int btnEliminar) {
 
 		int id = btnEliminar;
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
 		int estado = derImplArticulo.eliminarArticulo(id);
 		MV.addObject("pudoEliminarse", estado);
@@ -72,7 +72,7 @@ public class ABMLArticuloController {
 	@RequestMapping("ModificarProducto_ABMLProducto.html")
 	public ModelAndView eventoModificarProducto(int id_M, String txtNombreM, String txtDescripcionM, String txtTipoM,
 			String txtMarcaM, int txtPrecioM) {
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
 		int estado = derImplArticulo.modificarArticulo(id_M, txtNombreM, txtDescripcionM, txtTipoM, txtMarcaM,txtPrecioM);
 		MV.addObject("pudoModificarse", estado);

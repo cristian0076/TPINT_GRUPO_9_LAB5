@@ -37,7 +37,7 @@ public class ABMLVentasController {
 	@RequestMapping("Redireccionar_ABMLVentas.html")
 	public ModelAndView eventoRedireccionarProducto(String btnPagina, HttpServletRequest request,
 			String ddlFiltroVenta, String txtFiltroVenta) {
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		if (ddlFiltroVenta == null)
 			ddlFiltroVenta = "0";
 		if (txtFiltroVenta == null)
@@ -73,7 +73,7 @@ public class ABMLVentasController {
 	public ModelAndView eventoAgregarVenta(String txtFechaVentA, String txtCliente, String txtTotal,
 			String txtUsuario,String listaArticulosComprar) {
 		
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		try {
 
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
@@ -114,7 +114,7 @@ public class ABMLVentasController {
 	public ModelAndView eventoEliminarVenta(int btnEliminar) {
 
 		int id = btnEliminar;
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		ServicioImplVentas derImplVenta = (ServicioImplVentas) appContext.getBean("serviceBeanVenta");
 		int estado = derImplVenta.eliminarVenta(id);
 		MV.addObject("pudoEliminarse", estado);
@@ -125,7 +125,7 @@ public class ABMLVentasController {
 	@RequestMapping("ActualizarVenta_ABMLVenta.html")
 	public ModelAndView eventoActualizarVenta(int txtIDVenta) {
 		
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		try {
 			ServicioImplVentas derImplVenta = (ServicioImplVentas) appContext.getBean("serviceBeanVenta");
 			boolean seActualizo = derImplVenta.actualizarVenta(txtIDVenta);

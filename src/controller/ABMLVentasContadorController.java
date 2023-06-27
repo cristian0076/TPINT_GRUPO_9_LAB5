@@ -32,7 +32,7 @@ public class ABMLVentasContadorController {
 	@RequestMapping("Redireccionar_ABMLVentaContador.html")
 	public ModelAndView eventoRedireccionarProducto(String btnPagina, HttpServletRequest request,
 			String txtFiltroVentaContadorInicio, String txtFiltroVentaContadorFin) {
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		MV = fetchData(MV, btnPagina, txtFiltroVentaContadorInicio, txtFiltroVentaContadorFin);
 		return MV;
 	}
@@ -63,7 +63,6 @@ public class ABMLVentasContadorController {
 						if (ventaArticulo.getVentaVA().getId() == venta.getId()) {
 							for (TablaTemporal itemTablaTemporal : tablaTemporal) {
 								if (itemTablaTemporal.getId() == ventaArticulo.getId()) {
-									System.out.println(itemTablaTemporal);
 									sumaCompra += itemTablaTemporal.getSumaPrecio();
 								}
 							}

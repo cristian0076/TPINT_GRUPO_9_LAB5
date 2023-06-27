@@ -22,7 +22,7 @@ public class ABMLClienteController {
 	@RequestMapping("Redireccionar_ABMLCliente.html")
 	public ModelAndView eventoRedireccionarCliente(String btnPagina, HttpServletRequest request,
 			String ddlFiltroCliente, String txtFiltroCliente) {
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		if (ddlFiltroCliente == null)
 			ddlFiltroCliente = "0";
 		if (txtFiltroCliente == null)
@@ -35,19 +35,19 @@ public class ABMLClienteController {
 	public ModelAndView eventoAgregarCliente(String txtDni, String txtNombre, String txtApellido, String txtDireccion,
 			String txtFechaNac, String txtLocalidad, String txtMail, String txtSexo, String txtTelefono) {
 		try {
-		ModelAndView MV = new ModelAndView();
-		AtSymbolNotFoundException excepcion = new AtSymbolNotFoundException(txtMail);
-		excepcion.validateAtSymbol(txtMail);
-		
-		ServicioImplCliente derImplCliente = (ServicioImplCliente) appContext.getBean("serviceBeanCliente");
-		boolean estado = derImplCliente.agregarCliente(txtDni, txtNombre, txtApellido, txtDireccion, txtFechaNac,
-				txtLocalidad, txtMail, txtSexo, txtTelefono);
-		
-		MV.addObject("pudoAgregarse", estado);
-		MV = fetchData(MV, "0", "0", "");
-		return MV;}
-		catch(Exception e) {
-			ModelAndView MV = new ModelAndView();
+			ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
+			AtSymbolNotFoundException excepcion = new AtSymbolNotFoundException(txtMail);
+			excepcion.validateAtSymbol(txtMail);
+
+			ServicioImplCliente derImplCliente = (ServicioImplCliente) appContext.getBean("serviceBeanCliente");
+			boolean estado = derImplCliente.agregarCliente(txtDni, txtNombre, txtApellido, txtDireccion, txtFechaNac,
+					txtLocalidad, txtMail, txtSexo, txtTelefono);
+
+			MV.addObject("pudoAgregarse", estado);
+			MV = fetchData(MV, "0", "0", "");
+			return MV;
+		} catch (Exception e) {
+			ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 			MV.addObject("MensajeError", e.getMessage());
 			MV.addObject("pudoAgregarse", false);
 			MV = fetchData(MV, "0", "0", "");
@@ -59,7 +59,7 @@ public class ABMLClienteController {
 	public ModelAndView eventoEliminarCliente(int btnEliminar) {
 
 		int id = btnEliminar;
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		ServicioImplCliente derImplCliente = (ServicioImplCliente) appContext.getBean("serviceBeanCliente");
 		int estado = derImplCliente.eliminarCliente(id);
 		MV.addObject("pudoEliminarse", estado);
@@ -68,12 +68,13 @@ public class ABMLClienteController {
 	}
 
 	@RequestMapping("ModificarCliente_ABMLCliente.html")
-	public ModelAndView eventoModificarCliente(int id_CM,String txtDniM, String txtNombreM, String txtApellidoM, String txtDireccionM,
-			String txtFechaNacM, String txtLocalidadM, String txtMailM, String txtSexoM, String txtTelefonoM) {
-		ModelAndView MV = new ModelAndView();
+	public ModelAndView eventoModificarCliente(int id_CM, String txtDniM, String txtNombreM, String txtApellidoM,
+			String txtDireccionM, String txtFechaNacM, String txtLocalidadM, String txtMailM, String txtSexoM,
+			String txtTelefonoM) {
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		ServicioImplCliente derImplCliente = (ServicioImplCliente) appContext.getBean("serviceBeanCliente");
-		int estado = derImplCliente.modificarCliente(id_CM,txtDniM, txtNombreM, txtApellidoM, txtDireccionM, txtFechaNacM,
-				txtLocalidadM, txtMailM, txtSexoM, txtTelefonoM);
+		int estado = derImplCliente.modificarCliente(id_CM, txtDniM, txtNombreM, txtApellidoM, txtDireccionM,
+				txtFechaNacM, txtLocalidadM, txtMailM, txtSexoM, txtTelefonoM);
 		MV.addObject("pudoModificarse", estado);
 		MV = fetchData(MV, "0", "0", "");
 		return MV;
@@ -83,8 +84,7 @@ public class ABMLClienteController {
 		if (pagina == null)
 			pagina = "0";
 		ServicioImplCliente derImplCliente = (ServicioImplCliente) appContext.getBean("serviceBeanCliente");
-		List<Cliente> todosLosClientes = derImplCliente.obtenerTodosLosClientes(ddlFiltroCliente,
-				txtFiltroCliente);
+		List<Cliente> todosLosClientes = derImplCliente.obtenerTodosLosClientes(ddlFiltroCliente, txtFiltroCliente);
 		List<Cliente> clientes = derImplCliente.obtenerTodosLosClientesSegunPagina(pagina, ddlFiltroCliente,
 				txtFiltroCliente);
 

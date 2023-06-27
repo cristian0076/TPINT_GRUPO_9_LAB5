@@ -21,7 +21,7 @@ public class LoginController {
 	@RequestMapping("Redireccionar_Login.html")
 	public ModelAndView eventoRedireccionarLogin(String txtUsuario, String txtClave)
 	{
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		MV.setViewName("Login");
 		return MV;
 	}
@@ -32,7 +32,7 @@ public class LoginController {
 		ServicioImplUsuario serImplUsuario = (ServicioImplUsuario)appContext.getBean("serviceBean");
 		Usuario usuario = serImplUsuario.obtenerUnRegistro(txtUsuario,txtClave);
 		
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		if(usuario==null) {
 			String Message = "Verifica las credenciales.";
 			MV.addObject("Message",Message);

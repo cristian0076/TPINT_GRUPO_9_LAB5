@@ -175,4 +175,8 @@
 	<bean id="dataAccessBeanVentaArticulo"
 		class="daoImp.ServicioImplVentaArticuloDao" scope="singleton">
 	</bean>
+	<!-- MODEL VIEW -->
+	<bean id="beanModelView" class="org.springframework.web.servlet.ModelAndView" scope="prototype">
+		
+	</bean>
 </beans>
