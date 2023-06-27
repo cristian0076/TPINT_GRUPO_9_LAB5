@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import entidad.Cliente;
+import excepciones.AtSymbolNotFoundException;
 import servicioImpl.ServicioImplCliente;
 
 @Controller
@@ -33,13 +34,25 @@ public class ABMLClienteController {
 	@RequestMapping("AgregarCliente_ABMLCliente.html")
 	public ModelAndView eventoAgregarCliente(String txtDni, String txtNombre, String txtApellido, String txtDireccion,
 			String txtFechaNac, String txtLocalidad, String txtMail, String txtSexo, String txtTelefono) {
+		try {
 		ModelAndView MV = new ModelAndView();
+		AtSymbolNotFoundException excepcion = new AtSymbolNotFoundException(txtMail);
+		excepcion.validateAtSymbol(txtMail);
+		
 		ServicioImplCliente derImplCliente = (ServicioImplCliente) appContext.getBean("serviceBeanCliente");
 		boolean estado = derImplCliente.agregarCliente(txtDni, txtNombre, txtApellido, txtDireccion, txtFechaNac,
 				txtLocalidad, txtMail, txtSexo, txtTelefono);
+		
 		MV.addObject("pudoAgregarse", estado);
 		MV = fetchData(MV, "0", "0", "");
-		return MV;
+		return MV;}
+		catch(Exception e) {
+			ModelAndView MV = new ModelAndView();
+			MV.addObject("MensajeError", e.getMessage());
+			MV.addObject("pudoAgregarse", false);
+			MV = fetchData(MV, "0", "0", "");
+			return MV;
+		}
 	}
 
 	@RequestMapping("EliminarCliente_ABMLCliente.html")

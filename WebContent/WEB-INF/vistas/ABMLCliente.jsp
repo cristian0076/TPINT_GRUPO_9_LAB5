@@ -400,11 +400,20 @@
 			correctamente!</div>
 		<%
 			} else {
+				if (request.getAttribute("MensajeError") != null) {
+					String pudoModificarse = (String) request.getAttribute("MensajeError");
+					if (pudoModificarse!="") {
+		%>
+		<div class="alert alert-danger" role="alert"><%= request.getAttribute("MensajeError") %></div>
+				<%
+			} else {
 		%>
 		<div class="alert alert-danger" role="alert">Error al agregar, usuario repetido</div>
 		<%
 			}
 					}
+			}
+			}
 		%>
 		<!-- ELIMINADO -->
 				<%
@@ -438,7 +447,6 @@
 			}
 					}
 		%>
-
 		<%
 			} else {
 					if (session.getAttribute("usuario") != null) {
