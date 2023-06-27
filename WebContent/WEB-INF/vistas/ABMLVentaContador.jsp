@@ -1,4 +1,5 @@
 <%@page import="entidad.VentaArticulo"%>
+<%@page import="entidad.TablaTemporal"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidad.Usuario"%>
 <%@page import="entidad.Venta"%>
@@ -6,7 +7,7 @@
 <%@page import="entidad.Articulo"%>
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,10 +20,11 @@
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
 	crossorigin="anonymous">
 <style>
-#myChart{
-	margin:100px auto;
+#myChart {
+	margin: 100px auto;
 	width: 500px;
 }
+
 .dropdown-content {
 	display: none;
 	position: absolute;
@@ -91,60 +93,9 @@
 .cards .card:hover {
 	transform: scale(1.1, 1.1);
 }
-.cards
-
-
-:hover
->
-.card
-
-
-:not
-
- 
-
-(
-:hover
-
- 
-
-)
-{
-filter
-
-
-:
-
- 
-
-blur
-
-
-(10
-px
-);
-
-
-	
-
-transform
-
-
-:
-
- 
-
-scale
-
-
-(0
-.9
-,
-0
-.9
-
-
-);
+.cards:hover>.card:not(:hover){
+filter:blur(10px);
+transform:scale(0.9,0.9);
 }
 </style>
 </head>
@@ -240,7 +191,7 @@ scale
 					<th scope="col">Fecha</th>
 					<th scope="col">Cliente</th>
 					<th scope="col">Vendedor</th>
-					<th scope="col">Total</th>
+					<th scope="col">Total Venta</th>
 					<th scope="col">Venta cerrada?</th>
 				</tr>
 			</thead>
@@ -261,7 +212,7 @@ scale
 						<td style="transition: all 0.5s;"><span>${item.getFecha_V().getDate()}/${item.getFecha_V().getMonth() + 1}/${item.getFecha_V().getYear()+1900 }</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getId_Cliente().getNombre_C()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.getId_usuario().getEmpleadoU().getNombreE()}</span></td>
-						<td style="transition: all 0.5s;"><span>${item.getTotal_V()}</span></td>
+						<td style="transition: all 0.5s;"><span>$${item.getTotal_V()}</span></td>
 						<td style="transition: all 0.5s;"><span>${item.isStockDescontadoV() ? 'Si' : 'No'}</span></td>
 					</tr>
 					<tr>
@@ -277,7 +228,18 @@ scale
 											%>
 											<li class="list-group-item"><b>Articulo:</b><%=va.getArticuloVA().getNombreA()%>
 												<b>Marca:</b><%=va.getArticuloVA().getMarcaA().getNombreM()%>
-												<b>Cantidad:</b><%=va.getCantidadVA()%> <b>Precio Unitario:</b>$<%=va.getSubtotalVA()%></li>
+												<b>Cantidad:</b><%=va.getCantidadVA()%> <b>Precio Venta:</b>$<%=va.getSubtotalVA()%>
+												<c:forEach var="itemTablaTemporal" items="${tablaTemporal}">
+													<%
+														TablaTemporal tt = (TablaTemporal) pageContext.getAttribute("itemTablaTemporal");
+																				if (va.getId() == tt.getId()) {
+													%>
+													<b>Precio Compra:</b>
+													<%=tt.getSumaPrecio()%>
+													<%
+														}
+													%>
+												</c:forEach></li>
 											<%
 												}
 											%>

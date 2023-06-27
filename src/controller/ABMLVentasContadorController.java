@@ -70,6 +70,7 @@ public class ABMLVentasContadorController {
 					}
 				}
 			}
+			MV.addObject("tablaTemporal", tablaTemporal);
 			MV.addObject("sumaVenta", sumaVenta);
 			MV.addObject("sumaCompra", sumaCompra);
 			MV.addObject("ganancia", sumaVenta - sumaCompra);
@@ -104,6 +105,7 @@ public class ABMLVentasContadorController {
 					}
 				}
 			}
+			MV.addObject("tablaTemporal", tablaTemporal);
 			MV.addObject("sumaVenta", sumaVenta);
 			MV.addObject("sumaCompra", sumaCompra);
 			MV.addObject("ganancia", sumaVenta - sumaCompra);
