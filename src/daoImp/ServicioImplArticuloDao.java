@@ -131,6 +131,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 			articulo.setDescripcionA(descripcion);
 			articulo.setTipoA(tipoBD);
 			articulo.setMarcaA(marcaBD);
+			articulo.setPrecioUnitario((float)preciounitario);
 			session.save(articulo);
 
 			session.getTransaction().commit();
@@ -176,13 +177,13 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
-
+            
 			Marca marcaBD = (Marca) session.createQuery("SELECT m FROM Marca m WHERE m.id = " + marca).uniqueResult();
 			Tipo tipoBD = (Tipo) session.createQuery("SELECT t FROM Tipo t WHERE t.id = " + tipo).uniqueResult();
 			String hql = "UPDATE Articulo a SET a.status = 1 , a.nombreA = :nombre , a.descripcionA = :descripcion , a.tipoA = :tipo , a.marcaA = :marca, a.PrecioUnitario= :preciounitario WHERE a.id = :id";
 
 			estado = session.createQuery(hql).setParameter("id", id).setParameter("nombre", nombre)
-					.setParameter("descripcion", descripcion).setParameter("tipo", tipoBD).setParameter("marca", marcaBD).setParameter("preciounitario", preciounitario)
+					.setParameter("descripcion", descripcion).setParameter("tipo", tipoBD).setParameter("marca", marcaBD).setParameter("preciounitario", (float)(preciounitario))
 					.executeUpdate();
 
 			session.getTransaction().commit();
