@@ -1,0 +1,136 @@
+--Insert Marca
+INSERT INTO marca (nombreM, descripcionM, EstadoM) VALUES
+('Coca-Cola', 'Bebida', 1),
+('Nike', 'Calzado deportivo', 1),
+('Apple', 'Tecnología', 1),
+('Adidas', 'Calzado deportivo', 1),
+('Samsung', 'Electrónica', 1),
+('Toyota', 'Automóviles', 1),
+('McDonalds', 'Comida rápida', 1),
+('Microsoft', 'Tecnología', 1),
+('Pepsi', 'Bebida', 1),
+('Amazon', 'Comercio electrónico', 1),
+('Ford', 'Automóviles', 1),
+('Google', 'Tecnología', 1),
+('Nike', 'Ropa deportiva', 1),
+('Sony', 'Electrónica', 1),
+('Honda', 'Motocicletas', 1);
+
+--Insert Tipo
+
+INSERT INTO tipo (descripcion, nombre, status) VALUES
+('Bebidas gaseosas', 'Bebidas', 1),
+('Alimentos', 'Comida', 1),
+('Electrodomésticos', 'Electrodomésticos', 1),
+('Ropa', 'Moda', 1),
+('Electrónica', 'Tecnología', 1),
+('Automóviles', 'Vehículos', 1),
+('Juguetes', 'Entretenimiento', 1),
+('Muebles', 'Hogar', 1),
+('Cosméticos', 'Belleza', 1),
+('Libros', 'Cultura', 1),
+('Deportes', 'Deporte', 1),
+('Herramientas', 'Herramientas', 1),
+('Joyas', 'Accesorios', 1),
+('Farmacia', 'Salud', 1),
+('Viajes', 'Turismo', 1);
+
+--Insert Tipo Cuenta
+INSERT INTO tipocuenta (EstadoT, descripcionT) VALUES
+(1, 'Vendedor'),
+(1, 'Contador');
+
+--Insert Tipo Empleado
+
+INSERT INTO empleado (EstadoE, apellidoE, direccionE, dniE, fechaNacimientoE, legajoE, localidadE, mailE, nombreE, sexoE, telefonoE) VALUES
+(1, 'Cavana', 'Correa 3588', '43092324', '1990-01-01', '123', 'CABA', 'lcavana@gmail.com', 'Lucia', 'Mujer', '1122334455'),
+(1, 'López', 'Av. Rivadavia 1234', '40234567', '1985-05-10', '456', 'CABA', 'jlopez@gmail.com', 'Juan', 'Hombre', '987654321'),
+(1, 'Gómez', 'Calle 25 de Mayo 567', '34567890', '1992-12-15', '789', 'Córdoba', 'mgomez@gmail.com', 'María', 'Mujer', '456789012'),
+(1, 'Rodríguez', 'Av. San Martín 987', '23876543', '1988-09-20', '987', 'Buenos Aires', 'arodriguez@gmail.com', 'Andrés', 'Hombre', '234567890'),
+(1, 'Fernández', 'Calle 9 de Julio 432', '12345678', '1995-07-03', '654', 'Rosario', 'sfernandez@gmail.com', 'Sofía', 'Mujer', '890123456'),
+(1, 'Pérez', 'Av. Belgrano 765', '56789012', '1991-03-12', '321', 'CABA', 'jperez@gmail.com', 'Juan', 'Hombre', '567890123'),
+(1, 'González', 'Calle Sarmiento 321', '45678901', '1987-11-28', '159', 'Córdoba', 'fgonzalez@gmail.com', 'Federico', 'Hombre', '901234567'),
+(1, 'Luna', 'Av. Mayo 876', '34567890', '1993-06-17', '753', 'Buenos Aires', 'aluna@gmail.com', 'Ana', 'Mujer', '678901234'),
+(1, 'Silva', 'Calle Mitre 543', '56789012', '1989-02-25', '951', 'Rosario', 'rsilva@gmail.com', 'Roberto', 'Hombre', '345678901'),
+(1, 'Martínez', 'Av. Corrientes 345', '23456789', '1996-09-08', '246', 'CABA', 'mmartinez@gmail.com', 'María', 'Mujer', '012345678'),
+(1, 'Moreno', 'Calle Rivadavia 987', '67890123', '1990-04-15', '579', 'Córdoba', 'smoreno@gmail.com', 'Sergio', 'Hombre', '789012345'),
+(1, 'Ruiz', 'Av. San Juan 654', '45678901', '1986-12-02', '864', 'Buenos Aires', 'cruiz@gmail.com', 'Carolina', 'Mujer', '901234567'),
+(1, 'Torres', 'Calle Entre Ríos 321', '34567890', '1994-07-22', '741', 'Rosario', 'atorres@gmail.com', 'Alejandro', 'Hombre', '678901234'),
+(1, 'Acosta', 'Av. Pellegrini 543', '56789012', '1988-01-30', '258', 'CABA', 'aacosta@gmail.com', 'Adriana', 'Mujer', '345678901'),
+(1, 'Vargas', 'Calle San Luis 876', '23456789', '1997-08-10', '369', 'Córdoba', 'bvargas@gmail.com', 'Bernardo', 'Hombre', '012345678');
+
+--Insert Tipo Cliente
+
+INSERT INTO cliente (Apellido_C, DNI_C, Direccion_C, EstadoC, Fecha_Nacimiento_C, Localidad_C, Mail_C, Nombre_C, Sexo_C, Telefono_C) VALUES
+('González', '34567890', 'Calle San Martín 123', 1, '1990-05-15', 'Buenos Aires', 'agonzalez@gmail.com', 'Ana', 'Femenino', '1122334455'),
+('López', '45678901', 'Av. Rivadavia 456', 1, '1985-10-20', 'CABA', 'jlopez@gmail.com', 'Juan', 'Masculino', '2233445566'),
+('Martínez', '56789012', 'Calle Belgrano 789', 1, '1992-03-25', 'Rosario', 'mmartinez@gmail.com', 'María', 'Femenino', '3344556677'),
+('Rodríguez', '67890123', 'Av. San Juan 456', 1, '1988-09-30', 'Córdoba', 'arodriguez@gmail.com', 'Andrés', 'Masculino', '4455667788'),
+('Fernández', '78901234', 'Calle Entre Ríos 789', 1, '1995-07-05', 'Buenos Aires', 'sfernandez@gmail.com', 'Sofía', 'Femenino', '5566778899'),
+('Pérez', '89012345', 'Av. Corrientes 123', 1, '1991-02-10', 'CABA', 'jperez@gmail.com', 'Juan', 'Masculino', '6677889900'),
+('Gómez', '90123456', 'Calle San Luis 456', 1, '1987-11-15', 'Rosario', 'mgomez@gmail.com', 'María', 'Femenino', '7788990011'),
+('Silva', '01234567', 'Av. Mayo 789', 1, '1993-06-20', 'Córdoba', 'rsilva@gmail.com', 'Roberto', 'Masculino', '8899001122'),
+('Torres', '12345678', 'Calle Mitre 123', 1, '1989-03-05', 'Buenos Aires', 'atorres@gmail.com', 'Alejandro', 'Masculino', '9900112233'),
+('Luna', '23456789', 'Av. Pellegrini 456', 1, '1996-10-10', 'CABA', 'aluna@gmail.com', 'Ana', 'Femenino', '0011223344'),
+('Moreno', '34567890', 'Calle San Martín 789', 1, '1990-04-15', 'Rosario', 'smoreno@gmail.com', 'Sergio', 'Masculino', '1122334455'),
+('Ruiz', '45678901', 'Av. Rivadavia 123', 1, '1986-12-20', 'Córdoba', 'cruiz@gmail.com', 'Carolina', 'Femenino', '2233445566'),
+('Acosta', '56789012', 'Calle Belgrano 456', 1, '1997-07-25', 'Buenos Aires', 'a.acosta@gmail.com', 'Andrés', 'Masculino', '3344556677'),
+('Vera', '67890123', 'Av. San Juan 789', 1, '1988-09-30', 'CABA', 'mvera@gmail.com', 'María', 'Femenino', '4455667788'),
+('Molina', '78901234', 'Calle Entre Ríos 123', 1, '1995-08-05', 'Rosario', 'cmolina@gmail.com', 'Carlos', 'Masculino', '5566778899');
+
+--Insert Tipo Articulo
+
+INSERT INTO articulo (descripcionA, nombreA, status, marcaA, TipoA, PrecioUnitario) VALUES
+('Gaseosa de Cola', 'Coca-Cola', 1, 1, 1, 200),
+('Galletas', 'Oreo', 1, 2, 2, 150),
+('Café molido', 'Nescafé', 1, 3, 3, 250),
+('Chocolates', 'Ferrero Rocher', 1, 4, 4, 300),
+('Yogur', 'Activia', 1, 5, 5, 100),
+('Pan lactal', 'Bimbo', 1, 6, 6, 80),
+('Cerveza', 'Quilmes', 1, 7, 7, 180),
+('Agua mineral', 'Villavicencio', 1, 8, 8, 50),
+('Aceite de oliva', 'Cocinero', 1, 9, 9, 350),
+('Leche descremada', 'La Serenísima', 1, 10, 10, 90),
+('Vino tinto', 'Trapiche', 1, 11, 11, 200),
+('Jugo de naranja', 'Citric', 1, 12, 12, 120),
+('Papas fritas', 'Lays', 1, 13, 13, 70),
+('Salsa de tomate', 'Heinz', 1, 14, 14, 80),
+('Arroz', 'Marolio', 1, 15, 15, 60);
+
+--Insert Tipo Stock
+
+INSERT INTO stock (EstadoS, FechaVencimientoS, cantidad, fechaIngreso, precioCompra, articulo_id) VALUES
+(1, '2023-12-31', 100, '2023-06-20', 150.50, 1),
+(1, '2023-11-30', 50, '2023-06-21', 75.25, 2),
+(1, '2024-01-15', 200, '2023-06-22', 250.75, 3),
+(1, '2023-10-31', 80, '2023-06-23', 120.80, 4),
+(1, '2023-09-30', 120, '2023-06-24', 180.90, 5),
+(1, '2023-12-15', 150, '2023-06-25', 100.50, 6),
+(1, '2024-02-28', 90, '2023-06-26', 200.25, 7),
+(1, '2023-11-15', 70, '2023-06-27', 90.50, 8),
+(1, '2023-10-31', 100, '2023-06-28', 320.75, 9),
+(1, '2023-09-30', 80, '2023-06-29', 60.80, 10),
+(1, '2023-12-31', 120, '2023-06-30', 150.90, 11),
+(1, '2023-11-30', 60, '2023-07-01', 80.50, 12),
+(1, '2024-01-15', 90, '2023-07-02', 100.25, 13),
+(1, '2023-10-31', 100, '2023-07-03', 70.50, 14),
+(1, '2023-09-30', 80, '2023-07-04', 85.80, 15);
+
+--Insert Usuario
+
+INSERT INTO usuario (EstadoU, contraseniaU, usuarioU, empleadoU, tipoCuentaU) VALUES
+(1, 'contraseña123', 'pepe', 1, 1),
+(1, 'abc123', 'juanita', 2, 2),
+(1, 'password', 'maria', 3, 3),
+(1, 'qwerty', 'pedro', 4, 1),
+(1, '123456', 'laura', 5, 2),
+(1, 'iloveyou', 'carlos', 6, 3),
+(1, 'admin123', 'ana', 7, 1),
+(1, 'secret', 'luis', 8, 2),
+(1, 'p@ssw0rd', 'sofia', 9, 3),
+(1, 'hello123', 'jorge', 10, 1),
+(1, 'letmein', 'natalia', 11, 2),
+(1, 'welcome', 'roberto', 12, 3),
+(1, 'password123', 'mariana', 13, 1),
+(1, '123abc', 'daniel', 14, 2),
+(1, 'qwerty123', 'valentina', 15, 3);
