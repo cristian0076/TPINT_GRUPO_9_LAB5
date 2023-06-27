@@ -277,7 +277,7 @@ scale
 											%>
 											<li class="list-group-item"><b>Articulo:</b><%=va.getArticuloVA().getNombreA()%>
 												<b>Marca:</b><%=va.getArticuloVA().getMarcaA().getNombreM()%>
-												<b>Cantidad:</b><%=va.getCantidadVA()%> <b>Subtotal:</b>$<%=va.getSubtotalVA()%></li>
+												<b>Cantidad:</b><%=va.getCantidadVA()%> <b>Precio Unitario:</b>$<%=va.getSubtotalVA()%></li>
 											<%
 												}
 											%>

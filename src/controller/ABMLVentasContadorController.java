@@ -62,7 +62,8 @@ public class ABMLVentasContadorController {
 					for (VentaArticulo ventaArticulo : todasLasVentasArticulos) {
 						if (ventaArticulo.getVentaVA().getId() == venta.getId()) {
 							for (TablaTemporal itemTablaTemporal : tablaTemporal) {
-								if (itemTablaTemporal.getId() == ventaArticulo.getVentaVA().getId()) {
+								if (itemTablaTemporal.getId() == ventaArticulo.getId()) {
+									System.out.println(itemTablaTemporal);
 									sumaCompra += itemTablaTemporal.getSumaPrecio();
 								}
 							}
@@ -96,7 +97,7 @@ public class ABMLVentasContadorController {
 					for (VentaArticulo ventaArticulo : todasLasVentasArticulos) {
 						if (ventaArticulo.getVentaVA().getId() == venta.getId()) {							
 							for (TablaTemporal itemTablaTemporal : tablaTemporal) {
-								if (itemTablaTemporal.getId() == ventaArticulo.getVentaVA().getId()) {
+								if (itemTablaTemporal.getId() == ventaArticulo.getId()) {
 									sumaCompra += itemTablaTemporal.getSumaPrecio();
 								}
 							}
