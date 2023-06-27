@@ -240,7 +240,7 @@
 									<option value="Lanús">Lanús</option>
 									<option value="Berazategui">Berazategui</option>
 								</select> <span>Direccion</span> <input type="text" class="form-control"
-									name="txtDireccionM" placeholder="Direccion" required="required">
+									name="txtDireccionM" placeholder="Direccion" required="required" maxlength="20">
 								<span>Mail</span> <input type="text" class="form-control"
 									name="txtMailM" placeholder="Email del Cliente"
 									required="required" maxlength="50"> <span>Telefono</span>

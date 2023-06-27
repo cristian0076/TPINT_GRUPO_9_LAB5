@@ -173,7 +173,7 @@
 					<option value="2">Fecha vencimiento</option>
 					<option value="3">Cantidad</option>
 					<option value="4">Fecha ingreso</option>
-					<option value="5">precio de compra</option>
+					<option value="5">precio</option>
 					<option value="6">Producto</option>
 				</select> <input type="text" class="form-control txtFiltroStock"
 					aria-label="Text input with dropdown button" id="txtFiltroStock"
@@ -196,7 +196,7 @@
 					<th scope="col">Tipo</th>
 					<th scope="col">Cantidad</th>
 					<th scope="col">Fecha Vencimiento</th>
-					<th scope="col">Precio de compra</th>
+					<th scope="col">Precio unitario</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -226,7 +226,7 @@
 				<option value="2">Fecha vencimiento</option>
 				<option value="3">Cantidad</option>
 				<option value="4">Fecha ingreso</option>
-				<option value="5">precio de compra</option>
+				<option value="5">Precio</option>
 				<option value="6">Producto</option>
 			</select> <input type="hidden" class="form-control txtFiltroStock"
 				aria-label="Text input with dropdown button" id="txtFiltroStock"

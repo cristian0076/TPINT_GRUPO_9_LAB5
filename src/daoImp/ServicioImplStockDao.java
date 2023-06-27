@@ -77,13 +77,14 @@ public class ServicioImplStockDao implements DaoStock {
 		    existe = true;
 		    String hql = "UPDATE Stock s SET s.cantidad = :cant, s.precioCompra = :precio WHERE s.id ="+ StockDB.getId();
 		    
-		    int sumaCantidad = StockDB.getCantidad() + Cantidad;
-		    double sumaPrecio =  StockDB.getPrecioCompra() + precio;
 		    
+		    int sumaCantidad = StockDB.getCantidad() + Cantidad;
+		    double CostoMedio = ((StockDB.getPrecioCompra() *  StockDB.getCantidad()) + (Cantidad*precio))/ sumaCantidad;
+		    //double sumaPrecio =  StockDB.getPrecioCompra() + precio;
 		    System.out.println("suma: "+ sumaCantidad);
 		    update = session.createQuery(hql)
 		    .setParameter("cant", sumaCantidad)
-		    .setParameter("precio", sumaPrecio)
+		    .setParameter("precio", CostoMedio)
 		    .executeUpdate();
 			session.getTransaction().commit();
 		}
