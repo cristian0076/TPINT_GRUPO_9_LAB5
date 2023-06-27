@@ -26,7 +26,8 @@ public class ServicioImplClienteDao implements DaoCliente {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Cliente> obtenerTodosLosClientesSegunPagina(String pagina, String modoFiltro, String textoFiltro) {
-		ConfigHibernate ch = new ConfigHibernate();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
 		List<Cliente> listaCliente = new ArrayList<Cliente>();
 
@@ -95,7 +96,8 @@ public class ServicioImplClienteDao implements DaoCliente {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Cliente> obtenerTodosLosClientes(String modoFiltro, String textoFiltro) {
-		ConfigHibernate ch = new ConfigHibernate();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
 		List<Cliente> listaCliente = new ArrayList<Cliente>();
 
@@ -167,7 +169,8 @@ public class ServicioImplClienteDao implements DaoCliente {
 		boolean noError = true;
 
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 			
@@ -176,7 +179,6 @@ public class ServicioImplClienteDao implements DaoCliente {
 			if(listaCliente.size()==0) {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
 			Date fecha = formatter.parse(txtFechaNac+" 00:00:00");
-			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 			Cliente cliente = (Cliente) appContext.getBean("ClienteInicial");
 			cliente.setDNI_C(txtDni);
 			cliente.setNombre_C(txtNombre);
@@ -206,9 +208,9 @@ public class ServicioImplClienteDao implements DaoCliente {
 	public int modificarCliente(int id, String txtDni, String txtNombre, String txtApellido, String txtDireccion,
 			String txtFechaNac, String txtLocalidad, String txtMail, String txtSexo, String txtTelefono) {
 		int estado = 0;
-		System.out.println(txtFechaNac);
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
@@ -237,7 +239,8 @@ public class ServicioImplClienteDao implements DaoCliente {
 		int estado = 0;
 
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 

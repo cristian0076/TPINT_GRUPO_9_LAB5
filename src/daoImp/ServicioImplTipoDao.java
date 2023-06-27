@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import dao.DaoTipo;
 import entidad.Tipo;
@@ -13,7 +15,8 @@ public class ServicioImplTipoDao implements DaoTipo{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tipo> obtenerTodosLosTipos() {
-		ConfigHibernate ch = new ConfigHibernate();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
 		
 		List<Tipo> listaTipos = new ArrayList<Tipo>();

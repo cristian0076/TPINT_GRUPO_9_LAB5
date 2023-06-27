@@ -23,18 +23,14 @@ public class ServicioImplVentaArticuloDao implements DaoVentaArticulo{
 
 	@Override
 	public boolean agregarVentaArticulo(int idArticulo, int cantidadArticulo, float subtotal) {
-		System.out.println("-------------");
-		System.out.println(idArticulo);
-		System.out.println(cantidadArticulo);
-		System.out.println(subtotal);
 		boolean noError = true;
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 			Venta venta = (Venta) session.createQuery("SELECT v FROM Venta v order by v.id desc").setMaxResults(1).uniqueResult();
 			Articulo articulo = (Articulo) session.createQuery("SELECT a FROM Articulo a WHERE a.id = "+idArticulo).uniqueResult();
-			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 			VentaArticulo VentaArticulo = (VentaArticulo) appContext.getBean("VentaArticuloInicial");
 			VentaArticulo.setArticuloVA(articulo);
 			VentaArticulo.setVentaVA(venta);
@@ -56,7 +52,8 @@ public class ServicioImplVentaArticuloDao implements DaoVentaArticulo{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<VentaArticulo> obtenerTodosLasVentasArticulos() {
-		ConfigHibernate ch = new ConfigHibernate();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
 		List<VentaArticulo> listaArticulos = new ArrayList<VentaArticulo>();
 

@@ -40,7 +40,8 @@ public class ServicioImplVentasDao implements DaoVenta {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Venta> obtenerTodasLasVentasSegunPagina(String pagina, String modoFiltro, String textoFiltro) {
-		ConfigHibernate ch = new ConfigHibernate();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
 		List<Venta> listaVentas = new ArrayList<Venta>();
 
@@ -82,7 +83,8 @@ public class ServicioImplVentasDao implements DaoVenta {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Venta> obtenerTodasLasVentas(String modoFiltro, String textoFiltro) {
-		ConfigHibernate ch = new ConfigHibernate();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
 		List<Venta> listaVentas = new ArrayList<Venta>();
 
@@ -122,14 +124,14 @@ public class ServicioImplVentasDao implements DaoVenta {
 	public boolean agregarVenta(Date fecha, String id_Cliente, String id_usuario, float total) {
 		boolean noError = true;
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 			Cliente ClienteBD = (Cliente) session.createQuery("SELECT m FROM Cliente m WHERE m.id = " + id_Cliente)
 					.uniqueResult();
 			Usuario UsuarioBD = (Usuario) session.createQuery("SELECT m FROM Usuario m WHERE m.id = " + id_usuario)
 					.uniqueResult();
-			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 			Venta Venta = (Venta) appContext.getBean("VentaInicial");
 			Venta.setFecha_V(fecha);
 			Venta.setId_Cliente(ClienteBD);
@@ -155,7 +157,8 @@ public class ServicioImplVentasDao implements DaoVenta {
 		int estado = 0;
 
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 
@@ -178,7 +181,8 @@ public class ServicioImplVentasDao implements DaoVenta {
 	public boolean actualizarVenta(int id) {
 		boolean sinProblemas = true;
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 			// Tomo lista de productos segun venta
@@ -236,7 +240,8 @@ public class ServicioImplVentasDao implements DaoVenta {
 			String txtFiltroVentaContadorFin) {
 		List<Venta> listaVentas = new ArrayList<Venta>();
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 
 			listaVentas = (List<Venta>) session
@@ -257,7 +262,8 @@ public class ServicioImplVentasDao implements DaoVenta {
 			String txtFiltroVentaContadorFin) {
 		List<Venta> listaVentas = new ArrayList<Venta>();
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			listaVentas = (List<Venta>) session
 					.createQuery("SELECT c FROM Venta c WHERE c.EstadoV = 1 AND c.Fecha_V BETWEEN '"
@@ -277,7 +283,8 @@ public class ServicioImplVentasDao implements DaoVenta {
 	public List<TablaTemporal> obtenerTablaTemporal() {
 		List<TablaTemporal>  tablaTemporal = new ArrayList();
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			tablaTemporal = (List<TablaTemporal>) session
 					.createQuery("SELECT l from TablaTemporal l").list();

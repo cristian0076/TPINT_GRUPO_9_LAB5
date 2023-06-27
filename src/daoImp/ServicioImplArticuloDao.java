@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
 import dao.DaoArticulo;
 import entidad.Articulo;
@@ -24,7 +25,8 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Articulo> obtenerTodosLosArticulosSegunPagina(String pagina, String modoFiltro, String textoFiltro) {
-		ConfigHibernate ch = new ConfigHibernate();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
 		List<Articulo> listaArticulos = new ArrayList<Articulo>();
 
@@ -70,7 +72,8 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Articulo> obtenerTodosLosArticulos(String modoFiltro, String textoFiltro) {
-		ConfigHibernate ch = new ConfigHibernate();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
 		List<Articulo> listaArticulos = new ArrayList<Articulo>();
 
@@ -116,14 +119,13 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		boolean noError = true;
 
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 
 			Marca marcaBD = (Marca) session.createQuery("SELECT m FROM Marca m WHERE m.id = " + marca).uniqueResult();
 			Tipo tipoBD = (Tipo) session.createQuery("SELECT t FROM Tipo t WHERE t.id = " + tipo).uniqueResult();
-			
-			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 			Articulo articulo = (Articulo) appContext.getBean("ArticuloInicial");
 			articulo.setNombreA(nombre);
 			articulo.setDescripcionA(descripcion);
@@ -146,7 +148,8 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		int estado = 0;
 
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 
@@ -168,9 +171,9 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 	@Override
 	public int modificarArticulo(int id, String nombre, String descripcion, String tipo, String marca, int preciounitario) {
 		int estado = 0;
-		System.out.println(marca);
 		try {
-			ConfigHibernate ch = new ConfigHibernate();
+			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 

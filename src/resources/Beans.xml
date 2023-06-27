@@ -179,7 +179,10 @@
 	<bean id="beanModelView" class="org.springframework.web.servlet.ModelAndView" scope="prototype">
 		
 	</bean>
-	<bean id="beanExcepArroba" class="excepciones.AtSymbolNotFoundException">
+	<bean id="beanExcepArroba" class="excepciones.AtSymbolNotFoundException" scope="prototype">
 		<constructor-arg value="default mail value"></constructor-arg>
+	</bean>
+	
+	<bean id="beanConfigHibernate" class="daoImp.ConfigHibernate" scope="prototype">
 	</bean>
 </beans>
