@@ -34,7 +34,8 @@ BEGIN
             SELECT s.id
             FROM stock s
             WHERE s.articulo_id = pArticuloVA AND s.cantidad > 0
-            ORDER BY s.fechaVencimientoS ASC, s.id ASC
+            ORDER BY s.fechaVencimientoS ASC, s.id ASC -- FEFO
+			-- ORDER BY s.fechaIngreso ASC, s.id ASC -- FIFO
             LIMIT 1
         );
         
