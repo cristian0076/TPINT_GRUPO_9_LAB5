@@ -2,6 +2,7 @@ package controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class ABMLVentasContadorController {
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-dd");
 		LocalDateTime now = LocalDateTime.now();
-		System.out.println(dtf.format(now) + " 00:00:00");
 		if (txtFiltroVentaContadorInicio == null || txtFiltroVentaContadorFin == null) {
 			ServicioImplVentas derImplVenta = (ServicioImplVentas) appContext.getBean("serviceBeanVenta");
 			List<Venta> todosLasVentas = derImplVenta.obtenerTodasLasVentasYFecha(dtf.format(now) + " 00:00:00",
@@ -94,7 +94,7 @@ public class ABMLVentasContadorController {
 				if (venta.isStockDescontadoV()) {
 					sumaVenta += venta.getTotal_V();
 					for (VentaArticulo ventaArticulo : todasLasVentasArticulos) {
-						if (ventaArticulo.getVentaVA().getId() == venta.getId()) {
+						if (ventaArticulo.getVentaVA().getId() == venta.getId()) {							
 							for (TablaTemporal itemTablaTemporal : tablaTemporal) {
 								if (itemTablaTemporal.getId() == ventaArticulo.getVentaVA().getId()) {
 									sumaCompra += itemTablaTemporal.getSumaPrecio();

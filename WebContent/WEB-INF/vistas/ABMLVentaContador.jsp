@@ -6,6 +6,7 @@
 <%@page import="entidad.Articulo"%>
 <%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,6 +19,10 @@
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
 	crossorigin="anonymous">
 <style>
+#myChart{
+	margin:100px auto;
+	width: 500px;
+}
 .dropdown-content {
 	display: none;
 	position: absolute;
@@ -39,55 +44,107 @@
 .dropdown:hover .dropdown-content {
 	display: block;
 }
+
 .cards {
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  margin:0 auto;
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+	margin: 0 auto;
+	margin-bottom: 100px;
 }
 
 .cards .red {
-  background-color: #f43f5e;
+	background-color: #f43f5e;
 }
 
 .cards .blue {
-  background-color: #3b82f6;
+	background-color: #3b82f6;
 }
 
 .cards .green {
-  background-color: #22c55e;
+	background-color: #22c55e;
 }
 
 .cards .card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  height: 100px;
-  width: 250px;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  transition: 400ms;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	height: 100px;
+	width: 250px;
+	border-radius: 10px;
+	color: white;
+	cursor: pointer;
+	transition: 400ms;
 }
 
 .cards .card p.tip {
-  font-size: 1.5em;
-  font-weight: 700;
+	font-size: 1.5em;
+	font-weight: 700;
 }
 
 .cards .card p.second-text {
-  font-size: .8em;
+	font-size: .8em;
 }
 
 .cards .card:hover {
-  transform: scale(1.1, 1.1);
+	transform: scale(1.1, 1.1);
 }
+.cards
 
-.cards:hover > .card:not(:hover) {
-  filter: blur(10px);
-  transform: scale(0.9, 0.9);
+
+:hover
+>
+.card
+
+
+:not
+
+ 
+
+(
+:hover
+
+ 
+
+)
+{
+filter
+
+
+:
+
+ 
+
+blur
+
+
+(10
+px
+);
+
+
+	
+
+transform
+
+
+:
+
+ 
+
+scale
+
+
+(0
+.9
+,
+0
+.9
+
+
+);
 }
 </style>
 </head>
@@ -163,10 +220,11 @@
 				class="d-flex flex-row justify-content-center w-100">
 				<input type="date" class="border mr-3 txtFiltroVentaContadorInicio"
 					style="width: 200px;" id="txtFiltroVentaContadorInicio"
-					name="txtFiltroVentaContadorInicio" value="2023-06-27">
-				<input type="date"
-					style="width: 200px;" class="border mr-3 txtFiltroVentaContadorFin"
-					id="txtFiltroVentaContadorFin" name="txtFiltroVentaContadorFin" value="2023-06-27">
+					name="txtFiltroVentaContadorInicio" value="2023-06-27"> <input
+					type="date" style="width: 200px;"
+					class="border mr-3 txtFiltroVentaContadorFin"
+					id="txtFiltroVentaContadorFin" name="txtFiltroVentaContadorFin"
+					value="2023-06-27">
 				<div class="input-group-append mr-3">
 					<button class="btn btn-primary" type="submit">Buscar</button>
 				</div>
@@ -236,11 +294,12 @@
 		<nav aria-label="Page navigation example" class="mx-auto">
 		<form action="Redireccionar_ABMLVentaContador.html" method="post">
 			<input type="date" class="border mr-3 txtFiltroVentaContadorInicio"
-					style="width: 200px;" id="txtFiltroVentaContadorInicio"
-					name="txtFiltroVentaContadorInicio" value="2023-06-27" hidden>
-				<input type="date"
-					style="width: 200px;" class="border mr-3 txtFiltroVentaContadorFin"
-					id="txtFiltroVentaContadorFin" name="txtFiltroVentaContadorFin" hidden value="2023-06-27">
+				style="width: 200px;" id="txtFiltroVentaContadorInicio"
+				name="txtFiltroVentaContadorInicio" value="2023-06-27" hidden>
+			<input type="date" style="width: 200px;"
+				class="border mr-3 txtFiltroVentaContadorFin"
+				id="txtFiltroVentaContadorFin" name="txtFiltroVentaContadorFin"
+				hidden value="2023-06-27">
 			<ul class="pagination">
 				<c:forEach begin="0" step="1" end="${cantPaginas}" var="variable">
 					<%
@@ -266,19 +325,20 @@
 		</nav>
 		<!-- Totales -->
 		<div class="cards">
-		    <div class="card red">
-		        <p class="tip">$${sumaVenta }</p>
-		        <p class="second-text">Total VENTA</p>
-		    </div>
-		    <div class="card blue">
-		        <p class="tip">$${sumaCompra }</p>
-		        <p class="second-text">Total COMPRA</p>
-		    </div>
-		    <div class="card green">
-		        <p class="tip">$${ganancia }</p>
-		        <p class="second-text">GANANCIA</p>
-		    </div>
+			<div class="card red">
+				<p class="tip">$${sumaVenta }</p>
+				<p class="second-text">Total VENTA</p>
+			</div>
+			<div class="card blue">
+				<p class="tip">$${sumaCompra }</p>
+				<p class="second-text">Total COMPRA</p>
+			</div>
+			<div class="card green">
+				<p class="tip">$${ganancia }</p>
+				<p class="second-text">GANANCIA</p>
+			</div>
 		</div>
+
 		<%
 			} else {
 					if (session.getAttribute("usuario") != null) {
@@ -355,8 +415,8 @@
 		</footer>
 
 	</f:view>
-	
-		<script type="text/javascript">
+
+	<script type="text/javascript">
 	const inputsInicio = document.getElementsByClassName("txtFiltroVentaContadorInicio");
 	const inputsFin = document.getElementsByClassName("txtFiltroVentaContadorFin");
 	
@@ -383,7 +443,6 @@
 		}
 		
 	})
-	
 	</script>
 	<!--Obligatorio-->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -397,7 +456,6 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
 		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
 		crossorigin="anonymous"></script>
-
 </body>
 
 </html>
