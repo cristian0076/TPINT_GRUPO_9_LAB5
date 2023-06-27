@@ -5,8 +5,10 @@ import java.util.List;
 
 import dao.DaoVenta;
 import entidad.Cliente;
+import entidad.TablaTemporal;
 import entidad.Usuario;
 import entidad.Venta;
+import entidad.VentaArticulo;
 import dao.DaoUsuario;
 import servicio.ServicioVentas;
 
@@ -50,6 +52,25 @@ public class ServicioImplVentas implements ServicioVentas {
 	@Override
 	public boolean actualizarVenta(int id) {
 		return dataAccess.actualizarVenta(id);
+	}
+
+	@Override
+	public List<Venta> obtenerTodasLasVentasSegunPaginaYFecha(String pagina, String txtFiltroVentaContadorInicio,
+			String txtFiltroVentaContadorFin) {
+		return dataAccess.obtenerTodasLasVentasSegunPaginaYFecha(pagina, txtFiltroVentaContadorInicio,txtFiltroVentaContadorFin);
+	}
+
+	@Override
+	public List<Venta> obtenerTodasLasVentasYFecha(String txtFiltroVentaContadorInicio,
+			String txtFiltroVentaContadorFin) {
+		return dataAccess.obtenerTodasLasVentasYFecha( txtFiltroVentaContadorInicio,txtFiltroVentaContadorFin);
+
+	}
+
+	@Override
+	public List<TablaTemporal>  obtenerTablaTemporal() {
+		return dataAccess.obtenerTablaTemporal();
+
 	}
 
 }
