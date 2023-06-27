@@ -29,7 +29,7 @@ public class ServicioImplClienteDao implements DaoCliente {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
-		List<Cliente> listaCliente = new ArrayList<Cliente>();
+		List<Cliente> listaCliente = (List<Cliente>) appContext.getBean("listaCliente");
 
 		switch (modoFiltro) {
 		case "1":
@@ -99,7 +99,7 @@ public class ServicioImplClienteDao implements DaoCliente {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
-		List<Cliente> listaCliente = new ArrayList<Cliente>();
+		List<Cliente> listaCliente = (List<Cliente>) appContext.getBean("listaCliente");
 
 		switch (modoFiltro) {
 		case "1":
@@ -174,7 +174,7 @@ public class ServicioImplClienteDao implements DaoCliente {
 			Session session = ch.abrirConexion();
 			session.beginTransaction();
 			
-			List<Cliente> listaCliente = new ArrayList<Cliente>();
+			List<Cliente> listaCliente = (List<Cliente>) appContext.getBean("listaCliente");
 			listaCliente = (List<Cliente>) session.createQuery("SELECT c FROM Cliente c WHERE c.EstadoC = 1 and c.DNI_C="+txtDni).list();
 			if(listaCliente.size()==0) {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");

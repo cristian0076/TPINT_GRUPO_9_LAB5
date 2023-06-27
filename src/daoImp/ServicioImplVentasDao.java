@@ -43,7 +43,7 @@ public class ServicioImplVentasDao implements DaoVenta {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
-		List<Venta> listaVentas = new ArrayList<Venta>();
+		List<Venta> listaVentas = (List<Venta>) appContext.getBean("listaVenta");
 
 		switch (modoFiltro) {
 		case "1":
@@ -86,7 +86,7 @@ public class ServicioImplVentasDao implements DaoVenta {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
-		List<Venta> listaVentas = new ArrayList<Venta>();
+		List<Venta> listaVentas = (List<Venta>) appContext.getBean("listaVenta");
 
 		switch (modoFiltro) {
 		case "1":
@@ -238,9 +238,9 @@ public class ServicioImplVentasDao implements DaoVenta {
 	@Override
 	public List<Venta> obtenerTodasLasVentasSegunPaginaYFecha(String pagina, String txtFiltroVentaContadorInicio,
 			String txtFiltroVentaContadorFin) {
-		List<Venta> listaVentas = new ArrayList<Venta>();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		List<Venta> listaVentas = (List<Venta>) appContext.getBean("listaVenta");
 		try {
-			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 
@@ -260,9 +260,10 @@ public class ServicioImplVentasDao implements DaoVenta {
 	@Override
 	public List<Venta> obtenerTodasLasVentasYFecha(String txtFiltroVentaContadorInicio,
 			String txtFiltroVentaContadorFin) {
-		List<Venta> listaVentas = new ArrayList<Venta>();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		List<Venta> listaVentas = (List<Venta>) appContext.getBean("listaVenta");
 		try {
-			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+			
 			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			listaVentas = (List<Venta>) session
@@ -281,9 +282,9 @@ public class ServicioImplVentasDao implements DaoVenta {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TablaTemporal> obtenerTablaTemporal() {
-		List<TablaTemporal>  tablaTemporal = new ArrayList();
+		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
+		List<TablaTemporal>  tablaTemporal = (List<TablaTemporal>) appContext.getBean("listaTablaTemporal");
 		try {
-			ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 			ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 			Session session = ch.abrirConexion();
 			tablaTemporal = (List<TablaTemporal>) session

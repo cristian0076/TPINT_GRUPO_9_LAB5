@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<bean id="UsuarioInicial" class="entidad.Usuario">
 		<property name="usuarioU" value="Pepe"></property>
@@ -185,4 +188,21 @@
 	
 	<bean id="beanConfigHibernate" class="daoImp.ConfigHibernate" scope="prototype">
 	</bean>
+	<!-- ARRAYLISTS -->
+	<util:list id="listaArticulo" value-type="entidad.Articulo" scope="prototype">
+	</util:list>
+	<util:list id="listaCliente" value-type="entidad.Cliente" scope="prototype">
+	</util:list>
+	<util:list id="listaMarca" value-type="entidad.Marca" scope="prototype">
+	</util:list>
+	<util:list id="listaStock" value-type="entidad.Stock" scope="prototype">
+	</util:list>
+	<util:list id="listaTipo" value-type="entidad.Tipo" scope="prototype">
+	</util:list>
+	<util:list id="listaVenta" value-type="entidad.Venta" scope="prototype">
+	</util:list>
+	<util:list id="listaVentaArticulo" value-type="entidad.VentaArticulo" scope="prototype">
+	</util:list>
+	<util:list id="listaTablaTemporal" value-type="entidad.TablaTemporal" scope="prototype">
+	</util:list>
 </beans>

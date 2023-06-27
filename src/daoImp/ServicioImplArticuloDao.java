@@ -28,7 +28,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
-		List<Articulo> listaArticulos = new ArrayList<Articulo>();
+		List<Articulo> listaArticulos = (List<Articulo>) appContext.getBean("listaArticulo");
 
 		switch (modoFiltro) {
 		case "1":
@@ -75,7 +75,7 @@ public class ServicioImplArticuloDao implements DaoArticulo {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
-		List<Articulo> listaArticulos = new ArrayList<Articulo>();
+		List<Articulo> listaArticulos = (List<Articulo>) appContext.getBean("listaArticulo");
 
 		switch (modoFiltro) {
 		case "1":

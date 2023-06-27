@@ -109,7 +109,7 @@ public class ServicioImplStockDao implements DaoStock {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
-		List<Stock> listaStock = new ArrayList<Stock>();
+		List<Stock> listaStock = (List<Stock>) appContext.getBean("listaStock");
 
 		switch (modoFiltro) {
 		case "1":
@@ -164,7 +164,7 @@ public class ServicioImplStockDao implements DaoStock {
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
-		List<Stock> listaStock = new ArrayList<Stock>();
+		List<Stock> listaStock = (List<Stock>) appContext.getBean("listaStock");
 
 		switch (modoFiltro) {
 		case "1":

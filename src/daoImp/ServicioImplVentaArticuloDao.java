@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import dao.DaoVentaArticulo;
 import entidad.Articulo;
 import entidad.Cliente;
+import entidad.Tipo;
 import entidad.Usuario;
 import entidad.Venta;
 import entidad.VentaArticulo;
@@ -55,7 +56,7 @@ public class ServicioImplVentaArticuloDao implements DaoVentaArticulo{
 		ApplicationContext appContext = new ClassPathXmlApplicationContext("resources/Beans.xml");
 		ConfigHibernate ch = (ConfigHibernate) appContext.getBean("beanConfigHibernate");
 		Session session = ch.abrirConexion();
-		List<VentaArticulo> listaArticulos = new ArrayList<VentaArticulo>();
+		List<VentaArticulo> listaArticulos = (List<VentaArticulo>) appContext.getBean("listaVentaArticulo");
 
 			listaArticulos = (List<VentaArticulo>) session
 					.createQuery("SELECT a FROM VentaArticulo a ").list();
