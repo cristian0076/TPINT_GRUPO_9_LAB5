@@ -36,7 +36,7 @@ public class ABMLClienteController {
 			String txtFechaNac, String txtLocalidad, String txtMail, String txtSexo, String txtTelefono) {
 		try {
 			ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
-			AtSymbolNotFoundException excepcion = new AtSymbolNotFoundException(txtMail);
+			AtSymbolNotFoundException excepcion = (AtSymbolNotFoundException) appContext.getBean("beanExcepArroba",txtMail);
 			excepcion.validateAtSymbol(txtMail);
 
 			ServicioImplCliente derImplCliente = (ServicioImplCliente) appContext.getBean("serviceBeanCliente");

@@ -179,4 +179,7 @@
 	<bean id="beanModelView" class="org.springframework.web.servlet.ModelAndView" scope="prototype">
 		
 	</bean>
+	<bean id="beanExcepArroba" class="excepciones.AtSymbolNotFoundException">
+		<constructor-arg value="default mail value"></constructor-arg>
+	</bean>
 </beans>

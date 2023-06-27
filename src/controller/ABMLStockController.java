@@ -28,7 +28,7 @@ public class ABMLStockController {
 	{
 		ServicioImplArticulo derImplArticulo = (ServicioImplArticulo) appContext.getBean("serviceBeanArticulo");
 		List<Articulo> todosLosArticulos = derImplArticulo.obtenerTodosLosArticulos("0", "");
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		MV.addObject("Productos", todosLosArticulos);
 		MV.addObject("menor1", false);
 		if(ddlFiltroStock==null)
@@ -42,7 +42,7 @@ public class ABMLStockController {
 	@RequestMapping("AgregarStock_ABMLStock.html")
 	public ModelAndView eventoAgregarStock(String txtProducto,String txtCantidad,String txtPrecioC,String txtVencimiento)
 	{
-		ModelAndView MV = new ModelAndView();
+		ModelAndView MV = (ModelAndView) appContext.getBean("beanModelView");
 		
 		int cantidad = Integer.parseInt(txtCantidad);
 		int precio = Integer.parseInt(txtPrecioC);
